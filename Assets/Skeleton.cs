@@ -10,21 +10,25 @@ namespace AICreatures
         void Start()
         {
             InitState(new AIStateChase());
+            InitState(new AIStateFight());
             InitState(new AIStateIdle());
 
             ChangeState(AIStateIdle.ID);
         }
 
-        public void OnTriggerEnter(Collider other)
+        public override void FinishedState(int state)
         {
-            if (other.GetComponent<Human>())
-            {
-                if (!target)
-                {
-                    target = other.GetComponent<Human>();
-                    ChangeState(AIStateChase.ID);
-                }
-            }
+            print(state);
+            if (state == AIStateChase.ID)
+                ChangeState(AIStateFight.ID);
+
+            if (state == AIStateFight.ID)
+                ChangeState(AIStateChase.ID);
+        }
+
+        public override void TargetFound()
+        {
+            ChangeState(AIStateChase.ID);
         }
     }
 }

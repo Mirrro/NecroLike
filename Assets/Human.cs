@@ -23,25 +23,21 @@ namespace AICreatures
             if (state == AIStateIdle.ID)
                 ChangeState(AIStateWander.ID);
         }
-
-
-        public void OnTriggerEnter(Collider other)
+        public override void TargetFound()
         {
-            if (other.GetComponent<Skeleton>())
-            {
-                if (!target)
-                {
-                    target = other.GetComponent<Skeleton>();
-                    ChangeState(AIStateFlee.ID);
-                }
-            }
+            ChangeState(AIStateFlee.ID);
         }
-
         private void OnMouseDown()
         {
             if (Game.infected)
                 return;
             Game.infected = true;
+            Death();
+        }
+
+        public override void Death()
+        {
+            base.Death();
             Instantiate(Game.instance.skellyFab, transform.position, transform.rotation);
             Destroy(gameObject);
         }

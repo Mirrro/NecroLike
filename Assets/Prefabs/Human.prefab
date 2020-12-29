@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 4046427919427412165}
   m_Layer: 0
   m_Name: Human
-  m_TagString: Untagged
+  m_TagString: Human
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -133,9 +133,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 4046427919427412167}
-  target: {fileID: 0}
-  range: 0
-  attacking: 0
+  targets: []
+  targetTag: Skeleton
+  range: 1
+  attackspeed: 1
+  health: 10
+  damage: 2
 --- !u!54 &4046427919427412165
 Rigidbody:
   m_ObjectHideFlags: 0
