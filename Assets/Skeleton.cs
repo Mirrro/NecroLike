@@ -6,26 +6,34 @@ namespace AICreatures
 { 
     public class Skeleton : AICreature
     {
-        // Start is called before the first frame update
-        void Start()
+        public float tetherDistance;
+
+        void Awake()
         {
-            InitState(new AIStateWander());
+            InitState(new AIStateFollowPlayer());
+            InitState(new AIStateIdle());
             InitState(new AIStateChase());
             InitState(new AIStateFight());
 
-            ChangeState(AIStateWander.ID);
+            ChangeState(AIStateFollowPlayer.ID);
         }
 
         public override void FinishedState(int state)
         {
-            if (GetTarget() == null)
-                ChangeState(AIStateWander.ID);
-
+            if(state == AIStateFollowPlayer.ID && GetTarget() == null)
+                ChangeState(AIStateIdle.ID);
+            else if (state == AIStateIdle.ID && GetTarget() == null)
+                ChangeState(AIStateFollowPlayer.ID);
             else if (state == AIStateChase.ID)
                 ChangeState(AIStateFight.ID);
 
             else if (state == AIStateFight.ID)
-                ChangeState(AIStateChase.ID);
+            {
+                if (Vector3.Distance(transform.position, Game.GetPlayer().position) > tetherDistance)
+                    ChangeState(AIStateFollowPlayer.ID);
+                else
+                    ChangeState(AIStateChase.ID);
+            }
         }
 
         public override void TargetFound(AICreature target)

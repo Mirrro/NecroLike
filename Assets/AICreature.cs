@@ -115,7 +115,13 @@ namespace AICreatures
 
         public bool IsValidTarget(AICreature target)
         {
-            return target!=null && IsAlive() && !IsObstructed(target);
+            if (target == null)
+                return false;
+            if (!target.IsAlive())
+                return false;
+            if (IsObstructed(target))
+                return false;
+            return true;
         }
 
         public bool IsInRange(AICreature target)
@@ -130,6 +136,8 @@ namespace AICreatures
 
         public bool IsObstructed(AICreature target)
         {
+            if (target == null)
+                return true;
             int layerMask = 1 << 6;
             layerMask = ~layerMask;
 

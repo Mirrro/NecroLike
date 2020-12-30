@@ -45,7 +45,7 @@ namespace AICreatures
         {
             base.Death();
             Destroy(gameObject);
-            Instantiate(Game.instance.skellyFab, transform.position, transform.rotation);
+            Instantiate(Game.GetSkellyFab(), transform.position, transform.rotation);
         }
 
     }
