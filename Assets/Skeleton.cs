@@ -35,6 +35,11 @@ namespace AICreatures
                     ChangeState(AIStateChase.ID);
             }
         }
+        public override void Death()
+        {
+            base.Death();
+            Destroy(gameObject);
+        }
 
         public override void TargetFound(AICreature target)
         {
