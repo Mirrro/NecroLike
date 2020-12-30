@@ -7,6 +7,7 @@ public class Game : MonoBehaviour
     public static Game instance;
     public static bool infected;
     public GameObject skellyFab;
+    public Material deadPerson;
     public Player player;
 
     private void Awake()
@@ -21,5 +22,8 @@ public class Game : MonoBehaviour
     {
         return instance.skellyFab;
     }
-   
+    public static Material GetDeadMat()
+    {
+        return instance.deadPerson;
+    }
 }

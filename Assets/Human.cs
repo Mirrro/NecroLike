@@ -7,14 +7,18 @@ namespace AICreatures
 {
     public class Human : AICreature
     {
-        private void Awake()
+        private void Start()
         {
             InitState(new AIStateIdle());
             InitState(new AIStateWander());
             InitState(new AIStateFlee());
+            InitState(new AIStateDeadHuman());
 
-            if(IsAlive())
+            if (IsAlive())
                 ChangeState(AIStateIdle.ID);
+            else
+                ChangeState(AIStateDeadHuman.ID);
+
         }
         public override void FinishedState(int state)
         {
@@ -27,20 +31,24 @@ namespace AICreatures
             if (state == AIStateFlee.ID)
                 ChangeState(AIStateIdle.ID);
 
-        }
-        public override void TargetFound(AICreature target)
-        {
-            base.TargetFound(target);
-            if (currentState.GetID()!= AIStateFlee.ID)
-                ChangeState(AIStateFlee.ID);
-        }
-        private void OnMouseDown()
-        {
-            if (!IsAlive())
+            if (state == AIStateDeadHuman.ID)
             {
                 Destroy(gameObject);
                 Game.GetPlayer().SpawnSkeleton(this);
             }
+
+        }
+        public override void TargetFound(AICreature target)
+        {
+            base.TargetFound(target);
+            if (IsAlive() && currentState.GetID()!= AIStateFlee.ID)
+                ChangeState(AIStateFlee.ID);
+        }
+        public override void Death()
+        {
+            base.Death();
+            GetComponent<Renderer>().material = Game.GetDeadMat();
+            ChangeState(AIStateDeadHuman.ID);
         }
 
     }
