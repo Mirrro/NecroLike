@@ -7,13 +7,13 @@ public class Game : MonoBehaviour
     public static Game instance;
     public static bool infected;
     public GameObject skellyFab;
-    public Transform player;
+    public Player player;
 
     private void Awake()
     {
         instance = this;
     }
-    public static Transform GetPlayer()
+    public static Player GetPlayer()
     {
         return instance.player;
     }

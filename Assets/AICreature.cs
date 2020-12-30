@@ -9,11 +9,13 @@ namespace AICreatures
     public class AICreature : MonoBehaviour
     {
         [Header("State Machine")]
+        public int currentStateIDDEBUG;
         public AIState currentState;
         public Dictionary<int, AIState> states = new Dictionary<int, AIState>();
 
         [Header("Base Mob Components")]
         public NavMeshAgent agent;
+        public Animator anim;
         public UnityEvent deathEvent = new UnityEvent();
 
         [Header("Targeting")]
@@ -23,7 +25,9 @@ namespace AICreatures
 
         [Header("Combat Attributes")]
         public float range;
-        public float attackspeed;
+        public float attackAnimationLength;
+        public float attackPrepareTime;
+        public float attackCooldown;
         public int health;
         public int damage;
 
@@ -40,6 +44,8 @@ namespace AICreatures
         }
         public void ChangeState(int state)
         {
+            currentStateIDDEBUG = state;
+
             if (currentState != null)
                 currentState.Exit();
             states.TryGetValue(state, out currentState);

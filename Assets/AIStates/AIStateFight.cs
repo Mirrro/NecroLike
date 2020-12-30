@@ -9,36 +9,67 @@ namespace AICreatures
         {
             return ID;
         }
-        float attackPreparation;
+
+
+        int attackState; // 0 = prepare | 1 = hit | 2 = cooldown
+        float attackTime;
+        float attackPrepareTime;
+        float attackCooldown;
+        float attackAnimationLength;
         AICreature target;
         public override void Enter()
         {
-            attackPreparation = 1 / main.attackspeed;
             target = main.GetTarget();
-        }
+            main.agent.SetDestination(main.transform.position);
+            attackState = 0;
+            attackTime = 0;
 
-        public override void Exit()
-        {
+            attackAnimationLength = main.attackAnimationLength;
+            attackPrepareTime = main.attackPrepareTime;
+            attackCooldown = main.attackCooldown;
+
+
+            if (main.anim != null)
+                main.anim.SetTrigger("Attack");
         }
 
         public override void Update()
         {
-            if(main.IsValidTarget(target) && main.IsInRange(target))
+            attackTime += Time.deltaTime;
+            if (attackState == 0)
             {
-                if (attackPreparation <= 0)
-                    Attack();
-                else
-                    attackPreparation -= Time.deltaTime;
+                if (attackTime >= attackPrepareTime)
+                {
+                    attackState = 1;
+                    main.GetTarget().GetHit(main);
+                }
+
             }
-            else
-                main.FinishedState(ID);
+            if (attackState == 1)
+            { 
+                if (attackTime >= attackAnimationLength)
+                    attackState = 2;
+            }
+            else if(attackState == 2)
+            {
+                if (!main.IsValidTarget(target) || !main.IsInRange(target))
+                    main.FinishedState(ID);
+                else
+                {
+                    if (attackTime > attackCooldown + attackAnimationLength)
+                    {
+                        attackState = 0;
+                        attackTime = 0;
+                        if (main.anim != null)
+                            main.anim.SetTrigger("Attack");
+                    }
+                }
+               
+            }
         }
 
-        private void Attack()
+        public override void Exit()
         {
-            attackPreparation = 1 / main.attackspeed;
-            if (Vector3.Distance(main.GetTarget().transform.position, main.transform.position) <= main.range)
-                main.GetTarget().GetHit(main);
         }
     }
 }

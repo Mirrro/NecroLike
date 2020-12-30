@@ -7,18 +7,18 @@ public class Player : MonoBehaviour
 {
     public CharacterController controller;
     public float speed;
+    public List<Skeleton> army = new List<Skeleton>();
     void Update()
     {
         controller.SimpleMove(new Vector3(-speed*Input.GetAxis("Vertical"),0, speed*Input.GetAxis("Horizontal")));
     }
-    public void OnTriggerEnter(Collider other)
+    public void SpawnSkeleton(Human deadHuman)
     {
-        if (other.tag == "Skeleton")
-            other.GetComponent<Skeleton>().forceFollowPlayer = false;
+        GameObject newSkelly = Instantiate(Game.GetSkellyFab(), deadHuman.transform.position, deadHuman.transform.rotation);
+        army.Add(newSkelly.GetComponent<Skeleton>());
     }
-    public void OnTriggerExit(Collider other)
+    public void OnSkeletonDeath(Skeleton skeleton)
     {
-        if (other.tag == "Skeleton")
-            other.GetComponent<Skeleton>().forceFollowPlayer = true;
+        army.Remove(skeleton);
     }
 }

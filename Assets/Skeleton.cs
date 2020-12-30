@@ -7,42 +7,48 @@ namespace AICreatures
     public class Skeleton : AICreature
     {
         public float tetherDistance;
-        public bool forceFollowPlayer;
-
         void Awake()
         {
+            InitState(new AIStateSpawning());
             InitState(new AIStateFollowPlayer());
-            InitState(new AIStateIdle());
             InitState(new AIStateChase());
             InitState(new AIStateFight());
 
-            ChangeState(AIStateFollowPlayer.ID);
+            ChangeState(AIStateSpawning.ID);
+        }
+
+        private bool IsTooFarFromPlayer()
+        {
+            return Vector3.Distance(Game.GetPlayer().transform.position, transform.position) < tetherDistance;
         }
 
         public override void FinishedState(int state)
         {
-            if (forceFollowPlayer)
+            print("finished " + state);
+            if (IsTooFarFromPlayer())
                 ChangeState(AIStateFollowPlayer.ID);
-            else if(GetTarget() != null)
+            else if(IsValidTarget(GetTarget()))
             {
                 if (state != AIStateChase.ID)
                     ChangeState(AIStateChase.ID);
                 else
                     ChangeState(AIStateFight.ID);
             }
-            else if (state == AIStateFollowPlayer.ID)
-                ChangeState(AIStateIdle.ID);
+            else
+                ChangeState(AIStateFollowPlayer.ID);
         }
+
         public override void Death()
         {
             base.Death();
+            Game.GetPlayer().OnSkeletonDeath(this);
             Destroy(gameObject);
         }
 
         public override void TargetFound(AICreature target)
         {
             base.TargetFound(target);
-            if (!forceFollowPlayer && currentState.GetID() != AIStateChase.ID && currentState.GetID() != AIStateFight.ID)
+            if (!IsTooFarFromPlayer() && currentState.GetID() != AIStateSpawning.ID && currentState.GetID() != AIStateChase.ID && currentState.GetID() != AIStateFight.ID)
                 ChangeState(AIStateChase.ID);
         }
     }

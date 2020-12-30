@@ -13,7 +13,8 @@ namespace AICreatures
             InitState(new AIStateWander());
             InitState(new AIStateFlee());
 
-            ChangeState(AIStateIdle.ID);
+            if(IsAlive())
+                ChangeState(AIStateIdle.ID);
         }
         public override void FinishedState(int state)
         {
@@ -35,17 +36,11 @@ namespace AICreatures
         }
         private void OnMouseDown()
         {
-            if (Game.infected)
-                return;
-            Game.infected = true;
-            Death();
-        }
-
-        public override void Death()
-        {
-            base.Death();
-            Destroy(gameObject);
-            Instantiate(Game.GetSkellyFab(), transform.position, transform.rotation);
+            if (!IsAlive())
+            {
+                Destroy(gameObject);
+                Game.GetPlayer().SpawnSkeleton(this);
+            }
         }
 
     }

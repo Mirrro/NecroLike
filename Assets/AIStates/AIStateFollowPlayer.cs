@@ -15,7 +15,7 @@ namespace AICreatures
 
         public override void Enter()
         {
-            player = Game.GetPlayer();
+            player = Game.GetPlayer().transform;
             if (player != null)
                 main.agent.destination = player.transform.position;
         }

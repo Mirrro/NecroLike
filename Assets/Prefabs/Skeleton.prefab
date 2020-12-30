@@ -88,7 +88,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a01df685e384d6449ac88204d4519e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentStateIDDEBUG: 0
   agent: {fileID: 3312118156029521906}
+  anim: {fileID: 7288943877622547994}
   deathEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -96,11 +98,12 @@ MonoBehaviour:
   lastTarget: {fileID: 0}
   targetTag: Human
   range: 2
-  attackspeed: 10
+  attackAnimationLength: 1.15
+  attackPrepareTime: 0.12
+  attackCooldown: 0.1
   health: 10
-  damage: 2
-  tetherDistance: 5
-  forceFollowPlayer: 0
+  damage: 5
+  tetherDistance: 2
 --- !u!54 &3312118156029521917
 Rigidbody:
   m_ObjectHideFlags: 0
