@@ -154,7 +154,7 @@ MonoBehaviour:
       m_Calls: []
   targets: []
   lastTarget: {fileID: 0}
-  targetTag: skeleton
+  targetTag: Skeleton
   range: 2
   attackspeed: 10
   health: 100

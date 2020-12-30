@@ -7,6 +7,7 @@ namespace AICreatures
     public class Skeleton : AICreature
     {
         public float tetherDistance;
+        public bool forceFollowPlayer;
 
         void Awake()
         {
@@ -20,20 +21,17 @@ namespace AICreatures
 
         public override void FinishedState(int state)
         {
-            if(state == AIStateFollowPlayer.ID && GetTarget() == null)
-                ChangeState(AIStateIdle.ID);
-            else if (state == AIStateIdle.ID && GetTarget() == null)
+            if (forceFollowPlayer)
                 ChangeState(AIStateFollowPlayer.ID);
-            else if (state == AIStateChase.ID)
-                ChangeState(AIStateFight.ID);
-
-            else if (state == AIStateFight.ID)
+            else if(GetTarget() != null)
             {
-                if (Vector3.Distance(transform.position, Game.GetPlayer().position) > tetherDistance)
-                    ChangeState(AIStateFollowPlayer.ID);
-                else
+                if (state != AIStateChase.ID)
                     ChangeState(AIStateChase.ID);
+                else
+                    ChangeState(AIStateFight.ID);
             }
+            else if (state == AIStateFollowPlayer.ID)
+                ChangeState(AIStateIdle.ID);
         }
         public override void Death()
         {
@@ -44,7 +42,7 @@ namespace AICreatures
         public override void TargetFound(AICreature target)
         {
             base.TargetFound(target);
-            if (currentState.GetID() != AIStateChase.ID && currentState.GetID() != AIStateFight.ID)
+            if (!forceFollowPlayer && currentState.GetID() != AIStateChase.ID && currentState.GetID() != AIStateFight.ID)
                 ChangeState(AIStateChase.ID);
         }
     }

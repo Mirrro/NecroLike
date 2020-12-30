@@ -87,15 +87,25 @@ namespace AICreatures
         }
         public AICreature GetTarget()
         {
-            if (lastTarget == null && targets.Count == 0)
-                return null;
-            if (lastTarget == null || !lastTarget.IsAlive())
+            if (IsValidTarget(lastTarget))
+                return lastTarget;
+            else
             {
                 for(int i = 0; i<targets.Count; i++)
-                    if (!IsObstructed(targets[i]))
+                    if (IsValidTarget(targets[i]))
                         return(lastTarget = targets[i]);
             }
-            return lastTarget;
+            return null;
+        }
+        public bool IsValidTarget(AICreature target)
+        {
+            if (target == null)
+                return false;
+            if (!target.IsAlive())
+                return false;
+            if (IsObstructed(target))
+                return false;
+            return true;
         }
         #endregion
 
@@ -113,16 +123,7 @@ namespace AICreatures
             currentState = null;
         }
 
-        public bool IsValidTarget(AICreature target)
-        {
-            if (target == null)
-                return false;
-            if (!target.IsAlive())
-                return false;
-            if (IsObstructed(target))
-                return false;
-            return true;
-        }
+ 
 
         public bool IsInRange(AICreature target)
         {

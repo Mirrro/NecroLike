@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace AICreatures
 {
-    public class Soldier : Human
+    public class Soldier : AICreature
     {
         private void Awake()
         {
@@ -38,8 +38,15 @@ namespace AICreatures
         public override void TargetFound(AICreature target)
         {
             base.TargetFound(target);
-            if (currentState.GetID() != AIStateChase.ID)
+            if (currentState.GetID() != AIStateChase.ID && currentState.GetID() != AIStateFight.ID)
                 ChangeState(AIStateChase.ID);
+        }
+
+        public override void Death()
+        {
+            base.Death();
+            Destroy(gameObject);
+            Instantiate(Game.GetSkellyFab(), transform.position, transform.rotation);
         }
     }
 }

@@ -22,11 +22,12 @@ namespace AICreatures
 
         public override void Exit()
         {
+            main.agent.destination = main.transform.position;
         }
 
         public override void Update()
         {
-            if (main.agent.remainingDistance<=main.agent.stoppingDistance)
+            if (main.agent.remainingDistance<=2)
                 main.FinishedState(ID);
             else
                 main.agent.destination = player.transform.position;
