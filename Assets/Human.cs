@@ -7,7 +7,7 @@ namespace AICreatures
 {
     public class Human : AICreature
     {
-        private void Start()
+        private void Awake()
         {
             InitState(new AIStateIdle());
             InitState(new AIStateWander());
@@ -22,10 +22,16 @@ namespace AICreatures
 
             if (state == AIStateIdle.ID)
                 ChangeState(AIStateWander.ID);
+
+            if (state == AIStateFlee.ID)
+                ChangeState(AIStateIdle.ID);
+
         }
-        public override void TargetFound()
+        public override void TargetFound(AICreature target)
         {
-            ChangeState(AIStateFlee.ID);
+            base.TargetFound(target);
+            if (currentState.GetID()!= AIStateFlee.ID)
+                ChangeState(AIStateFlee.ID);
         }
         private void OnMouseDown()
         {
@@ -38,8 +44,8 @@ namespace AICreatures
         public override void Death()
         {
             base.Death();
-            Instantiate(Game.instance.skellyFab, transform.position, transform.rotation);
             Destroy(gameObject);
+            Instantiate(Game.instance.skellyFab, transform.position, transform.rotation);
         }
 
     }

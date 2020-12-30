@@ -10,9 +10,11 @@ namespace AICreatures
             return ID;
         }
         float attackPreparation;
+        AICreature target;
         public override void Enter()
         {
             attackPreparation = 1 / main.attackspeed;
+            target = main.GetTarget();
         }
 
         public override void Exit()
@@ -21,7 +23,7 @@ namespace AICreatures
 
         public override void Update()
         {
-            if (Vector3.Distance(main.GetTarget().transform.position, main.transform.position) <= main.range)
+            if(main.IsValidTarget(target) && main.IsInRange(target))
             {
                 if (attackPreparation <= 0)
                     Attack();

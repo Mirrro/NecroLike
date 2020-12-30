@@ -7,9 +7,13 @@ namespace AICreatures
         {
             return ID;
         }
+        AICreature target;
+        
         public override void Enter()
         {
-            main.agent.destination = main.GetTarget().transform.position;
+            target = main.GetTarget();
+            if(target!=null)
+                main.agent.destination = target.transform.position;
         }
 
         public override void Exit()
@@ -18,11 +22,11 @@ namespace AICreatures
 
         public override void Update()
         {
-            if (main.agent.remainingDistance <= main.range)
+            if (!main.IsValidTarget(target) || main.IsInRange(target))
                 main.FinishedState(ID);
 
             else
-                main.agent.destination = main.GetTarget().transform.position;
+                main.agent.destination = target.transform.position;
         }
     }
 }

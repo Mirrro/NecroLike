@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3312118156029521916}
   - component: {fileID: 3312118156029521917}
   - component: {fileID: 3312118156029521907}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Skeleton
   m_TagString: Skeleton
   m_Icon: {fileID: 0}
@@ -94,8 +94,8 @@ NavMeshAgent:
   m_GameObject: {fileID: 3312118156029521908}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
-  m_Speed: 3.5
+  m_Radius: 1
+  m_Speed: 1.5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -120,12 +120,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 3312118156029521906}
+  deathEvent:
+    m_PersistentCalls:
+      m_Calls: []
   targets: []
+  lastTarget: {fileID: 0}
   targetTag: Human
-  range: 5
+  range: 2
   attackspeed: 10
   health: 10
-  damage: 5
+  damage: 2
 --- !u!54 &3312118156029521917
 Rigidbody:
   m_ObjectHideFlags: 0

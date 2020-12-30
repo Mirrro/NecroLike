@@ -9,26 +9,30 @@ namespace AICreatures
         // Start is called before the first frame update
         void Start()
         {
+            InitState(new AIStateWander());
             InitState(new AIStateChase());
             InitState(new AIStateFight());
-            InitState(new AIStateIdle());
 
-            ChangeState(AIStateIdle.ID);
+            ChangeState(AIStateWander.ID);
         }
 
         public override void FinishedState(int state)
         {
-            print(state);
-            if (state == AIStateChase.ID)
+            if (GetTarget() == null)
+                ChangeState(AIStateWander.ID);
+
+            else if (state == AIStateChase.ID)
                 ChangeState(AIStateFight.ID);
 
-            if (state == AIStateFight.ID)
+            else if (state == AIStateFight.ID)
                 ChangeState(AIStateChase.ID);
         }
 
-        public override void TargetFound()
+        public override void TargetFound(AICreature target)
         {
-            ChangeState(AIStateChase.ID);
+            base.TargetFound(target);
+            if (currentState.GetID() != AIStateChase.ID && currentState.GetID() != AIStateFight.ID)
+                ChangeState(AIStateChase.ID);
         }
     }
 }
