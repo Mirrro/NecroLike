@@ -8,7 +8,6 @@ public class Joystick : MonoBehaviour, IDragHandler
 {
     private Vector3 startPosition;
     public float maxDistance;
-    private Button button;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,11 +17,12 @@ public class Joystick : MonoBehaviour, IDragHandler
     // Update is called once per frame
     void Update()
     {
-        Game.SetInput(new Vector2((transform.position.x - startPosition.x)/ maxDistance, (transform.position.y - startPosition.y)/ maxDistance));
-        if (Input.GetMouseButtonUp(0) || Input.touchCount==1&&Input.GetTouch(0).phase==TouchPhase.Ended)
+        if (Input.GetMouseButtonUp(0) || Input.touchCount == 1 && Input.GetTouch(0).phase == TouchPhase.Ended)
         {
             transform.position = startPosition;
         }
+        Game.SetInput(new Vector2((transform.position.x - startPosition.x)/ maxDistance, (transform.position.y - startPosition.y)/ maxDistance));
+
     }
 
     public void OnDrag(PointerEventData eventData)
