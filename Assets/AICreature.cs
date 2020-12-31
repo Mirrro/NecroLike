@@ -20,7 +20,6 @@ namespace AICreatures
 
         [Header("Targeting")]
         public List<AICreature> targets = new List<AICreature>();
-        public AICreature lastTarget;
         public string targetTag;
 
         [Header("Combat Attributes")]
@@ -93,14 +92,10 @@ namespace AICreatures
         }
         public AICreature GetTarget()
         {
-            if (IsValidTarget(lastTarget))
-                return lastTarget;
-            else
-            {
-                for(int i = 0; i<targets.Count; i++)
-                    if (IsValidTarget(targets[i]))
-                        return(lastTarget = targets[i]);
-            }
+            for(int i = 0; i<targets.Count; i++)
+                if (IsValidTarget(targets[i]))
+                    return(targets[i]);
+            
             return null;
         }
         public bool IsValidTarget(AICreature target)
@@ -128,9 +123,7 @@ namespace AICreatures
             deathEvent.Invoke();
             currentState = null;
         }
-
- 
-
+        
         public bool IsInRange(AICreature target)
         {
             return (Vector3.Distance(target.transform.position, transform.position) <= range);

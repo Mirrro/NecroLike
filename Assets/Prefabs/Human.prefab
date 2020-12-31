@@ -132,7 +132,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5834c3b97bdca6468b8004649c5331b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentStateIDDEBUG: 0
   agent: {fileID: 4046427919427412167}
+  anim: {fileID: 0}
   deathEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -140,7 +142,9 @@ MonoBehaviour:
   lastTarget: {fileID: 0}
   targetTag: Skeleton
   range: 1
-  attackspeed: 1
+  attackAnimationLength: 0
+  attackPrepareTime: 0
+  attackCooldown: 0
   health: 10
   damage: 2
 --- !u!54 &4046427919427412165

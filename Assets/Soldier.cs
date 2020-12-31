@@ -6,32 +6,29 @@ namespace AICreatures
 {
     public class Soldier : AICreature
     {
+        Vector3 startPosition;
         private void Start()
         {
             InitState(new AIStateIdle());
-            InitState(new AIStateWander());
             InitState(new AIStateFight());
             InitState(new AIStateChase());
 
             ChangeState(AIStateIdle.ID);
+            startPosition = transform.position;
         }
         public override void FinishedState(int state)
-        {
-            if (state == AIStateWander.ID)
-                ChangeState(AIStateIdle.ID);
-
-            if (state == AIStateIdle.ID)
-                ChangeState(AIStateWander.ID);
-
-            if (state == AIStateChase.ID)
-                ChangeState(AIStateFight.ID);
-
-            if (state == AIStateFight.ID)
+        {   
+            if (IsValidTarget(GetTarget()))
             {
-                if(GetTarget() == null)
-                    ChangeState(AIStateIdle.ID);
-                else
+                if (state != AIStateChase.ID)
                     ChangeState(AIStateChase.ID);
+                else
+                    ChangeState(AIStateFight.ID);
+            }
+            else
+            {
+                ChangeState(AIStateIdle.ID);
+                agent.SetDestination(startPosition);
             }
 
         }
