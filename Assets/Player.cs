@@ -9,11 +9,10 @@ public class Player : MonoBehaviour
     public float speed;
     public float reviveRange;
     public float reviveTime;
-
-
+    
     void Update()
     {
-        controller.SimpleMove(new Vector3(-speed*Input.GetAxis("Vertical"),0, speed*Input.GetAxis("Horizontal")));
+        controller.SimpleMove(new Vector3(speed*Game.GetInput().x,0, speed* Game.GetInput().y));
     }
     public void SpawnSkeleton(Human deadHuman)
     {

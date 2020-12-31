@@ -121,6 +121,7 @@ namespace AICreatures
         public virtual void Death()
         {
             deathEvent.Invoke();
+            currentState.Exit();
             currentState = null;
         }
         

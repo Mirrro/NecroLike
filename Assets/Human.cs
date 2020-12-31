@@ -33,6 +33,8 @@ namespace AICreatures
 
             if (state == AIStateDeadHuman.ID)
             {
+                currentState.Exit();
+                currentState = null;
                 Destroy(gameObject);
                 Game.GetPlayer().SpawnSkeleton(this);
             }
@@ -46,7 +48,7 @@ namespace AICreatures
         }
         public override void Death()
         {
-            base.Death();
+            deathEvent.Invoke();
             GetComponent<Renderer>().material = Game.GetDeadMat();
             ChangeState(AIStateDeadHuman.ID);
         }
