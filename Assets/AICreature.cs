@@ -32,7 +32,7 @@ namespace AICreatures
         public int damage;
 
         #region Statemachine
-        private void FixedUpdate()
+        private void LateUpdate()
         {
             if (currentState != null)
                 currentState.Update();

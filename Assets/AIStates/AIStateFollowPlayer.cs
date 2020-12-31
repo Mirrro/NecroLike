@@ -27,7 +27,7 @@ namespace AICreatures
 
         public override void Update()
         {
-            if (main.agent.remainingDistance<=2)
+            if (main.agent.remainingDistance<=5)
                 main.FinishedState(ID);
             else
                 main.agent.destination = player.transform.position;

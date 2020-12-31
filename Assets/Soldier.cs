@@ -6,7 +6,7 @@ namespace AICreatures
 {
     public class Soldier : AICreature
     {
-        private void Awake()
+        private void Start()
         {
             InitState(new AIStateIdle());
             InitState(new AIStateWander());

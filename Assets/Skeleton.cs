@@ -7,7 +7,7 @@ namespace AICreatures
     public class Skeleton : AICreature
     {
         public float tetherDistance;
-        void Awake()
+        void Start()
         {
             InitState(new AIStateSpawning());
             InitState(new AIStateFollowPlayer());
@@ -19,12 +19,11 @@ namespace AICreatures
 
         private bool IsTooFarFromPlayer()
         {
-            return Vector3.Distance(Game.GetPlayer().transform.position, transform.position) < tetherDistance;
+            return Vector3.Distance(Game.GetPlayer().transform.position, transform.position) > tetherDistance;
         }
 
         public override void FinishedState(int state)
         {
-            print("finished " + state);
             if (IsTooFarFromPlayer())
                 ChangeState(AIStateFollowPlayer.ID);
             else if(IsValidTarget(GetTarget()))
@@ -41,7 +40,6 @@ namespace AICreatures
         public override void Death()
         {
             base.Death();
-            Game.GetPlayer().OnSkeletonDeath(this);
             Destroy(gameObject);
         }
 

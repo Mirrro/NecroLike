@@ -38,12 +38,17 @@ namespace AICreatures
             attackTime += Time.deltaTime;
             if (attackState == 0)
             {
-                if (attackTime >= attackPrepareTime)
+                if (!main.IsValidTarget(target))
+                    main.FinishedState(ID);
+                else
                 {
-                    attackState = 1;
-                    main.GetTarget().GetHit(main);
+                    if (attackTime >= attackPrepareTime)
+                    {
+                        attackState = 1;
+                        if(main.IsInRange(target))
+                            target.GetHit(main);
+                    }
                 }
-
             }
             if (attackState == 1)
             { 
