@@ -7,6 +7,7 @@ public class Game : MonoBehaviour
     public static Game instance;
     public static bool infected;
     public GameObject skellyFab;
+    public GameObject skeletonDeathAnim;
     public Material deadPerson;
     public Player player;
 
@@ -25,5 +26,9 @@ public class Game : MonoBehaviour
     public static Material GetDeadMat()
     {
         return instance.deadPerson;
+    }
+    public static GameObject GetSkeletonDeathAnim()
+    {
+        return instance.skeletonDeathAnim;
     }
 }

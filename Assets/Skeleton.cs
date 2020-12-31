@@ -40,6 +40,7 @@ namespace AICreatures
         public override void Death()
         {
             base.Death();
+            Instantiate(Game.GetSkeletonDeathAnim(), transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
 

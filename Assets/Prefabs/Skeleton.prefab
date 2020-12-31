@@ -103,7 +103,7 @@ MonoBehaviour:
   attackCooldown: 0.1
   health: 10
   damage: 5
-  tetherDistance: 2
+  tetherDistance: 2.5
 --- !u!54 &3312118156029521917
 Rigidbody:
   m_ObjectHideFlags: 0
