@@ -8,10 +8,18 @@ namespace AICreatures
 {
     public class AICreature : MonoBehaviour
     {
+        public int ID;
+        public int team;
+
         [Header("State Machine")]
-        public int currentStateIDDEBUG;
+        public AIManager.AIStateType entryState;
+        public AIManager.AIStateType defaultState;
+        public AIManager.AIStateType targetFoundState;
+        public AIManager.AIStateType deathState;
+
+        public AIManager.AIStateType currentStateType;
         public AIState currentState;
-        public Dictionary<int, AIState> states = new Dictionary<int, AIState>();
+        public Dictionary<AIManager.AIStateType, AIState> states = new Dictionary<AIManager.AIStateType, AIState>();
 
         [Header("Base Mob Components")]
         public NavMeshAgent agent;
@@ -19,8 +27,7 @@ namespace AICreatures
         public UnityEvent deathEvent = new UnityEvent();
 
         [Header("Targeting")]
-        public List<AICreature> targets = new List<AICreature>();
-        public string targetTag;
+        public List<int> targets = new List<int>();
 
         [Header("Combat Attributes")]
         public float range;
@@ -31,19 +38,36 @@ namespace AICreatures
         public int damage;
 
         #region Statemachine
+        private void Start()
+        {
+            ID = Game.RegisterCreature(this);
+            InitState(entryState);
+            InitState(defaultState);
+            InitState(targetFoundState);
+            InitState(deathState);
+            ChangeState(entryState);
+            if (!IsAlive())
+                Death();
+        }
+
         private void LateUpdate()
         {
             if (currentState != null)
                 currentState.Update();
+
         }
-        public virtual void InitState(AIState state)
+        public void InitState(AIManager.AIStateType stateType)
         {
-            states.Add(state.GetID(), state);
-            state.Init(this);
+            if(!states.ContainsKey(stateType))
+            {
+                AIState state = AIManager.ActivateState(stateType);
+                states.Add(stateType, state);
+                state.Init(this);
+            }
         }
-        public void ChangeState(int state)
+        public void ChangeState(AIManager.AIStateType state)
         {
-            currentStateIDDEBUG = state;
+            currentStateType = state;
 
             if (currentState != null)
                 currentState.Exit();
@@ -53,48 +77,60 @@ namespace AICreatures
         }
         public virtual void FinishedState(int state)
         {
+            if (state == (int)deathState)
+            {
+                currentState.Exit();
+                Destroy(gameObject);
+            }
+            if (GetTarget() == null)
+                ChangeState(defaultState);
+            else
+                ChangeState(targetFoundState);
+
         }
         #endregion
 
         #region TargetHandling
-        public void TrimTargets()
-        {
-            List<AICreature> deadTargets = new List<AICreature>();
 
-            foreach (AICreature target in targets)
-                if (target == null || !target.IsAlive())
-                    deadTargets.Add(target);
-
-            foreach (AICreature target in deadTargets)
-                targets.Remove(target);
-
-            targets.TrimExcess();
-        }
         public virtual void TargetFound(AICreature target)
         {
-            target.deathEvent.AddListener(TrimTargets);
-            targets.Add(target);
+            targets.Add(target.ID);
+
+            if (currentState.GetID() != (int)targetFoundState)
+                ChangeState(targetFoundState);
         }
         public void TargetLost(AICreature target)
         {
-            target.deathEvent.RemoveListener(TrimTargets);
-            targets.Remove(target);
+            targets.Remove(target.ID);
+
+            if (GetTarget() == null && currentState.GetID() == (int)targetFoundState)
+                ChangeState(defaultState);
         }
         public void OnTriggerEnter(Collider other)
         {
-            if (other.tag == targetTag && IsAlive())
-                TargetFound(other.GetComponent<AICreature>());    
+            AICreature creature = other.GetComponent<AICreature>();
+            if (creature == null)
+                return;
+            if (creature.team!=team && creature.IsAlive())
+                TargetFound(creature);    
         }
         public void OnTriggerExit(Collider other)
         {
-            if (other.tag == targetTag && IsAlive())
-                TargetLost(other.GetComponent<AICreature>());
+            AICreature creature = other.GetComponent<AICreature>();
+            if (creature == null)
+                return;
+            if (creature.team != team)
+                TargetLost(creature);
         }
         public AICreature GetTarget()
         {
             for(int i = 0; i<targets.Count; i++)
-                if (IsValidTarget(targets[i]))
-                    return(targets[i]);
+            {
+                AICreature target = Game.instance.GetCreature(team == 0 ? 1 : 0, targets[i]);
+                if (IsValidTarget(target))
+                    return target;
+            }
+                
             
             return null;
         }
@@ -105,6 +141,8 @@ namespace AICreatures
             if (!target.IsAlive())
                 return false;
             if (IsObstructed(target))
+                return false;
+            if (tag == "Skeleton" && Vector3.Distance(transform.position, target.transform.position) > 3)
                 return false;
             return true;
         }
@@ -121,8 +159,8 @@ namespace AICreatures
         public virtual void Death()
         {
             deathEvent.Invoke();
-            currentState.Exit();
-            currentState = null;
+            Game.UnregisterCreature(this);
+            ChangeState(deathState);
         }
         
         public bool IsInRange(AICreature target)

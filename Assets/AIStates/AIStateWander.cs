@@ -5,21 +5,31 @@ namespace AICreatures
 {
     public class AIStateWander : AIState
     {
-        public static int ID = 1;
-        public override int GetID()
-        {
-            return ID;
-        }
+        float timeUntilNextMove;
+        bool arrived;
         public override void Enter()
         {
-            NavMesh.SamplePosition(Random.insideUnitSphere * 5 + main.transform.position, out NavMeshHit hit, 5, NavMesh.AllAreas);
-            main.agent.SetDestination(hit.position);
         }
 
         public override void Update()
         {
-            if (main.agent.remainingDistance <= main.agent.stoppingDistance)
-                main.FinishedState(ID);
+            if(arrived)
+            {
+                timeUntilNextMove -= Time.deltaTime;
+                if (timeUntilNextMove <= 0)
+                {
+                    arrived = false;
+                    main.anim.SetTrigger("Walk");
+                    NavMesh.SamplePosition(Random.insideUnitSphere * 5 + main.transform.position, out NavMeshHit hit, 5, NavMesh.AllAreas);
+                    main.agent.SetDestination(hit.position);
+                }
+            }
+            else if (main.agent.remainingDistance <= main.agent.stoppingDistance)
+            {
+                arrived = true;
+                main.anim.SetTrigger("Idle");
+                timeUntilNextMove = Random.Range(1, 5);
+            }
         }
         public override void Exit()
         {

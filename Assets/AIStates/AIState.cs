@@ -3,11 +3,20 @@ namespace AICreatures
     public abstract class AIState
     {
         protected AICreature main;
+        private int id;
 
-        public abstract int GetID();
-
+        public int GetID()
+        {
+            return id;
+        }
+        protected void FireStateFinished()
+        {
+            main.FinishedState(GetID());
+        }
         public void Init(AICreature main)
         {
+            AIManager.AIStateTypeDictionary.TryGetValue(GetType(), out AIManager.AIStateType type);
+            id = (int)type;
             this.main = main;
         }
 
