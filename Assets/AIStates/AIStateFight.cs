@@ -4,12 +4,6 @@ namespace AICreatures
 {
     public class AIStateFight : AIState
     {
-        public static int ID = 4;
-        public override int GetID()
-        {
-            return ID;
-        }
-
 
         int attackState; // 0 = prepare | 1 = hit | 2 = cooldown
         float attackTime;
@@ -19,8 +13,11 @@ namespace AICreatures
         AICreature target;
         public override void Enter()
         {
-            target = main.GetTarget();
-            main.agent.SetDestination(main.transform.position);
+            target = main.GetTarget(); 
+
+            if (target != null)
+                main.agent.destination = target.transform.position;
+            
             attackState = 0;
             attackTime = 0;
 
@@ -33,44 +30,52 @@ namespace AICreatures
                 main.anim.SetTrigger("Attack");
         }
 
-        public override void Update()
+        private void Chase()
+        {
+            attackState = 0;
+            attackTime = 0;
+            main.agent.destination = target.transform.position;
+        }
+
+        private void Attack()
         {
             attackTime += Time.deltaTime;
             if (attackState == 0)
             {
-                if (!main.IsValidTarget(target))
-                    main.FinishedState(ID);
-                else
+                if (attackTime >= attackPrepareTime)
                 {
-                    if (attackTime >= attackPrepareTime)
-                    {
-                        attackState = 1;
-                        if(main.IsInRange(target))
-                            target.GetHit(main);
-                    }
+                    attackState = 1;
+                    if (main.IsInRange(target))
+                        target.GetHit(main);
                 }
+                
             }
             if (attackState == 1)
-            { 
+            {
                 if (attackTime >= attackAnimationLength)
                     attackState = 2;
             }
-            else if(attackState == 2)
+            else if (attackState == 2)
             {
-                if (!main.IsValidTarget(target) || !main.IsInRange(target))
-                    main.FinishedState(ID);
-                else
+                if (attackTime > attackCooldown + attackAnimationLength)
                 {
-                    if (attackTime > attackCooldown + attackAnimationLength)
-                    {
-                        attackState = 0;
-                        attackTime = 0;
-                        if (main.anim != null)
-                            main.anim.SetTrigger("Attack");
-                    }
+                    attackState = 0;
+                    attackTime = 0;
+                    if (main.anim != null)
+                        main.anim.SetTrigger("Attack");
                 }
-               
+                
             }
+        }
+
+        public override void Update()
+        {
+            if (!main.IsValidTarget(target))
+                FireStateFinished();
+            else if (main.IsInRange(target))
+                Attack();
+            else
+                Chase();
         }
 
         public override void Exit()

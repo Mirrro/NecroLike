@@ -6,11 +6,6 @@ namespace AICreatures
     public class AIStateSpawning : AIState
     {
         private float timeLeft;
-        public static int ID = 6;
-        public override int GetID()
-        {
-            return ID;
-        }
         public override void Enter()
         {
             if (main.anim != null)
@@ -27,7 +22,7 @@ namespace AICreatures
         {
             timeLeft -= Time.deltaTime;
             if (timeLeft <= 0)
-                main.FinishedState(ID);
+                FireStateFinished();
         }
     }
 }
