@@ -5,15 +5,26 @@ using UnityEngine;
 public class Game : MonoBehaviour
 {
     public static Game instance;
-    public static bool infected;
     public GameObject skellyFab;
     public GameObject skeletonDeathAnim;
     public Material deadPerson;
+    public GameObject linePrefab;
     public Player player;
+    public Vector2 input;
 
     private void Awake()
     {
         instance = this;
+    }
+
+    public static Vector2 GetInput()
+    {
+        return instance.input;
+    }
+
+    public static void SetInput(Vector2 input)
+    {
+        instance.input = input;
     }
     public static Player GetPlayer()
     {
@@ -31,4 +42,11 @@ public class Game : MonoBehaviour
     {
         return instance.skeletonDeathAnim;
     }
+    public static GameObject GetLinePrefabInstance()
+    {
+        return Instantiate(instance.linePrefab);
+    }
+
+
+
 }
