@@ -9,7 +9,7 @@ namespace AICreatures
         public override void Enter()
         {
             target = main.GetTarget();
-            main.anim.SetTrigger("Walk");
+            main.anim.SetTrigger("Flee");
         }
 
         public override void Exit()
@@ -29,6 +29,7 @@ namespace AICreatures
             main.transform.position = startTransform.position;
             main.transform.rotation = startTransform.rotation;
             main.agent.SetDestination(hit.position);
+            FireStateFinished();
         }
     }
 }

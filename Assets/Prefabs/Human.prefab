@@ -9,10 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4046427919427412166}
-  - component: {fileID: 4046427919427412163}
   - component: {fileID: 4046427919427412167}
-  - component: {fileID: 4046427919427412165}
   - component: {fileID: 7243557543542532278}
+  - component: {fileID: -8089771529960984659}
   m_Layer: 6
   m_Name: Human
   m_TagString: Human
@@ -35,19 +34,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &4046427919427412163
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4046427919427412162}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 2
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!195 &4046427919427412167
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -70,22 +56,6 @@ NavMeshAgent:
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!54 &4046427919427412165
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4046427919427412162}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!114 &7243557543542532278
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -100,6 +70,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: 0
   team: 1
+  enemyTeam: 0
   entryState: 2
   defaultState: 3
   targetFoundState: 4
@@ -110,13 +81,27 @@ MonoBehaviour:
   deathEvent:
     m_PersistentCalls:
       m_Calls: []
-  targets: 
+  vision: 5
   range: 0
   attackAnimationLength: 0
   attackPrepareTime: 0
   attackCooldown: 0
   health: 5
   damage: 0
+  targetCreatureID: 0
+--- !u!65 &-8089771529960984659
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4046427919427412162}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &256099894894216127
 PrefabInstance:
   m_ObjectHideFlags: 0

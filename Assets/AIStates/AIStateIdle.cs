@@ -6,8 +6,8 @@ namespace AICreatures
     {
         public override void Enter()
         {
-            FireStateFinished();
             main.anim.SetTrigger("Idle");
+            FireStateFinished();
         }
 
         public override void Exit()

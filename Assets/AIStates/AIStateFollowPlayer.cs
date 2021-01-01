@@ -15,7 +15,6 @@ namespace AICreatures
 
         public override void Exit()
         {
-            main.agent.destination = main.transform.position;
         }
 
         public override void Update()

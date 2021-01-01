@@ -70,8 +70,8 @@ namespace AICreatures
 
         public override void Update()
         {
-            if (!main.IsValidTarget(target))
-                FireStateFinished();
+            if (!target.IsAlive())
+                main.FinishedState(GetID());
             else if (main.IsInRange(target))
                 Attack();
             else

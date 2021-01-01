@@ -13,6 +13,7 @@ namespace AICreatures
 
         public override void Update()
         {
+            FireStateFinished();
             if(arrived)
             {
                 timeUntilNextMove -= Time.deltaTime;
