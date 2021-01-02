@@ -6,13 +6,20 @@ using UnityEngine.AI;
 
 namespace AICreatures
 {
+    [RequireComponent(typeof(NavMeshAgent))]
     public class AICreature : MonoBehaviour
     {
-        public int ID;
-        public int team;
-        public int enemyTeam;
+        [Header("Base Components")]
+        public NavMeshAgent agent;
+        public Animator anim;
 
-        [Header("State Machine")]
+        [Header("AI SETTINGS")]
+        [HideInInspector]
+        public int ID;
+        public Game.Team team;
+        public Game.Team enemyTeam;
+
+        [Header("States")]
         public AIManager.AIStateType entryState;
         public AIManager.AIStateType defaultState;
         public AIManager.AIStateType targetFoundState;
@@ -22,12 +29,9 @@ namespace AICreatures
         public AIState currentState;
         public Dictionary<AIManager.AIStateType, AIState> states = new Dictionary<AIManager.AIStateType, AIState>();
 
-        [Header("Base Mob Components")]
-        public NavMeshAgent agent;
-        public Animator anim;
         public UnityEvent deathEvent = new UnityEvent();
 
-        [Header("Combat Attributes")]
+        [Header("Stats")]
         public float vision;
         public float range;
         public float attackAnimationLength;
@@ -35,7 +39,6 @@ namespace AICreatures
         public float attackCooldown;
         public int health;
         public int damage;
-        public int targetCreatureID;
 
         #region Statemachine
         private void Start()
@@ -51,14 +54,21 @@ namespace AICreatures
 
         private void FixedUpdate()
         {
+            if(IsAlive())
+            {
+                if (GetTarget() != null && currentStateType != targetFoundState)
+                    ChangeState(targetFoundState);
+                else if (GetTarget() == null && currentStateType == targetFoundState)
+                    ChangeState(defaultState);
+            }
             if (currentState != null)
                 currentState.Update();
+
         }
         private void Update()
         {
             if (currentState != null)
                 currentState.VisualUpdate();
-            
         }
         public void InitState(AIManager.AIStateType stateType)
         {
@@ -86,10 +96,8 @@ namespace AICreatures
                 currentState.Exit();
                 Destroy(gameObject);
             }
-            else if (GetTarget() == null)
+            else if (state == (int)entryState)
                 ChangeState(defaultState);
-            else
-                ChangeState(targetFoundState);
 
         }
         #endregion
@@ -97,7 +105,7 @@ namespace AICreatures
         #region TargetHandling
         public AICreature GetTarget()
         {
-            int layerMask = 1 << (6+team);
+            int layerMask = 1 << (6+((int)team));
             Collider[] hitColliders = Physics.OverlapSphere(transform.position, vision, layerMask);
 
             layerMask = ~layerMask;

@@ -12,6 +12,7 @@ public class Game : MonoBehaviour
     public GameObject linePrefab;
     public Player player;
     public Vector2 input;
+    public enum Team { Skeletons, Humans};
     
     private void Awake()
     {

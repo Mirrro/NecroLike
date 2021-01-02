@@ -15,7 +15,8 @@ namespace AICreatures
             {typeof(AIStateFollowPlayer),AIStateType.FollowPlayer},
             {typeof(AIStateIdle),AIStateType.Idle},
             {typeof(AIStateWander),AIStateType.Wander},
-
+            {typeof(AIStatePatrol),AIStateType.Patrol},
+            
             {typeof(AIStateFlee),AIStateType.Flee},
             {typeof(AIStateFight),AIStateType.Fight},
 
@@ -31,6 +32,7 @@ namespace AICreatures
             typeof(AIStateFollowPlayer),
             typeof(AIStateIdle),
             typeof(AIStateWander),
+            typeof(AIStatePatrol),
 
             typeof(AIStateFlee),
             typeof(AIStateFight),
@@ -46,6 +48,7 @@ namespace AICreatures
             FollowPlayer,
             Idle,
             Wander,
+            Patrol,
 
             Flee,
             Fight,

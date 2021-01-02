@@ -68,27 +68,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a55919bdc83a5e4e966c599e2398f10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  agent: {fileID: 3312118156029521906}
+  anim: {fileID: 1153857552438004731}
   ID: 0
   team: 0
   enemyTeam: 1
   entryState: 0
   defaultState: 1
-  targetFoundState: 5
-  deathState: 7
+  targetFoundState: 6
+  deathState: 8
   currentStateType: 0
-  agent: {fileID: 3312118156029521906}
-  anim: {fileID: 1153857552438004731}
   deathEvent:
     m_PersistentCalls:
       m_Calls: []
-  vision: 10
+  vision: 5
   range: 2
   attackAnimationLength: 0.1
   attackPrepareTime: 0.1
   attackCooldown: 1
   health: 10
   damage: 1
-  targetCreatureID: 0
 --- !u!65 &7909611661052167624
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -10,14 +10,8 @@ namespace AICreatures
         float attackPrepareTime;
         float attackCooldown;
         float attackAnimationLength;
-        AICreature target;
         public override void Enter()
         {
-            target = main.GetTarget(); 
-
-            if (target != null)
-                main.agent.destination = target.transform.position;
-            
             attackState = 0;
             attackTime = 0;
 
@@ -34,7 +28,7 @@ namespace AICreatures
         {
             attackState = 0;
             attackTime = 0;
-            main.agent.destination = target.transform.position;
+            main.agent.destination = main.GetTarget().transform.position;
         }
 
         private void Attack()
@@ -45,8 +39,8 @@ namespace AICreatures
                 if (attackTime >= attackPrepareTime)
                 {
                     attackState = 1;
-                    if (main.IsInRange(target))
-                        target.GetHit(main);
+                    if (main.IsInRange(main.GetTarget()))
+                        main.GetTarget().GetHit(main);
                 }
                 
             }
@@ -70,9 +64,7 @@ namespace AICreatures
 
         public override void Update()
         {
-            if (!target.IsAlive())
-                main.FinishedState(GetID());
-            else if (main.IsInRange(target))
+            if (main.IsInRange(main.GetTarget()))
                 Attack();
             else
                 Chase();
