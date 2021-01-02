@@ -5,7 +5,7 @@ namespace AICreatures
 {
     public class AIStateFlee : AIState
     {
-        AICreature target;
+        ITargetable target;
         public override void Enter()
         {
             target = main.GetTarget();
@@ -20,7 +20,7 @@ namespace AICreatures
         public override void Update()
         {
             startTransform = main.transform;
-            main.transform.rotation = Quaternion.LookRotation(main.transform.position - target.transform.position);
+            main.transform.rotation = Quaternion.LookRotation(main.transform.position - target.GetPosition());
             Vector3 runTo = main.transform.position + main.transform.forward * 1;
             NavMeshHit hit;
             NavMesh.SamplePosition(runTo, out hit, 5, 1 << NavMesh.GetAreaFromName("Walkable"));

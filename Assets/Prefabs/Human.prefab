@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4046427919427412167}
   - component: {fileID: 7243557543542532278}
   - component: {fileID: -8089771529960984659}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Human
   m_TagString: Human
   m_Icon: {fileID: 0}
@@ -70,12 +70,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   agent: {fileID: 4046427919427412167}
   anim: {fileID: 9133084165702364839}
+  usePlayerAsTargetOrientation: 0
   ID: 0
   team: 1
   enemyTeam: 0
-  entryState: 2
+  entryState: 3
   defaultState: 3
-  targetFoundState: 6
+  targetFoundState: 5
   deathState: 7
   currentStateType: 0
   deathEvent:
@@ -108,6 +109,61 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4046427919427412166}
     m_Modifications:
+    - target: {fileID: 180995864198762672, guid: 471d9c41ea629014998c880615a5fcf8,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 793973629178101104, guid: 471d9c41ea629014998c880615a5fcf8,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1263319703316285024, guid: 471d9c41ea629014998c880615a5fcf8,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2035717400930022889, guid: 471d9c41ea629014998c880615a5fcf8,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2173675309838938772, guid: 471d9c41ea629014998c880615a5fcf8,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3227935402131572971, guid: 471d9c41ea629014998c880615a5fcf8,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3747856256932354409, guid: 471d9c41ea629014998c880615a5fcf8,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4319648510280388446, guid: 471d9c41ea629014998c880615a5fcf8,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4487344371846143960, guid: 471d9c41ea629014998c880615a5fcf8,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6699471448526509403, guid: 471d9c41ea629014998c880615a5fcf8,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7123567163906677787, guid: 471d9c41ea629014998c880615a5fcf8,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 8536910073005356963, guid: 471d9c41ea629014998c880615a5fcf8,
         type: 3}
       propertyPath: m_RootOrder
@@ -167,6 +223,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: VillagerPrefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 9021522418874739993, guid: 471d9c41ea629014998c880615a5fcf8,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 471d9c41ea629014998c880615a5fcf8, type: 3}

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 9110655449650986300}
   - component: {fileID: 5835136003300330689}
   - component: {fileID: 2107172910546888617}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Knight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -59,23 +59,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a55919bdc83a5e4e966c599e2398f10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ID: 0
-  team: 1
-  entryState: 0
-  defaultState: 3
-  targetFoundState: 5
-  deathState: 6
-  currentStateType: 0
   agent: {fileID: 2107172910546888617}
   anim: {fileID: 6742100676276634830}
+  usePlayerAsTargetOrientation: 0
+  ID: 0
+  team: 1
+  enemyTeam: 0
+  entryState: 4
+  defaultState: 4
+  targetFoundState: 6
+  deathState: 7
+  currentStateType: 0
   deathEvent:
     m_PersistentCalls:
       m_Calls: []
-  targets: 
+  vision: 5
   range: 2
-  attackAnimationLength: 0.1
+  attackAnimationLength: 0.23
   attackPrepareTime: 0.1
-  attackCooldown: 1
+  attackCooldown: 3
   health: 100
   damage: 5
 --- !u!195 &2107172910546888617
@@ -107,15 +109,80 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9068347254159235717}
     m_Modifications:
+    - target: {fileID: 57584902809938321, guid: 48da008eb1447d740b8360f3bebef1a2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 318571680426965528, guid: 48da008eb1447d740b8360f3bebef1a2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 432885823284084069, guid: 48da008eb1447d740b8360f3bebef1a2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 694592152997562769, guid: 48da008eb1447d740b8360f3bebef1a2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1382424484491489921, guid: 48da008eb1447d740b8360f3bebef1a2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1628309096681793502, guid: 48da008eb1447d740b8360f3bebef1a2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1920960845806509889, guid: 48da008eb1447d740b8360f3bebef1a2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 2003091768648058948, guid: 48da008eb1447d740b8360f3bebef1a2,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 526511c72864ff04c9029e50fefab005, type: 2}
+    - target: {fileID: 2583342283530436783, guid: 48da008eb1447d740b8360f3bebef1a2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2769052550994202665, guid: 48da008eb1447d740b8360f3bebef1a2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3181958171819726488, guid: 48da008eb1447d740b8360f3bebef1a2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6968125507734028318, guid: 48da008eb1447d740b8360f3bebef1a2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 7284989825690280680, guid: 48da008eb1447d740b8360f3bebef1a2,
         type: 3}
       propertyPath: m_Name
       value: KnightCharacter
+      objectReference: {fileID: 0}
+    - target: {fileID: 7284989825690280680, guid: 48da008eb1447d740b8360f3bebef1a2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7709035943435250921, guid: 48da008eb1447d740b8360f3bebef1a2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 7949604354823747666, guid: 48da008eb1447d740b8360f3bebef1a2,
         type: 3}
@@ -171,6 +238,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8858694705728295914, guid: 48da008eb1447d740b8360f3bebef1a2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8967245290701838787, guid: 48da008eb1447d740b8360f3bebef1a2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 48da008eb1447d740b8360f3bebef1a2, type: 3}
@@ -270,6 +347,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ShoulderPlate (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 06e2ded2c998b8949a2b286c42346445,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 06e2ded2c998b8949a2b286c42346445, type: 3}
 --- !u!1001 &5691033389725571489
@@ -343,6 +425,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ShoulderPlate
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 06e2ded2c998b8949a2b286c42346445,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 06e2ded2c998b8949a2b286c42346445, type: 3}

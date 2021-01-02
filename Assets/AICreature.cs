@@ -7,11 +7,14 @@ using UnityEngine.AI;
 namespace AICreatures
 {
     [RequireComponent(typeof(NavMeshAgent))]
-    public class AICreature : MonoBehaviour
+    public class AICreature : MonoBehaviour, ITargetable
     {
+        private ITargetable target;
         [Header("Base Components")]
         public NavMeshAgent agent;
         public Animator anim;
+        private Transform targetOrientation;
+        public bool usePlayerAsTargetOrientation;
 
         [Header("AI SETTINGS")]
         [HideInInspector]
@@ -43,6 +46,10 @@ namespace AICreatures
         #region Statemachine
         private void Start()
         {
+            if (usePlayerAsTargetOrientation)
+                targetOrientation = Game.GetPlayer().transform;
+            else
+                targetOrientation = transform;
             InitState(entryState);
             InitState(defaultState);
             InitState(targetFoundState);
@@ -54,8 +61,9 @@ namespace AICreatures
 
         private void FixedUpdate()
         {
-            if(IsAlive())
+            if (IsAlive())
             {
+                UpdateTarget();
                 if (GetTarget() != null && currentStateType != targetFoundState)
                     ChangeState(targetFoundState);
                 else if (GetTarget() == null && currentStateType == targetFoundState)
@@ -103,10 +111,10 @@ namespace AICreatures
         #endregion
 
         #region TargetHandling
-        public AICreature GetTarget()
+        private void UpdateTarget()
         {
-            int layerMask = 1 << (6+((int)team));
-            Collider[] hitColliders = Physics.OverlapSphere(transform.position, vision, layerMask);
+            int layerMask = 1 << (6 + ((int)enemyTeam));
+            Collider[] hitColliders = Physics.OverlapSphere(targetOrientation.position, vision, layerMask);
 
             layerMask = ~layerMask;
             Collider closestCollider = null;
@@ -115,22 +123,27 @@ namespace AICreatures
                 RaycastHit hit;
                 if (!Physics.Raycast(transform.position, hitCollider.transform.position - transform.position, out hit, Vector3.Distance(transform.position, hitCollider.transform.position), layerMask))
                 {
-                    if (closestCollider == null|| Vector3.Distance(transform.position, hitCollider.transform.position)< Vector3.Distance(transform.position, closestCollider.transform.position))
+                    if (closestCollider == null || Vector3.Distance(transform.position, hitCollider.transform.position) < Vector3.Distance(transform.position, closestCollider.transform.position))
                         closestCollider = hitCollider;
                 }
 
             }
             if (closestCollider == null)
-                return null;
-            return closestCollider.GetComponent<AICreature>();
+                target = null;
+            else
+                target = closestCollider.GetComponent<ITargetable>();
+        }
+        public ITargetable GetTarget()
+        {
+            return target;
         }
 
         #endregion
 
         #region MobBehaviour
-        public void GetHit(AICreature damager)
+        public void GetHit(int damage)
         {
-            health -= damager.damage;
+            health -= damage;
             if (health <= 0)
                 Death();
         }
@@ -142,9 +155,9 @@ namespace AICreatures
             ChangeState(deathState);
         }
         
-        public bool IsInRange(AICreature target)
+        public bool IsInRange(Vector3 position)
         {
-            return (Vector3.Distance(target.transform.position, transform.position) <= range);
+            return (Vector3.Distance(position, transform.position) <= range);
         }
 
         public bool IsAlive()
@@ -158,6 +171,11 @@ namespace AICreatures
         public void PrintForMe(string str)
         {
             print(str);
+        }
+
+        public Vector3 GetPosition()
+        {
+            return transform.position;
         }
     }
 }
