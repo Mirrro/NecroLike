@@ -78,7 +78,7 @@ MonoBehaviour:
   attackAnimationLength: 0.23
   attackPrepareTime: 0.1
   attackCooldown: 3
-  health: 100
+  health: 10
   damage: 5
 --- !u!195 &2107172910546888617
 NavMeshAgent:
