@@ -57,32 +57,33 @@ namespace AICreatures
         }
         public override void VisualUpdate()
         {
-            if (target != null)
+            if (target != null && target.IsAlive())
                 main.transform.rotation = Quaternion.LookRotation(target.GetPosition() - main.transform.position);
         }
         public override void Update()
         {
-            if(target == null||!target.IsAlive())
-                target = main.GetTarget();
+            if (target != null && target.IsAlive())
+            {
 
-            if (attackState == 3)
-            {
-                attackTime += Time.deltaTime;
-                if (attackTime >= attackAnimationLength + attackCooldown)
+                if (attackState == 3)
                 {
-                    attackState = 0;
-                    attackTime = 0;
+                    attackTime += Time.deltaTime;
+                    if (attackTime >= attackAnimationLength + attackCooldown)
+                    {
+                        attackState = 0;
+                        attackTime = 0;
+                    }
                 }
-            }
-            else if (!main.IsInRange(target.GetPosition()))
-            {
-                main.anim.SetTrigger("Chase");
-                main.agent.destination = target.GetPosition();
+                else if (!main.IsInRange(target.GetPosition()))
+                {
+                    main.anim.SetTrigger("Chase");
+                    main.agent.destination = target.GetPosition();
+                }
+                else
+                    Attack();
             }
             else
-                Attack();
-
-            main.PrintForMe(main.name+" "+attackState);
+                target = main.GetTarget();
         }
 
         public override void Exit()

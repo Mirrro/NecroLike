@@ -162,7 +162,7 @@ namespace AICreatures
 
         public bool IsAlive()
         {
-            return isActiveAndEnabled && health > 0;
+            return this != null && isActiveAndEnabled && health > 0;
         }
 
        
