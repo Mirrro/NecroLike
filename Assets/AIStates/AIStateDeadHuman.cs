@@ -15,24 +15,25 @@ namespace AICreatures
             line = Game.GetLinePrefabInstance().GetComponent<LineRenderer>();
             line.SetPosition(0, main.transform.position);
             timeLeft = player.reviveTime;
-         //   main.GetComponent<Renderer>().material = Game.GetDeadMat();
+            main.anim.SetTrigger("Death");
+            main.agent.enabled = false;
         }
 
         public override void Exit()
         {
             Game.Destroy(line.gameObject);
+            player.SpawnSkeleton(main);
         }
+
 
         public override void Update()
         {
             if (timeLeft <= 0)
             {
-                player.SpawnSkeleton(main);
                 FireStateFinished();
             }
             else if (Vector3.Distance(player.transform.position, main.transform.position) <= player.reviveRange)
             {
-                line.SetPosition(1, player.transform.position);
                 line.enabled = true;
                 timeLeft -= Time.deltaTime;
             }
@@ -41,6 +42,11 @@ namespace AICreatures
                 timeLeft = player.reviveTime;
                 line.enabled = false;
             }
+        }
+
+        public override void VisualUpdate()
+        {
+            line.SetPosition(1, player.transform.position);
         }
     }
 }

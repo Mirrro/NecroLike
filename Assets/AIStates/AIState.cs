@@ -25,5 +25,7 @@ namespace AICreatures
         public abstract void Exit();
 
         public abstract void Update();
+
+        public virtual void VisualUpdate(){ }
     }
 }

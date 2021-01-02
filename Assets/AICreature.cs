@@ -6,12 +6,20 @@ using UnityEngine.AI;
 
 namespace AICreatures
 {
+    [RequireComponent(typeof(NavMeshAgent))]
     public class AICreature : MonoBehaviour
     {
-        public int ID;
-        public int team;
+        [Header("Base Components")]
+        public NavMeshAgent agent;
+        public Animator anim;
 
-        [Header("State Machine")]
+        [Header("AI SETTINGS")]
+        [HideInInspector]
+        public int ID;
+        public Game.Team team;
+        public Game.Team enemyTeam;
+
+        [Header("States")]
         public AIManager.AIStateType entryState;
         public AIManager.AIStateType defaultState;
         public AIManager.AIStateType targetFoundState;
@@ -21,15 +29,10 @@ namespace AICreatures
         public AIState currentState;
         public Dictionary<AIManager.AIStateType, AIState> states = new Dictionary<AIManager.AIStateType, AIState>();
 
-        [Header("Base Mob Components")]
-        public NavMeshAgent agent;
-        public Animator anim;
         public UnityEvent deathEvent = new UnityEvent();
 
-        [Header("Targeting")]
-        public List<int> targets = new List<int>();
-
-        [Header("Combat Attributes")]
+        [Header("Stats")]
+        public float vision;
         public float range;
         public float attackAnimationLength;
         public float attackPrepareTime;
@@ -40,7 +43,6 @@ namespace AICreatures
         #region Statemachine
         private void Start()
         {
-            ID = Game.RegisterCreature(this);
             InitState(entryState);
             InitState(defaultState);
             InitState(targetFoundState);
@@ -50,11 +52,23 @@ namespace AICreatures
                 Death();
         }
 
-        private void LateUpdate()
+        private void FixedUpdate()
         {
+            if(IsAlive())
+            {
+                if (GetTarget() != null && currentStateType != targetFoundState)
+                    ChangeState(targetFoundState);
+                else if (GetTarget() == null && currentStateType == targetFoundState)
+                    ChangeState(defaultState);
+            }
             if (currentState != null)
                 currentState.Update();
 
+        }
+        private void Update()
+        {
+            if (currentState != null)
+                currentState.VisualUpdate();
         }
         public void InitState(AIManager.AIStateType stateType)
         {
@@ -82,70 +96,35 @@ namespace AICreatures
                 currentState.Exit();
                 Destroy(gameObject);
             }
-            if (GetTarget() == null)
+            else if (state == (int)entryState)
                 ChangeState(defaultState);
-            else
-                ChangeState(targetFoundState);
 
         }
         #endregion
 
         #region TargetHandling
-
-        public virtual void TargetFound(AICreature target)
-        {
-            targets.Add(target.ID);
-
-            if (currentState.GetID() != (int)targetFoundState)
-                ChangeState(targetFoundState);
-        }
-        public void TargetLost(AICreature target)
-        {
-            targets.Remove(target.ID);
-
-            if (GetTarget() == null && currentState.GetID() == (int)targetFoundState)
-                ChangeState(defaultState);
-        }
-        public void OnTriggerEnter(Collider other)
-        {
-            AICreature creature = other.GetComponent<AICreature>();
-            if (creature == null)
-                return;
-            if (creature.team!=team && creature.IsAlive())
-                TargetFound(creature);    
-        }
-        public void OnTriggerExit(Collider other)
-        {
-            AICreature creature = other.GetComponent<AICreature>();
-            if (creature == null)
-                return;
-            if (creature.team != team)
-                TargetLost(creature);
-        }
         public AICreature GetTarget()
         {
-            for(int i = 0; i<targets.Count; i++)
+            int layerMask = 1 << (6+((int)team));
+            Collider[] hitColliders = Physics.OverlapSphere(transform.position, vision, layerMask);
+
+            layerMask = ~layerMask;
+            Collider closestCollider = null;
+            foreach (var hitCollider in hitColliders)
             {
-                AICreature target = Game.instance.GetCreature(team == 0 ? 1 : 0, targets[i]);
-                if (IsValidTarget(target))
-                    return target;
+                RaycastHit hit;
+                if (!Physics.Raycast(transform.position, hitCollider.transform.position - transform.position, out hit, Vector3.Distance(transform.position, hitCollider.transform.position), layerMask))
+                {
+                    if (closestCollider == null|| Vector3.Distance(transform.position, hitCollider.transform.position)< Vector3.Distance(transform.position, closestCollider.transform.position))
+                        closestCollider = hitCollider;
+                }
+
             }
-                
-            
-            return null;
+            if (closestCollider == null)
+                return null;
+            return closestCollider.GetComponent<AICreature>();
         }
-        public bool IsValidTarget(AICreature target)
-        {
-            if (target == null)
-                return false;
-            if (!target.IsAlive())
-                return false;
-            if (IsObstructed(target))
-                return false;
-            if (tag == "Skeleton" && Vector3.Distance(transform.position, target.transform.position) > 3)
-                return false;
-            return true;
-        }
+
         #endregion
 
         #region MobBehaviour
@@ -159,7 +138,7 @@ namespace AICreatures
         public virtual void Death()
         {
             deathEvent.Invoke();
-            Game.UnregisterCreature(this);
+            gameObject.layer = 0;
             ChangeState(deathState);
         }
         
@@ -173,20 +152,7 @@ namespace AICreatures
             return isActiveAndEnabled && health > 0;
         }
 
-        public bool IsObstructed(AICreature target)
-        {
-            if (target == null)
-                return true;
-            int layerMask = 1 << 6;
-            layerMask = ~layerMask;
-
-            RaycastHit hit;
-            Debug.DrawRay(transform.position, (target.transform.position - transform.position) * Vector3.Distance(transform.position, target.transform.position), Color.yellow);
-            if (Physics.Raycast(transform.position, target.transform.position - transform.position , out hit, Vector3.Distance(transform.position, target.transform.position), layerMask))
-                return true;
-            else
-                return false;
-        }
+       
         #endregion
 
         public void PrintForMe(string str)
