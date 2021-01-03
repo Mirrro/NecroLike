@@ -61,14 +61,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   agent: {fileID: 2107172910546888617}
   anim: {fileID: 6742100676276634830}
-  usePlayerAsTargetOrientation: 0
   ID: 0
   team: 1
   enemyTeam: 0
-  entryState: 4
-  defaultState: 4
-  targetFoundState: 6
-  deathState: 7
+  entryState: 3
+  defaultState: 3
+  targetFoundState: 5
+  deathState: 6
   currentStateType: 0
   deathEvent:
     m_PersistentCalls:

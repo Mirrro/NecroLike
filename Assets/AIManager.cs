@@ -11,8 +11,7 @@ namespace AICreatures
         public static Dictionary<Type, AIStateType> AIStateTypeDictionary = new Dictionary<Type, AIStateType>
         {
             {typeof(AIStateSpawning),AIStateType.Spawning},
-
-            {typeof(AIStateFollowPlayer),AIStateType.FollowPlayer},
+            
             {typeof(AIStateIdle),AIStateType.Idle},
             {typeof(AIStateWander),AIStateType.Wander},
             {typeof(AIStatePatrol),AIStateType.Patrol},
@@ -28,8 +27,7 @@ namespace AICreatures
         public static Type[] AIStateTypes = new Type[]
         {
             typeof(AIStateSpawning),
-
-            typeof(AIStateFollowPlayer),
+            
             typeof(AIStateIdle),
             typeof(AIStateWander),
             typeof(AIStatePatrol),
@@ -44,8 +42,7 @@ namespace AICreatures
         public enum AIStateType
         {
             Spawning,
-
-            FollowPlayer,
+            
             Idle,
             Wander,
             Patrol,

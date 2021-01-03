@@ -13,8 +13,6 @@ namespace AICreatures
         [Header("Base Components")]
         public NavMeshAgent agent;
         public Animator anim;
-        private Transform targetOrientation;
-        public bool usePlayerAsTargetOrientation;
 
         [Header("AI SETTINGS")]
         [HideInInspector]
@@ -46,10 +44,7 @@ namespace AICreatures
         #region Statemachine
         private void Start()
         {
-            if (usePlayerAsTargetOrientation)
-                targetOrientation = Game.GetPlayer().transform;
-            else
-                targetOrientation = transform;
+            Game.RegisterCreature((int)team);
             InitState(entryState);
             InitState(defaultState);
             InitState(targetFoundState);
@@ -114,7 +109,7 @@ namespace AICreatures
         private void UpdateTarget()
         {
             int layerMask = 1 << (6 + ((int)enemyTeam));
-            Collider[] hitColliders = Physics.OverlapSphere(targetOrientation.position, vision, layerMask);
+            Collider[] hitColliders = Physics.OverlapSphere(GetPosition(), vision, layerMask);
 
             layerMask = ~layerMask;
             Collider closestCollider = null;
@@ -150,6 +145,7 @@ namespace AICreatures
 
         public virtual void Death()
         {
+            Game.UnregisterCreature((int)team);
             deathEvent.Invoke();
             gameObject.layer = 0;
             ChangeState(deathState);

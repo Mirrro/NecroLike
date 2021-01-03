@@ -9,11 +9,8 @@ namespace AICreatures
         float attackPrepareTime;
         float attackCooldown;
         float attackAnimationLength;
-        ITargetable target;
         public override void Enter()
         {
-            target = main.GetTarget();
-
             attackState = 0;
             attackTime = 0;
 
@@ -41,8 +38,8 @@ namespace AICreatures
                 if (attackTime >= attackPrepareTime)
                 {
                     attackState = 2;
-                    if (main.IsInRange(target.GetPosition()))
-                        target.GetHit(main.damage);
+                    if (main.IsInRange(main.GetTarget().GetPosition()))
+                        main.GetTarget().GetHit(main.damage);
                 }
             }
             else if (attackState == 2)
@@ -57,12 +54,12 @@ namespace AICreatures
         }
         public override void VisualUpdate()
         {
-            if (target != null && target.IsAlive())
-                main.transform.rotation = Quaternion.LookRotation(target.GetPosition() - main.transform.position);
+            if (main.GetTarget() != null && main.GetTarget().IsAlive())
+                main.transform.rotation = Quaternion.LookRotation(main.GetTarget().GetPosition() - main.transform.position);
         }
         public override void Update()
         {
-            if (target != null && target.IsAlive())
+            if (main.GetTarget() != null && main.GetTarget().IsAlive())
             {
 
                 if (attackState == 3)
@@ -74,16 +71,14 @@ namespace AICreatures
                         attackTime = 0;
                     }
                 }
-                else if (!main.IsInRange(target.GetPosition()))
+                else if (!main.IsInRange(main.GetTarget().GetPosition()))
                 {
                     main.anim.SetTrigger("Chase");
-                    main.agent.destination = target.GetPosition();
+                    main.agent.destination = main.GetTarget().GetPosition();
                 }
                 else
                     Attack();
             }
-            else
-                target = main.GetTarget();
         }
 
         public override void Exit()

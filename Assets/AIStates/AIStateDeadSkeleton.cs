@@ -8,7 +8,7 @@ namespace AICreatures
     {
         public override void Enter()
         {
-            Game.GetSkeletonDeathAnimInstance(main.transform.position);
+            Game.Instantiate(Game.GetSkeletonDeathPrefab(),main.transform.position,Quaternion.identity);
             FireStateFinished();
         }
 

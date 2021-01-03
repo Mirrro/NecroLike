@@ -1,45 +1,52 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using AICreatures;
+using UnityEngine.Events;
 
-public class Player : MonoBehaviour, ITargetable
+public class Player : MonoBehaviour
 {
-    public CharacterController controller;
-    public float speed;
-    public float reviveRange;
-    public float reviveTime;
-    public float tetherDistance;
-    public int health;
-    
-    void Update()
+    public Ability[] abilites = new Ability[]{ new AbilitySpawn(), new AbilitySpawn(), new AbilitySpawn() };
+    public int selectedAbility = -1;
+    public LineRenderer line;
+
+    private void Start()
     {
-        controller.SimpleMove(new Vector3(speed*Game.GetInput().x,0, speed* Game.GetInput().y));
+        for (int i = 0; i<abilites.Length; i++)
+        {
+            CreateButton(i);
+        }
     }
-    public void SpawnSkeleton(AICreature deadHuman)
+    private void CreateButton(int id)
     {
-        Instantiate(Game.GetSkellyFab(), deadHuman.transform.position, deadHuman.transform.rotation);
+        GameObject abilityButton = Instantiate(Game.GetAbilityButtonPrefab(), FindObjectOfType<Canvas>().transform);
+        abilityButton.transform.position = new Vector3(abilites.Length * 160 - id * 160, 90, 0);
+        abilityButton.GetComponent<Button>().onClick.AddListener(delegate { SelectAbility(id); });
+        abilityButton.GetComponent<Button>().onClick.AddListener(delegate { Game.HideButton(abilityButton); });
+        abilityButton.GetComponentInChildren<Text>().text = abilites[id].GetName();
     }
 
-    public void GetHit(int damage)
+    private void Update()
     {
-        health -= damage;
-        if (health <= 0)
-            Death();
+        Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out RaycastHit hit);
+        line.SetPosition(1, hit.point);
+        if (Input.GetMouseButtonDown(0) && selectedAbility != -1)
+            ActivateAbility(hit.point);
     }
 
-    public void Death()
+    public void SelectAbility(int id)
     {
-        Application.Quit();
+        selectedAbility = id;
+        line.enabled = true;
     }
 
-    public bool IsAlive()
+    public void ActivateAbility(Vector3 pos)
     {
-        return health > 0;
+        line.enabled = false;
+        abilites[selectedAbility].TryActivate(pos);
+        selectedAbility = -1;
     }
 
-    public Vector3 GetPosition()
-    {
-        return transform.position;
-    }
 }
+

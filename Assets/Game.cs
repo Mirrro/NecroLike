@@ -1,54 +1,61 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using AICreatures;
 
 public class Game : MonoBehaviour
 {
     public static Game instance;
+
     public GameObject skellyFab;
     public GameObject skeletonDeathAnim;
-    public Material deadPerson;
-    public GameObject linePrefab;
-    public Player player;
-    public Vector2 input;
-    public enum Team { Skeletons, Humans};
+    public GameObject abilityButtonPrefab;
+
+    public Transform MOBS;
+    public enum Team { Skeletons, Humans };
+    public int[] creatureCount = new int[2] { 0, 0 };
+
+    public Text humanCountText;
     
     private void Awake()
     {
         instance = this;
     }
 
-    public static Vector2 GetInput()
+    public static Transform GetMOBS()
     {
-        return instance.input;
+        return instance.MOBS;
     }
 
-    public static void SetInput(Vector2 input)
+    public static void RegisterCreature(int team)
     {
-        instance.input = input;
+        instance.creatureCount[team]++;
+        instance.humanCountText.text = instance.creatureCount[(int)Team.Humans].ToString();
     }
-    public static Player GetPlayer()
+
+    public static void UnregisterCreature(int team)
     {
-        return instance.player;
+        instance.creatureCount[team]--;
+        instance.humanCountText.text = instance.creatureCount[(int)Team.Humans].ToString();
     }
-    public static GameObject GetSkellyFab()
+
+    public static void HideButton(GameObject button)
+    {
+        button.SetActive(false);
+    }
+
+    public static GameObject GetSkeletonPrefab()
     {
         return instance.skellyFab;
     }
-    public static Material GetDeadMat()
+    public static GameObject GetSkeletonDeathPrefab()
     {
-        return instance.deadPerson;
+        return instance.skeletonDeathAnim;
     }
-    public static GameObject GetSkeletonDeathAnimInstance(Vector3 position)
+    public static GameObject GetAbilityButtonPrefab()
     {
-        return Instantiate(instance.skeletonDeathAnim, position, Quaternion.identity);
+        return instance.abilityButtonPrefab;
     }
-    public static GameObject GetLinePrefabInstance()
-    {
-        return Instantiate(instance.linePrefab);
-    }
-
-
-
+    
 }
