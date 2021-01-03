@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: HumanBehindWall
+  m_Name: SkeletonBehindWall
   m_Shader: {fileID: -6465566751694194690, guid: d149902e9606e1e4cb9b361b4f198660,
     type: 3}
   m_ShaderKeywords: 
@@ -120,8 +120,7 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 0
     m_Colors:
-    - Color_8c2f818160674e3490c91d770424db7a: {r: 0.490566, g: 0.2710471, b: 0.1082947,
-        a: 1}
+    - Color_8c2f818160674e3490c91d770424db7a: {r: 1, g: 0, b: 0.44027233, a: 1}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 0.21960784}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
