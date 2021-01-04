@@ -1,3 +1,4 @@
+using UnityEngine;
 namespace AICreatures
 {
     public abstract class AIState

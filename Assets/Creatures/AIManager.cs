@@ -1,12 +1,24 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using System;
 
 namespace AICreatures
 {
-    public class AIManager : MonoBehaviour
+    public static class AIManager
     {
+        public enum AIStateType
+        {
+            Spawning,
+
+            Idle,
+            Wander,
+            Patrol,
+
+            Flee,
+            Fight,
+
+            DeadHuman,
+            DeadSkeleton
+        }
 
         public static Dictionary<Type, AIStateType> AIStateTypeDictionary = new Dictionary<Type, AIStateType>
         {
@@ -21,7 +33,6 @@ namespace AICreatures
 
             {typeof(AIStateDeadHuman),AIStateType.DeadHuman},
             {typeof(AIStateDeadSkeleton),AIStateType.DeadSkeleton},
-
         };
 
         public static Type[] AIStateTypes = new Type[]
@@ -39,21 +50,10 @@ namespace AICreatures
             typeof(AIStateDeadSkeleton)
         };
 
-        public enum AIStateType
+        public static T ActivateState<T>() where T: AIState
         {
-            Spawning,
-            
-            Idle,
-            Wander,
-            Patrol,
-
-            Flee,
-            Fight,
-
-            DeadHuman,
-            DeadSkeleton
+            return (T)Activator.CreateInstance(typeof(T));
         }
-
         public static AIState ActivateState(AIStateType type)
         {
            return (AIState)Activator.CreateInstance(AIStateTypes[(int)type]);

@@ -7,45 +7,45 @@ using UnityEngine.Events;
 
 public class Player : MonoBehaviour
 {
-    public Ability[] abilites = new Ability[]{ new AbilitySpawn(), new AbilitySpawn(), new AbilitySpawn() };
-    public int selectedAbility = -1;
+    public CreatureCard[] creatureCards;
+    public int selectedCreatureCard = -1;
     public LineRenderer line;
 
     private void Start()
     {
-        for (int i = 0; i<abilites.Length; i++)
+        for (int i = 0; i< creatureCards.Length; i++)
         {
-            CreateButton(i);
+            CreateCreatureCardButton(i);
         }
     }
-    private void CreateButton(int id)
+    private void CreateCreatureCardButton(int id)
     {
         GameObject abilityButton = Instantiate(Game.GetAbilityButtonPrefab(), FindObjectOfType<Canvas>().transform);
-        abilityButton.transform.position = new Vector3(abilites.Length * 160 - id * 160, 90, 0);
+        abilityButton.transform.position = new Vector3(creatureCards.Length * 160 - id * 160, 90, 0);
         abilityButton.GetComponent<Button>().onClick.AddListener(delegate { SelectAbility(id); });
         abilityButton.GetComponent<Button>().onClick.AddListener(delegate { Game.HideButton(abilityButton); });
-        abilityButton.GetComponentInChildren<Text>().text = abilites[id].GetName();
+        abilityButton.GetComponentInChildren<Text>().text = creatureCards[id].spawnPrefab.name;
     }
 
     private void Update()
     {
         Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out RaycastHit hit);
         line.SetPosition(1, hit.point);
-        if (Input.GetMouseButtonDown(0) && selectedAbility != -1)
-            ActivateAbility(hit.point);
+        if (Input.GetMouseButtonDown(0) && selectedCreatureCard != -1)
+            SpawnCreature(hit.point);
     }
 
     public void SelectAbility(int id)
     {
-        selectedAbility = id;
+        selectedCreatureCard = id;
         line.enabled = true;
     }
 
-    public void ActivateAbility(Vector3 pos)
+    public void SpawnCreature(Vector3 pos)
     {
         line.enabled = false;
-        abilites[selectedAbility].TryActivate(pos);
-        selectedAbility = -1;
+        creatureCards[selectedCreatureCard].SpawnMob(pos);
+        selectedCreatureCard = -1;
     }
 
 }

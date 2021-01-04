@@ -27,8 +27,8 @@ namespace AICreatures
         public AIManager.AIStateType deathState;
 
         public AIManager.AIStateType currentStateType;
-        public AIState currentState;
-        public Dictionary<AIManager.AIStateType, AIState> states = new Dictionary<AIManager.AIStateType, AIState>();
+        private AIState currentState;
+        private Dictionary<AIManager.AIStateType, AIState> states = new Dictionary<AIManager.AIStateType, AIState>();
 
         public UnityEvent deathEvent = new UnityEvent();
 
@@ -66,7 +66,6 @@ namespace AICreatures
             }
             if (currentState != null)
                 currentState.Update();
-
         }
         private void Update()
         {
