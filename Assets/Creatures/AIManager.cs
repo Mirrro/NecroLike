@@ -17,7 +17,9 @@ namespace AICreatures
             Fight,
 
             DeadHuman,
-            DeadSkeleton
+            DeadSkeleton,
+
+            Rally
         }
 
         public static Dictionary<Type, AIStateType> AIStateTypeDictionary = new Dictionary<Type, AIStateType>
@@ -33,6 +35,9 @@ namespace AICreatures
 
             {typeof(AIStateDeadHuman),AIStateType.DeadHuman},
             {typeof(AIStateDeadSkeleton),AIStateType.DeadSkeleton},
+
+
+            {typeof(AIStateRally),AIStateType.Rally}
         };
 
         public static Type[] AIStateTypes = new Type[]
@@ -47,7 +52,9 @@ namespace AICreatures
             typeof(AIStateFight),
 
             typeof(AIStateDeadHuman),
-            typeof(AIStateDeadSkeleton)
+            typeof(AIStateDeadSkeleton),
+            
+            typeof(AIStateRally)
         };
 
         public static T ActivateState<T>() where T: AIState

@@ -15,9 +15,21 @@ public class Game : MonoBehaviour
     public Transform MOBS;
     public enum Team { Skeletons, Humans };
     public int[] creatureCount = new int[2] { 0, 0 };
+    private Vector3 rallyPoint;
+    public static Vector3 RallyPoint
+    {
+        get { return instance.rallyPoint; } 
+        set { instance.rallyPoint = value; } 
+    }
 
     public Text humanCountText;
-    
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(RallyPoint, 10);
+    }
+
     private void Awake()
     {
         instance = this;

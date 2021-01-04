@@ -31,6 +31,7 @@ namespace AICreatures
         private Dictionary<AIManager.AIStateType, AIState> states = new Dictionary<AIManager.AIStateType, AIState>();
 
         public UnityEvent deathEvent = new UnityEvent();
+        bool forcedState;
 
         [Header("Stats")]
         public float vision;
@@ -54,9 +55,17 @@ namespace AICreatures
                 Death();
         }
 
+        public void ForceState(AIManager.AIStateType state)
+        {
+            InitState(state);
+
+            ChangeState(state);
+            forcedState = true;
+        }
+
         private void FixedUpdate()
         {
-            if (IsAlive())
+            if (IsAlive() && !forcedState)
             {
                 UpdateTarget();
                 if (GetTarget() != null && currentStateType != targetFoundState)
@@ -93,6 +102,8 @@ namespace AICreatures
         }
         public virtual void FinishedState(int state)
         {
+            if (forcedState)
+                forcedState = false;
             if (state == (int)deathState)
             {
                 currentState.Exit();

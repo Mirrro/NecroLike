@@ -14,9 +14,7 @@ public class Player : MonoBehaviour
     private void Start()
     {
         for (int i = 0; i< creatureCards.Length; i++)
-        {
             CreateCreatureCardButton(i);
-        }
     }
     private void CreateCreatureCardButton(int id)
     {
@@ -31,8 +29,20 @@ public class Player : MonoBehaviour
     {
         Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out RaycastHit hit);
         line.SetPosition(1, hit.point);
-        if (Input.GetMouseButtonDown(0) && selectedCreatureCard != -1)
-            SpawnCreature(hit.point);
+        if (Input.GetMouseButtonDown(0))
+        {
+            if(selectedCreatureCard != -1)
+                SpawnCreature(hit.point);
+            else
+            {
+                Game.RallyPoint = hit.point;
+                int layerMask = 1 << 6;
+                Collider[] hitColliders = Physics.OverlapSphere(hit.point, 10, layerMask);
+                foreach(Collider collider in hitColliders)
+                    collider.GetComponent<AICreature>().ForceState(AIManager.AIStateType.Rally);
+            }
+        }
+           
     }
 
     public void SelectAbility(int id)
