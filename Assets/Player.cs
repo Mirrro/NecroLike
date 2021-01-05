@@ -31,16 +31,16 @@ public class Player : MonoBehaviour
         line.SetPosition(1, hit.point);
         if (Input.GetMouseButtonDown(0))
         {
-            if(selectedCreatureCard != -1)
-                SpawnCreature(hit.point);
-            else
+            if(selectedCreatureCard == -1)
             {
                 Game.RallyPoint = hit.point;
                 int layerMask = 1 << 6;
                 Collider[] hitColliders = Physics.OverlapSphere(hit.point, 10, layerMask);
-                foreach(Collider collider in hitColliders)
+                foreach (Collider collider in hitColliders)
                     collider.GetComponent<AICreature>().ForceState(AIManager.AIStateType.Rally);
             }
+            else
+                SpawnCreature(hit.point);
         }
            
     }

@@ -27,7 +27,8 @@ public class Game : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(RallyPoint, 10);
+        if (Game.instance != null)
+            Gizmos.DrawWireSphere(RallyPoint, 10);
     }
 
     private void Awake()
