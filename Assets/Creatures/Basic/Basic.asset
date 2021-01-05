@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c4239a7ac993f1246a0a3fce4453e23b, type: 3}
-  m_Name: KnightCard
+  m_Name: Basic
   m_EditorClassIdentifier: 
   buttonImage: {fileID: 0}
-  spawnPrefab: {fileID: 3312118156029521908, guid: e965ed5d766833e449b10f5ec71788eb,
+  spawnPrefab: {fileID: 3312118156029521908, guid: 4f059679593789a41b310a2331bd79a5,
     type: 3}
   spawnAmount: 1

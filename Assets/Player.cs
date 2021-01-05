@@ -37,7 +37,7 @@ public class Player : MonoBehaviour
                 int layerMask = 1 << 6;
                 Collider[] hitColliders = Physics.OverlapSphere(hit.point, 10, layerMask);
                 foreach (Collider collider in hitColliders)
-                    collider.GetComponent<AICreature>().ForceState(AIManager.AIStateType.Rally);
+                    collider.GetComponent<AIEntity>().ForceBehaviour(collider.GetComponent<AIRally>());
             }
             else
                 SpawnCreature(hit.point);

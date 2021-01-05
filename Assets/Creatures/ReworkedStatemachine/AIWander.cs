@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 namespace AICreatures
 {
-    public class AIBehaviourWander : AIBehaviour
+    public class AIWander : AIBehaviour
     {
         private void OnEnable()
         {

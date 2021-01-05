@@ -10,10 +10,14 @@ GameObject:
   m_Component:
   - component: {fileID: 4046427919427412166}
   - component: {fileID: 4046427919427412167}
-  - component: {fileID: 7243557543542532278}
   - component: {fileID: -8089771529960984659}
+  - component: {fileID: 845817682601263160}
+  - component: {fileID: 510141612724801600}
+  - component: {fileID: 7827669166121319673}
+  - component: {fileID: 7307965807201527328}
+  - component: {fileID: 6430380009242565699}
   m_Layer: 7
-  m_Name: Human
+  m_Name: Villager
   m_TagString: Human
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -56,38 +60,6 @@ NavMeshAgent:
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &7243557543542532278
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4046427919427412162}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a55919bdc83a5e4e966c599e2398f10, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  agent: {fileID: 4046427919427412167}
-  anim: {fileID: 9133084165702364839}
-  ID: 0
-  team: 1
-  enemyTeam: 0
-  entryState: 2
-  defaultState: 2
-  targetFoundState: 4
-  deathState: 6
-  currentStateType: 0
-  deathEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  vision: 5
-  range: 0
-  attackAnimationLength: 0
-  attackPrepareTime: 0
-  attackCooldown: 0
-  health: 5
-  damage: 0
 --- !u!65 &-8089771529960984659
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -101,6 +73,162 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &845817682601263160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4046427919427412162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8927ca44533a1be43924c22cb4dbab49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  team: 1
+  enemyTeam: 0
+  stats:
+    health: 5
+    vision: 5
+    damage: 0
+    range: 0
+  HitEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  DeathEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7307965807201527328}
+        m_TargetAssemblyTypeName: AICreatures.AIBehaviour, Assembly-CSharp
+        m_MethodName: SetBehaviour
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  EnemyFoundEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7827669166121319673}
+        m_TargetAssemblyTypeName: AICreatures.AIBehaviour, Assembly-CSharp
+        m_MethodName: SetBehaviour
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  anim: {fileID: 0}
+  agent: {fileID: 0}
+  forced: 0
+  currentBehaviour: {fileID: 510141612724801600}
+--- !u!114 &510141612724801600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4046427919427412162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d8b5da27e5bf2f45a7fc03a8f7fe2fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finished:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6430380009242565699}
+        m_TargetAssemblyTypeName: AICreatures.AIBehaviour, Assembly-CSharp
+        m_MethodName: SetBehaviour
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  timer: 1
+--- !u!114 &7827669166121319673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4046427919427412162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0da950cbb74fc3489200d38b4848d71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finished:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &7307965807201527328
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4046427919427412162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a70fc6a13c4f1c849b1a8e5f5edeed7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finished:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4046427919427412162}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  skeleton: {fileID: 3312118156029521908, guid: 4f059679593789a41b310a2331bd79a5,
+    type: 3}
+  timeUntilDestruction: 1
+--- !u!114 &6430380009242565699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4046427919427412162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1368364df561fe4f9030cb9a731ad9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finished:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 510141612724801600}
+        m_TargetAssemblyTypeName: AICreatures.AIBehaviour, Assembly-CSharp
+        m_MethodName: SetBehaviour
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &256099894894216127
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -233,12 +361,6 @@ PrefabInstance:
 --- !u!4 &8499676800289305628 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8536910073005356963, guid: 471d9c41ea629014998c880615a5fcf8,
-    type: 3}
-  m_PrefabInstance: {fileID: 256099894894216127}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &9133084165702364839 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 9021522418874739992, guid: 471d9c41ea629014998c880615a5fcf8,
     type: 3}
   m_PrefabInstance: {fileID: 256099894894216127}
   m_PrefabAsset: {fileID: 0}

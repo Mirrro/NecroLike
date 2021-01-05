@@ -5,22 +5,20 @@ using UnityEngine.AI;
 
 namespace AICreatures
 {
-    public class AIBehaviourIdle : AIBehaviour
+    public class AIRally : AIBehaviour
     {
-        public float timer;
-        private float passedTime;
         private void OnEnable()
         {
-            passedTime = 0;
-            entity.anim.SetTrigger("Idle");
+            entity.agent.SetDestination(Game.RallyPoint);
         }
 
         private void FixedUpdate()
         {
-            passedTime += Time.deltaTime;
-            if (passedTime >= timer)
+            if (entity.agent.remainingDistance <= 2)
+            {
+                entity.forced = false;
                 finished.Invoke();
+            }
         }
     }
 }
-

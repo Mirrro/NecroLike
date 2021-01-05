@@ -10,8 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 3312118156029521904}
   - component: {fileID: 3312118156029521906}
-  - component: {fileID: 2023166882510048736}
   - component: {fileID: 7909611661052167624}
+  - component: {fileID: 3290532538598319942}
+  - component: {fileID: -3221840400269061206}
+  - component: {fileID: 5317877426570767782}
+  - component: {fileID: -3688462328016641301}
   m_Layer: 6
   m_Name: Skeleton
   m_TagString: Skeleton
@@ -56,38 +59,6 @@ NavMeshAgent:
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &2023166882510048736
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3312118156029521908}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a55919bdc83a5e4e966c599e2398f10, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  agent: {fileID: 3312118156029521906}
-  anim: {fileID: 1153857552438004731}
-  ID: 0
-  team: 0
-  enemyTeam: 1
-  entryState: 0
-  defaultState: 2
-  targetFoundState: 5
-  deathState: 7
-  currentStateType: 0
-  deathEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  vision: 5
-  range: 2
-  attackAnimationLength: 0.1
-  attackPrepareTime: 0.1
-  attackCooldown: 1
-  health: 10
-  damage: 1
 --- !u!65 &7909611661052167624
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -101,6 +72,146 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3290532538598319942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3312118156029521908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8927ca44533a1be43924c22cb4dbab49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  team: 0
+  enemyTeam: 1
+  stats:
+    health: 5
+    vision: 5
+    damage: 3
+    range: 2
+  HitEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  DeathEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3312118156029521908}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  EnemyFoundEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -3221840400269061206}
+        m_TargetAssemblyTypeName: AICreatures.AIBehaviour, Assembly-CSharp
+        m_MethodName: SetBehaviour
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  anim: {fileID: 0}
+  agent: {fileID: 0}
+  forced: 0
+  currentBehaviour: {fileID: -3688462328016641301}
+--- !u!114 &-3221840400269061206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3312118156029521908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c88171a0b73fde04a8ece4fea8387d04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finished:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -3688462328016641301}
+        m_TargetAssemblyTypeName: AICreatures.AIBehaviour, Assembly-CSharp
+        m_MethodName: SetBehaviour
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  preHitPhase: 1
+  postHitPhase: 0
+  cooldown: 1
+--- !u!114 &5317877426570767782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3312118156029521908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3659d7c256870a04cb02076046550d00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finished:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -3688462328016641301}
+        m_TargetAssemblyTypeName: AICreatures.AIBehaviour, Assembly-CSharp
+        m_MethodName: SetBehaviour
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &-3688462328016641301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3312118156029521908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1368364df561fe4f9030cb9a731ad9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finished:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -3688462328016641301}
+        m_TargetAssemblyTypeName: AICreatures.AIBehaviour, Assembly-CSharp
+        m_MethodName: SetBehaviour
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &2468475568455989480
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -243,12 +354,6 @@ PrefabInstance:
 --- !u!4 &5225151699145294384 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7692920820642429656, guid: 1de71d0dd1182174fbcfaad65af3b953,
-    type: 3}
-  m_PrefabInstance: {fileID: 2468475568455989480}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &1153857552438004731 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 3621626546629161747, guid: 1de71d0dd1182174fbcfaad65af3b953,
     type: 3}
   m_PrefabInstance: {fileID: 2468475568455989480}
   m_PrefabAsset: {fileID: 0}

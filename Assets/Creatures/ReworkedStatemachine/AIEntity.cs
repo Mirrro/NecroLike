@@ -21,8 +21,6 @@ namespace AICreatures
         public UnityEvent EnemyFoundEvent = new UnityEvent();
 
         [HideInInspector]
-        public int ID;
-        [HideInInspector]
         public Animator anim;
         [HideInInspector]
         public NavMeshAgent agent;
@@ -35,6 +33,7 @@ namespace AICreatures
             currentBehaviour.enabled = true;
         }
 
+
         private void FixedUpdate()
         {
             if((nearestEnemy = FindNearestVisibleEnemy()) != null)
@@ -42,6 +41,11 @@ namespace AICreatures
         }
 
         #region Combat
+        public static bool IsAlive(AIEntity entity)
+        {
+            return entity != null && entity.stats.health > 0;
+        }
+
         private AIEntity nearestEnemy;
         private AIEntity FindNearestVisibleEnemy()
         {
@@ -80,31 +84,40 @@ namespace AICreatures
         {
             return transform.position;
         }
-        public bool IsAlive()
+   
+        public bool IsInRange(Vector3 position)
         {
-            return this != null && stats.health > 0;
+            return (Vector3.Distance(position, transform.position) <= stats.range);
         }
         #endregion
 
         #region Statemachine
+        [HideInInspector]
+        public bool forced;
         public AIBehaviour currentBehaviour;
         public void ChangeBehaviour(AIBehaviour newBehaviour)
         {
-            if (currentBehaviour == newBehaviour)
+            if (currentBehaviour == newBehaviour || forced)
                 return;
             currentBehaviour.enabled = false;
             currentBehaviour = newBehaviour;
             currentBehaviour.enabled = true;
         }
+        public void ForceBehaviour(AIBehaviour newBehaviour)
+        {
+            ChangeBehaviour(newBehaviour);
+            forced = true;
+        }
         #endregion
-        
+
     }
 
 }
-
+[System.Serializable]
 public struct Stats
 {
     public int health;
     public float vision;
-
+    public int damage;
+    public float range;
 }
