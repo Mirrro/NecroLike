@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4239a7ac993f1246a0a3fce4453e23b, type: 3}
   m_Name: Basic
   m_EditorClassIdentifier: 
-  buttonImage: {fileID: 0}
+  cardPrefab: {fileID: 2231131266297534130, guid: 77397f609c327444e99fb214506e62e0,
+    type: 3}
   spawnPrefab: {fileID: 3312118156029521908, guid: 4f059679593789a41b310a2331bd79a5,
     type: 3}
   spawnAmount: 1
+  unlocked: 1

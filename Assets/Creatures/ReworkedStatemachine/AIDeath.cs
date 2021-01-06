@@ -22,7 +22,7 @@ namespace AICreatures
             if (timeLeft <= 0)
             {
                 finished.Invoke();
-                Instantiate(skeleton, entity.transform.position, entity.transform.rotation, Game.GetMOBS());
+                Instantiate(skeleton, entity.transform.position, entity.transform.rotation, Level.GetMobs());
                 return;
             }
             else

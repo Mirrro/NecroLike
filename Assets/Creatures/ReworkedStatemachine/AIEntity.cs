@@ -26,7 +26,7 @@ namespace AICreatures
 
         private void Start()
         {
-            Game.RegisterCreature((int)team);
+            Level.RegisterCreature((int)team);
             anim = GetComponentInChildren<Animator>();
             agent = GetComponent<NavMeshAgent>();
             currentBehaviour.enabled = true;
@@ -72,6 +72,7 @@ namespace AICreatures
         }
         public void Death()
         {
+            Level.UnregisterCreature((int)team);
             DeathEvent.Invoke();
         }
         public void GetHit(int damage)

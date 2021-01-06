@@ -7,11 +7,12 @@ namespace AICreatures
 {
     public class AIRally : AIBehaviour
     {
-        private void OnEnable()
+        
+        public void Rally(Vector3 rallyPoint)
         {
-            entity.agent.SetDestination(Game.RallyPoint);
+            entity.agent.SetDestination(rallyPoint);
+            ForceBehaviour();
         }
-
         private void FixedUpdate()
         {
             if (entity.agent.remainingDistance <= 2)
