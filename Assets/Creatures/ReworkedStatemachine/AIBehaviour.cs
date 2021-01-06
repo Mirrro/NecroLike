@@ -20,6 +20,9 @@ namespace AICreatures
         {
             entity.ChangeBehaviour(this);
         }
-
+        public void ForceBehaviour()
+        {
+            entity.ForceBehaviour(this);
+        }
     }
 }

@@ -7,9 +7,11 @@ namespace AICreatures
 {
     public class AIWander : AIBehaviour
     {
+        public float wanderingDistance;
+        public Transform wanderingCenter;
         private void OnEnable()
         {
-            NavMesh.SamplePosition(Random.insideUnitSphere * 5 + entity.transform.position, out NavMeshHit hit, 5, NavMesh.AllAreas);
+            NavMesh.SamplePosition(Random.insideUnitSphere * wanderingDistance + wanderingCenter.position, out NavMeshHit hit, wanderingDistance, NavMesh.AllAreas);
             entity.agent.SetDestination(hit.position);
             entity.anim.SetTrigger("Walk");
         }

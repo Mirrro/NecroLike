@@ -12,10 +12,9 @@ GameObject:
   - component: {fileID: 4046427919427412167}
   - component: {fileID: -8089771529960984659}
   - component: {fileID: 845817682601263160}
-  - component: {fileID: 510141612724801600}
   - component: {fileID: 7307965807201527328}
-  - component: {fileID: 6430380009242565699}
   - component: {fileID: 3283861022698740101}
+  - component: {fileID: -7243539487701271594}
   m_Layer: 7
   m_Name: Knight
   m_TagString: Human
@@ -92,15 +91,12 @@ MonoBehaviour:
     vision: 5
     damage: 10
     range: 3
-  HitEvent:
-    m_PersistentCalls:
-      m_Calls: []
   DeathEvent:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 7307965807201527328}
         m_TargetAssemblyTypeName: AICreatures.AIBehaviour, Assembly-CSharp
-        m_MethodName: SetBehaviour
+        m_MethodName: ForceBehaviour
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -128,35 +124,7 @@ MonoBehaviour:
   anim: {fileID: 0}
   agent: {fileID: 0}
   forced: 0
-  currentBehaviour: {fileID: 510141612724801600}
---- !u!114 &510141612724801600
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4046427919427412162}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d8b5da27e5bf2f45a7fc03a8f7fe2fd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  finished:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6430380009242565699}
-        m_TargetAssemblyTypeName: AICreatures.AIBehaviour, Assembly-CSharp
-        m_MethodName: SetBehaviour
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  timer: 1
+  currentBehaviour: {fileID: -7243539487701271594}
 --- !u!114 &7307965807201527328
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -187,33 +155,6 @@ MonoBehaviour:
   skeleton: {fileID: 3312118156029521908, guid: dacbc4e3538d2804ba6f7c8f2d43d7fa,
     type: 3}
   timeUntilDestruction: 1
---- !u!114 &6430380009242565699
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4046427919427412162}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a1368364df561fe4f9030cb9a731ad9a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  finished:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 510141612724801600}
-        m_TargetAssemblyTypeName: AICreatures.AIBehaviour, Assembly-CSharp
-        m_MethodName: SetBehaviour
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &3283861022698740101
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -229,7 +170,7 @@ MonoBehaviour:
   finished:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6430380009242565699}
+      - m_Target: {fileID: -7243539487701271594}
         m_TargetAssemblyTypeName: AICreatures.AIBehaviour, Assembly-CSharp
         m_MethodName: SetBehaviour
         m_Mode: 1
@@ -244,6 +185,25 @@ MonoBehaviour:
   preHitPhase: 1
   postHitPhase: 0
   cooldown: 1
+--- !u!114 &-7243539487701271594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4046427919427412162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6881ba57252222845993a5fe9d6d9cc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finished:
+    m_PersistentCalls:
+      m_Calls: []
+  waypoints:
+  - {x: 0, y: 0, z: 0}
+  - {x: 1, y: 0, z: 1}
+  waitTime: 1
 --- !u!1001 &5407769340761720505
 PrefabInstance:
   m_ObjectHideFlags: 0
