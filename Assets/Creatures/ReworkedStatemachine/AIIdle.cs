@@ -17,6 +17,8 @@ namespace AICreatures
 
         private void FixedUpdate()
         {
+            if (timer == 0)
+                return;
             passedTime += Time.deltaTime;
             if (passedTime >= timer)
                 finished.Invoke();

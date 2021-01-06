@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3290532538598319942}
   - component: {fileID: -3221840400269061206}
   - component: {fileID: 5317877426570767782}
-  - component: {fileID: -3688462328016641301}
+  - component: {fileID: 531057764110515688}
   m_Layer: 6
   m_Name: Knight Skeleton
   m_TagString: Skeleton
@@ -127,7 +127,7 @@ MonoBehaviour:
   anim: {fileID: 0}
   agent: {fileID: 0}
   forced: 0
-  currentBehaviour: {fileID: -3688462328016641301}
+  currentBehaviour: {fileID: 531057764110515688}
 --- !u!114 &-3221840400269061206
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -143,7 +143,7 @@ MonoBehaviour:
   finished:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: -3688462328016641301}
+      - m_Target: {fileID: 531057764110515688}
         m_TargetAssemblyTypeName: AICreatures.AIBehaviour, Assembly-CSharp
         m_MethodName: SetBehaviour
         m_Mode: 1
@@ -173,7 +173,7 @@ MonoBehaviour:
   finished:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: -3688462328016641301}
+      - m_Target: {fileID: 531057764110515688}
         m_TargetAssemblyTypeName: AICreatures.AIBehaviour, Assembly-CSharp
         m_MethodName: SetBehaviour
         m_Mode: 1
@@ -185,7 +185,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &-3688462328016641301
+--- !u!114 &531057764110515688
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -194,24 +194,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 3312118156029521908}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a1368364df561fe4f9030cb9a731ad9a, type: 3}
+  m_Script: {fileID: 11500000, guid: 1d8b5da27e5bf2f45a7fc03a8f7fe2fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   finished:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: -3688462328016641301}
-        m_TargetAssemblyTypeName: AICreatures.AIBehaviour, Assembly-CSharp
-        m_MethodName: SetBehaviour
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
+  timer: 0
 --- !u!1001 &7694643651302803723
 PrefabInstance:
   m_ObjectHideFlags: 0

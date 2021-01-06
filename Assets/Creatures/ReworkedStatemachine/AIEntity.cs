@@ -16,7 +16,6 @@ namespace AICreatures
         public Stats stats;
 
         [Header("Combat Events")]
-        public UnityEvent HitEvent = new UnityEvent();
         public UnityEvent DeathEvent = new UnityEvent();
         public UnityEvent EnemyFoundEvent = new UnityEvent();
 
@@ -78,7 +77,8 @@ namespace AICreatures
         public void GetHit(int damage)
         {
             stats.health -= damage;
-            HitEvent.Invoke();
+            if (stats.health <= 0)
+                Death();
         }
         public Vector3 GetPosition()
         {

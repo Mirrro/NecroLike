@@ -11,7 +11,6 @@ namespace AICreatures
         public float waitTime;
         int currentWaypoint;
         float timeUntilNextMove;
-        bool idling;
         private void OnEnable()
         {
             currentWaypoint = 0;
@@ -23,24 +22,24 @@ namespace AICreatures
         {
             if (entity.agent.remainingDistance <= entity.agent.stoppingDistance)
             {
-                if (!idling)
+                if (timeUntilNextMove <= 0)
                 {
+                    timeUntilNextMove = waitTime;
                     entity.anim.SetTrigger("Idle");
-                    idling = true;
                 }
+
                 timeUntilNextMove -= Time.deltaTime;
+
                 if (timeUntilNextMove <= 0)
                     SetDestination();
             }
         }
         private void SetDestination()
         {
-            idling = false;
-            entity.anim.SetTrigger("Patrol");
-            timeUntilNextMove = waitTime;
-            entity.agent.SetDestination(waypoints[currentWaypoint]);
             if (++currentWaypoint >= waypoints.Length)
                 currentWaypoint = 0;
+            entity.anim.SetTrigger("Patrol");
+            entity.agent.SetDestination(waypoints[currentWaypoint]);
         }
     }
 }
