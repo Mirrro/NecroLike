@@ -1307,6 +1307,9 @@ MonoBehaviour:
   - {fileID: 1999703747}
   - {fileID: 832936059}
   - {fileID: 133528986}
+  shaderMaterialTransition: {fileID: 2100000, guid: e1c5b0ead94f8ac4c93de83156c17d4c,
+    type: 2}
+  transitionSpeedMultiplier: 0.11
   mobs: {fileID: 324749024}
 --- !u!1 &1586523066
 GameObject:
@@ -2195,22 +2198,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d8b5da27e5bf2f45a7fc03a8f7fe2fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  finished:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6430380008146064482}
-        m_TargetAssemblyTypeName: AICreatures.AIBehaviour, Assembly-CSharp
-        m_MethodName: SetBehaviour
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  timer: 1
+  entity: {fileID: 0}
+  currentAction: 0
+  wanderingDistance: 0
+  wanderingCenter: {fileID: 0}
 --- !u!4 &543450652020765159
 Transform:
   m_ObjectHideFlags: 0
@@ -2219,7 +2210,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 919132147478342493}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.4800005, y: 0, z: 8.559999}
+  m_LocalPosition: {x: 5.4800005, y: 0, z: -8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1396176398}
@@ -2433,6 +2424,7 @@ MonoBehaviour:
     vision: 5
     damage: 0
     range: 0
+    speed: 0
   DeathEvent:
     m_PersistentCalls:
       m_Calls:
@@ -2448,25 +2440,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  EnemyFoundEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 7827669165015872728}
-        m_TargetAssemblyTypeName: AICreatures.AIBehaviour, Assembly-CSharp
-        m_MethodName: SetBehaviour
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
   anim: {fileID: 0}
   agent: {fileID: 0}
   forced: 0
-  currentBehaviour: {fileID: 510141613778376801}
 --- !u!114 &845817681629396100
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2486,6 +2462,7 @@ MonoBehaviour:
     vision: 5
     damage: 10
     range: 3
+    speed: 0
   DeathEvent:
     m_PersistentCalls:
       m_Calls:
@@ -2501,25 +2478,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  EnemyFoundEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3283861023874311481}
-        m_TargetAssemblyTypeName: AICreatures.AIBehaviour, Assembly-CSharp
-        m_MethodName: SetBehaviour
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
   anim: {fileID: 0}
   agent: {fileID: 0}
   forced: 0
-  currentBehaviour: {fileID: 1979832549999773546}
 --- !u!1 &919132147478342493
 GameObject:
   m_ObjectHideFlags: 0
@@ -3744,13 +3705,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6881ba57252222845993a5fe9d6d9cc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  finished:
-    m_PersistentCalls:
-      m_Calls: []
+  entity: {fileID: 0}
+  currentAction: 0
   waypoints:
   - {x: -14.80114, y: 0, z: 3.570873}
   - {x: -14.8, y: 0, z: 14.4}
-  waitTime: 1
 --- !u!1 &2075631622240456371
 GameObject:
   m_ObjectHideFlags: 0
@@ -4762,24 +4721,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c88171a0b73fde04a8ece4fea8387d04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  finished:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1979832549999773546}
-        m_TargetAssemblyTypeName: AICreatures.AIBehaviour, Assembly-CSharp
-        m_MethodName: SetBehaviour
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  preHitPhase: 1
-  postHitPhase: 0
-  cooldown: 1
 --- !u!1 &3320624304826194157
 GameObject:
   m_ObjectHideFlags: 0
@@ -5323,6 +5264,7 @@ GameObject:
   - component: {fileID: 7307965808502659740}
   - component: {fileID: 3283861023874311481}
   - component: {fileID: 1979832549999773546}
+  - component: {fileID: 4046427918254169215}
   m_Layer: 7
   m_Name: Knight
   m_TagString: Human
@@ -5330,6 +5272,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &4046427918254169215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4046427918254169214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 248b8cb1b8f71774aab4516bfad3522c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entity: {fileID: 0}
+  currentAction: 0
+  fighter: 0
 --- !u!1 &4046427918363879651
 GameObject:
   m_ObjectHideFlags: 0
@@ -5346,6 +5303,7 @@ GameObject:
   - component: {fileID: 7827669165015872728}
   - component: {fileID: 7307965808277089793}
   - component: {fileID: 6430380008146064482}
+  - component: {fileID: 4046427918363879652}
   m_Layer: 7
   m_Name: Human
   m_TagString: Human
@@ -5353,6 +5311,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &4046427918363879652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4046427918363879651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 248b8cb1b8f71774aab4516bfad3522c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entity: {fileID: 0}
+  currentAction: 0
+  fighter: 0
 --- !u!195 &4046427918363879654
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -7792,23 +7765,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1368364df561fe4f9030cb9a731ad9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  finished:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 510141613778376801}
-        m_TargetAssemblyTypeName: AICreatures.AIBehaviour, Assembly-CSharp
-        m_MethodName: SetBehaviour
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  wanderingDistance: 5
-  wanderingCenter: {fileID: 4046427918363879655}
 --- !u!33 &6445726354782558761
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -8389,24 +8345,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a70fc6a13c4f1c849b1a8e5f5edeed7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  finished:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4046427918363879651}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  skeleton: {fileID: 3312118156029521908, guid: 4f059679593789a41b310a2331bd79a5,
-    type: 3}
-  timeUntilDestruction: 1
 --- !u!114 &7307965808502659740
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8419,24 +8357,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a70fc6a13c4f1c849b1a8e5f5edeed7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  finished:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4046427918254169214}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  skeleton: {fileID: 3312118156029521908, guid: dacbc4e3538d2804ba6f7c8f2d43d7fa,
-    type: 3}
-  timeUntilDestruction: 1
 --- !u!1 &7320560244086960034
 GameObject:
   m_ObjectHideFlags: 0
@@ -9464,9 +9384,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0da950cbb74fc3489200d38b4848d71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  finished:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &7881834878164871724
 GameObject:
   m_ObjectHideFlags: 0

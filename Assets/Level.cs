@@ -1,10 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using AICreatures;
 using UnityEngine.Events;
-using UnityEngine.EventSystems;
 public class Level : MonoBehaviour
 {
     #region Singleton
@@ -26,6 +21,9 @@ public class Level : MonoBehaviour
     protected float transitionTime;
     [SerializeField]
     protected Transform[] stateCameraTransforms;
+
+    [SerializeField] private Material shaderMaterialTransition;
+    [SerializeField] private float transitionSpeedMultiplier = 0.5f;
     private void Start()
     {
         GameState = Game.GameState.Positioning;
@@ -50,7 +48,7 @@ public class Level : MonoBehaviour
     {
         if(state!=nextState)
         {
-            timeUntilNextState -= Time.deltaTime;
+            timeUntilNextState -= Time.deltaTime * transitionSpeedMultiplier;
             float t = (transitionTime - timeUntilNextState)/ transitionTime;
             t = t * t * (3f - 2f * t);
             if (timeUntilNextState <= 0)
@@ -62,8 +60,17 @@ public class Level : MonoBehaviour
             }
             Camera.main.transform.position = Vector3.Lerp(stateCameraTransforms[(int)state].position, stateCameraTransforms[(int)nextState].position, t);
             Camera.main.transform.rotation = Quaternion.Lerp(stateCameraTransforms[(int)state].rotation, stateCameraTransforms[(int)nextState].rotation, t);
+            ShaderLerp(t);
         }
     }
+    #region Shader Handeling
+
+    private static readonly int RADIUS = Shader.PropertyToID("Vector1_8ca1ba16de1c45deb4e0cd5b6477bc66");
+    private void ShaderLerp(float t)
+    {
+        shaderMaterialTransition.SetFloat(RADIUS,-10 + (t * 100));
+    }
+    #endregion
     #region Creature Tracking
     [SerializeField]
     protected Transform mobs;
@@ -75,6 +82,7 @@ public class Level : MonoBehaviour
         }
     }
     private int[] creatureCount = new int[2] { 0, 0 };
+
     public static void RegisterCreature(int team)
     {
         instance.creatureCount[team]++;
