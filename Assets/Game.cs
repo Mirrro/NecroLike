@@ -4,46 +4,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class Game : MonoBehaviour
+public static class Game
 {
-    #region Singleton
-    public static Game instance;
-    private void Awake()
-    {
-        if (instance != null)
-            Destroy(gameObject);
-        else
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-    }
-    #endregion
 
     public enum Team { Skeletons, Humans };
-    private CreatureCard[] loadout = new CreatureCard[3];
-    public CreatureCard[] allCards;
+    public enum GameState { Entry, Positioning, Fighting};
 
-    public static CreatureCard[] GetUnlockedCreatureCards()
-    {
-        List<CreatureCard> unlocked = new List<CreatureCard>();
-        foreach (CreatureCard card in instance.allCards)
-            if (card.Unlocked)
-                unlocked.Add(card);
-        return unlocked.ToArray();
-    }
-    public static int LoadoutSize()
-    {
-        return instance.loadout.Length;
-    }
-    public static CreatureCard GetCreatureCard(int id)
-    {
-        return instance.loadout[id];
-    }
-    public static CreatureCard SetCreatureCard(int id, int type)
-    {
-        return instance.loadout[id] = instance.allCards[type];
-    }
+    public static CreatureCard[] loadout = new CreatureCard[3];
+
     public static void LevelFinished()
     {
         SceneManager.LoadScene("Menu");
@@ -51,10 +19,6 @@ public class Game : MonoBehaviour
     public static void LevelStart()
     {
         SceneManager.LoadScene("SampleScene");
-    }
-    public void UnlockCard(CreatureCard card)
-    {
-        card.Unlocked = true;
     }
 
 }

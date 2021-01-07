@@ -29,6 +29,13 @@ namespace AICreatures
             Level.RegisterCreature((int)team);
             anim = GetComponentInChildren<Animator>();
             agent = GetComponent<NavMeshAgent>();
+            Level.FightState.AddListener(GameStart);
+            enabled = false;
+        }
+
+        public void GameStart()
+        {
+            enabled = true;
             currentBehaviour.enabled = true;
         }
 
