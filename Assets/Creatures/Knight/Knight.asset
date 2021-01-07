@@ -12,9 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4239a7ac993f1246a0a3fce4453e23b, type: 3}
   m_Name: Knight
   m_EditorClassIdentifier: 
-  cardPrefab: {fileID: 2231131266297534130, guid: 9d31277384619904086252445c6106ec,
-    type: 3}
   spawnPrefab: {fileID: 3312118156029521908, guid: dacbc4e3538d2804ba6f7c8f2d43d7fa,
     type: 3}
   spawnAmount: 1
-  unlocked: 1
+  unlocked: 0

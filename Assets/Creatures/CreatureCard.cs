@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class CreatureCard : ScriptableObject
 {
-    [MenuItem("Assets/Create/CreatureCard")]
+   /* [MenuItem("Assets/Create/CreatureCard")]
     public static void CreateCreatureCard()
     {
         CreatureCard asset = CreateInstance<CreatureCard>();
@@ -18,7 +18,7 @@ public class CreatureCard : ScriptableObject
 
         Selection.activeObject = asset;
     }
-    
+    */
     [SerializeField]
     private GameObject spawnPrefab;
     [SerializeField]

@@ -324,13 +324,24 @@ MonoBehaviour:
   enemyTeam: 0
   stats:
     health: 10
-    vision: 2
     damage: 5
     range: 2
     speed: 5
   DeathEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 6be7c0a3c233b8e4ba82648173449a47, type: 2}
+        m_TargetAssemblyTypeName: CreatureCard, Assembly-CSharp
+        m_MethodName: set_Unlocked
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   anim: {fileID: 0}
   agent: {fileID: 0}
   forced: 0
