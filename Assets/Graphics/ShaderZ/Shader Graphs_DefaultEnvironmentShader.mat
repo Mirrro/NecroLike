@@ -8,7 +8,8 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Shader Graphs_DefaultEnvironmentShader
-  m_Shader: {fileID: 10752, guid: 0000000000000000f000000000000000, type: 0}
+  m_Shader: {fileID: -6465566751694194690, guid: 8557846b14dde6f43ac6df501e402e76,
+    type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -25,10 +26,6 @@ Material:
         m_Offset: {x: 0, y: 0}
     - Texture2D_965f33e760434db59f97739d1cb82dcc:
         m_Texture: {fileID: 2800000, guid: 89bba2cc26aad1340a248d8eaddbf684, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 5413fb4fa7ed5984eaab5f5041fbd23c, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SampleTexture2D_d09d01370c95486cb04ff119544c5165_Texture_1:
@@ -52,15 +49,9 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-<<<<<<< Updated upstream
     - Vector1_8ca1ba16de1c45deb4e0cd5b6477bc66: 65.426834
     - Vector1_8da350d839b24a3b93ac767f2cb80754: 0.05
     - Vector1_bdac1cb1751e43dfb339c047c0f7e819: 2.5
-=======
-    - Vector1_8ca1ba16de1c45deb4e0cd5b6477bc66: 89.99183
-    - Vector1_8da350d839b24a3b93ac767f2cb80754: -0.03
-    - Vector1_bdac1cb1751e43dfb339c047c0f7e819: 99.8
->>>>>>> Stashed changes
     m_Colors:
     - Color_1b26e2bdb08c4076b413f7087791d82d: {r: 0.28212884, g: 0.28682852, b: 0.4716981,
         a: 0}
