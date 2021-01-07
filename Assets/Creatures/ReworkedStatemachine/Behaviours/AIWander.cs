@@ -9,10 +9,6 @@ namespace AICreatures
     {
         public float wanderingDistance;
         public Transform wanderingCenter;
-        public AIWander()
-        {
-            actions = new AIAction[] { new ActionWait(this), new ActionWalk(this) };
-        }
         
         protected override void Check()
         {
@@ -28,7 +24,6 @@ namespace AICreatures
                 }
                 case 1:
                 {
-                    entity.anim.SetTrigger("Idle");
                     ChangeAction(0);
                     break;
                 }

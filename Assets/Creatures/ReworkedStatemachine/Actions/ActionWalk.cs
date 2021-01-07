@@ -9,7 +9,7 @@ namespace AICreatures
         public ActionWalk(AIBehaviour main) : base(main) { }
         public override bool Run()
         {
-            return main.entity.agent.remainingDistance <= main.entity.agent.stoppingDistance;
+            return main.entity.agent.remainingDistance <= 2;
         }
         public override void Init()
         {

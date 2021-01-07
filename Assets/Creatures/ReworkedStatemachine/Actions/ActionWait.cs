@@ -15,6 +15,7 @@ namespace AICreatures
         }
         public override void Init()
         {
+            main.entity.anim.SetTrigger("Idle");
             timeLeft = 10/main.entity.stats.speed;
         }
     }

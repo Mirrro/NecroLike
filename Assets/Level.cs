@@ -60,7 +60,10 @@ public class Level : MonoBehaviour
             }
             Camera.main.transform.position = Vector3.Lerp(stateCameraTransforms[(int)state].position, stateCameraTransforms[(int)nextState].position, t);
             Camera.main.transform.rotation = Quaternion.Lerp(stateCameraTransforms[(int)state].rotation, stateCameraTransforms[(int)nextState].rotation, t);
-            ShaderLerp(t);
+            if(nextState == Game.GameState.Positioning)
+                ShaderLerp(t);
+            else if(nextState == Game.GameState.Fighting)
+                ShaderLerp(1-t);
         }
     }
     #region Shader Handeling
@@ -68,7 +71,7 @@ public class Level : MonoBehaviour
     private static readonly int RADIUS = Shader.PropertyToID("Vector1_8ca1ba16de1c45deb4e0cd5b6477bc66");
     private void ShaderLerp(float t)
     {
-        shaderMaterialTransition.SetFloat(RADIUS,-10 + (t * 100));
+        shaderMaterialTransition.SetFloat(RADIUS, -10 + (t * 100));
     }
     #endregion
     #region Creature Tracking

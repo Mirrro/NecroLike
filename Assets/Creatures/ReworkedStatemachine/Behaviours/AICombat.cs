@@ -6,11 +6,10 @@ namespace AICreatures
 {
     public class AICombat : AIBehaviour
     {
-        public bool fighter;
         AIAction combatAction;
-        AICombat()
+        public override void InitStates()
         {
-            if (fighter)
+            if (entity.stats.damage>0)
                 actions = new AIAction[] { new ActionWait(this), new ActionWalk(this), new ActionAttack(this) };
             else
                 actions = new AIAction[] { new ActionFlee(this) };
@@ -18,7 +17,7 @@ namespace AICreatures
         }
         private void OnEnable()
         {
-            currentAction = 0;
+            ChangeAction(0);
         }
         
         private void Fight()
@@ -27,19 +26,25 @@ namespace AICreatures
             {
                 case 0:
                     {
-                        if (entity.GetNearestEnemy() != null)
+                        if (entity.IsInRange(entity.GetNearestEnemy().GetPosition()))
                             ChangeAction(2);
                         else
+                        {
+                            entity.agent.SetDestination(entity.GetNearestEnemy().GetPosition());
                             ChangeAction(1);
+                        }
 
                         break;
                     }
                 case 1:
                     {
-                        if (entity.GetNearestEnemy() != null)
+                        if (entity.IsInRange(entity.GetNearestEnemy().GetPosition()))
                             ChangeAction(2);
                         else
+                        {
+                            entity.agent.SetDestination(entity.GetNearestEnemy().GetPosition());
                             ChangeAction(1);
+                        }
                         break;
                     }
 
@@ -56,7 +61,7 @@ namespace AICreatures
         }
         protected override void Check()
         {
-            if(fighter)
+            if(entity.stats.damage > 0)
                 Fight();
         }
     }

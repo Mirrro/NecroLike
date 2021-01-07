@@ -9,7 +9,7 @@ namespace AICreatures
     {
         public Vector3[] waypoints;
         int currentWaypoint;
-        public AIPatrol()
+        public override void InitStates()
         {
             actions = new AIAction[] { new ActionWait(this), new ActionWalk(this) };
         }
@@ -28,7 +28,6 @@ namespace AICreatures
                 }
                 case 1:
                 {
-                    entity.anim.SetTrigger("Idle");
                     ChangeAction(0);
                     break;
                 }

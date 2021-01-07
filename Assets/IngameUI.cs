@@ -64,7 +64,6 @@ public class IngameUI : MonoBehaviour
     private void Start()
     {
         InitCards();
-        Level.GameState = Game.GameState.Fighting;
     }
 
     private void Update()

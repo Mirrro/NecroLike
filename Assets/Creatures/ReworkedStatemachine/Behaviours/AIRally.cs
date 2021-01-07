@@ -7,10 +7,11 @@ namespace AICreatures
 {
     public class AIRally : AIBehaviour
     {
-        public AIRally()
+        public override void InitStates()
         {
             actions = new AIAction[] { new ActionWalk(this) };
         }
+
         public void Rally(Vector3 rallyPoint)
         {
             entity.agent.SetDestination(rallyPoint);

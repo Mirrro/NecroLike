@@ -6,11 +6,16 @@ using UnityEngine.Events;
 namespace AICreatures
 {
     [RequireComponent(typeof(AIEntity))]
-    public abstract class DefaultBehaviour : AIBehaviour
+    public class DefaultBehaviour : AIBehaviour
     {
-        public DefaultBehaviour()
+        public override void InitStates()
         {
             actions = new AIAction[] { new ActionWait(this), new ActionWalk(this) };
+        }
+
+        protected override void Check()
+        {
+            throw new System.NotImplementedException();
         }
     }
     

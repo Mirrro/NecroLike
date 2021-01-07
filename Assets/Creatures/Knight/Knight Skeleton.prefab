@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 3312118156029521906}
   - component: {fileID: 7909611661052167624}
   - component: {fileID: 3290532538598319942}
-  - component: {fileID: -3221840400269061206}
   - component: {fileID: 5317877426570767782}
   - component: {fileID: 531057764110515688}
+  - component: {fileID: 7862663541190557405}
   m_Layer: 6
   m_Name: Knight Skeleton
   m_TagString: Skeleton
@@ -91,9 +91,7 @@ MonoBehaviour:
     vision: 5
     damage: 5
     range: 2
-  HitEvent:
-    m_PersistentCalls:
-      m_Calls: []
+    speed: 0
   DeathEvent:
     m_PersistentCalls:
       m_Calls:
@@ -109,55 +107,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  EnemyFoundEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: -3221840400269061206}
-        m_TargetAssemblyTypeName: AICreatures.AIBehaviour, Assembly-CSharp
-        m_MethodName: SetBehaviour
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
   anim: {fileID: 0}
   agent: {fileID: 0}
   forced: 0
-  currentBehaviour: {fileID: 531057764110515688}
---- !u!114 &-3221840400269061206
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3312118156029521908}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c88171a0b73fde04a8ece4fea8387d04, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  finished:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 531057764110515688}
-        m_TargetAssemblyTypeName: AICreatures.AIBehaviour, Assembly-CSharp
-        m_MethodName: SetBehaviour
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  preHitPhase: 1
-  postHitPhase: 0
-  cooldown: 1
 --- !u!114 &5317877426570767782
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -170,21 +122,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3659d7c256870a04cb02076046550d00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  finished:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 531057764110515688}
-        m_TargetAssemblyTypeName: AICreatures.AIBehaviour, Assembly-CSharp
-        m_MethodName: SetBehaviour
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+  entity: {fileID: 0}
+  currentAction: 0
 --- !u!114 &531057764110515688
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -197,10 +136,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d8b5da27e5bf2f45a7fc03a8f7fe2fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  finished:
-    m_PersistentCalls:
-      m_Calls: []
-  timer: 0
+  entity: {fileID: 0}
+  currentAction: 0
+  wanderingDistance: 1
+  wanderingCenter: {fileID: 3312118156029521904}
+--- !u!114 &7862663541190557405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3312118156029521908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 248b8cb1b8f71774aab4516bfad3522c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entity: {fileID: 0}
+  currentAction: 0
+  fighter: 1
 --- !u!1001 &7694643651302803723
 PrefabInstance:
   m_ObjectHideFlags: 0

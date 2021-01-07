@@ -12,6 +12,7 @@ namespace AICreatures
     [RequireComponent(typeof(AICombat))]
     public class AIEntity : MonoBehaviour
     {
+        private bool dead;
         [Header("Combat Settings")]
         public Game.Team team;
         public Game.Team enemyTeam;
@@ -66,7 +67,7 @@ namespace AICreatures
         private AIEntity FindNearestVisibleEnemy()
         {
             int layerMask = 1 << (6 + ((int)enemyTeam));
-            Collider[] hitColliders = Physics.OverlapSphere(GetPosition(), stats.vision, layerMask);
+            Collider[] hitColliders = Physics.OverlapSphere(GetPosition(), 7, layerMask);
 
             layerMask = ~layerMask;
             Collider closestCollider = null;
@@ -89,8 +90,16 @@ namespace AICreatures
         }
         public void Death()
         {
+            if (dead == true)
+                return;
+            enabled = false;
+            dead = true;
+            gameObject.layer = 0;
             Level.UnregisterCreature((int)team);
             DeathEvent.Invoke();
+            combatBehaviour.enabled = false;
+            defaultBehaviour.enabled = false;
+            anim.SetTrigger("Death");
         }
         public void GetHit(int damage)
         {
@@ -128,7 +137,6 @@ namespace AICreatures
 public struct Stats
 {
     public int health;
-    public float vision;
     public int damage;
     public float range;
     public float speed;

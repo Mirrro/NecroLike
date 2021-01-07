@@ -308,7 +308,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   entity: {fileID: 0}
   currentAction: 0
-  fighter: 1
 --- !u!114 &1531317723221714479
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -321,7 +320,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8927ca44533a1be43924c22cb4dbab49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  team: 0
+  team: 1
   enemyTeam: 0
   stats:
     health: 10
