@@ -8,21 +8,24 @@ namespace AICreatures
 {
     [RequireComponent(typeof(NavMeshAgent))]
     [RequireComponent(typeof(Collider))]
+    [RequireComponent(typeof(DefaultBehaviour))]
+    [RequireComponent(typeof(AICombat))]
     public class AIEntity : MonoBehaviour
     {
         [Header("Combat Settings")]
         public Game.Team team;
         public Game.Team enemyTeam;
         public Stats stats;
-
-        [Header("Combat Events")]
+        
         public UnityEvent DeathEvent = new UnityEvent();
-        public UnityEvent EnemyFoundEvent = new UnityEvent();
 
         [HideInInspector]
         public Animator anim;
         [HideInInspector]
         public NavMeshAgent agent;
+
+        private AICombat combatBehaviour;
+        private DefaultBehaviour defaultBehaviour;
 
         private void Start()
         {
@@ -31,19 +34,26 @@ namespace AICreatures
             agent = GetComponent<NavMeshAgent>();
             Level.FightState.AddListener(GameStart);
             enabled = false;
+
+            combatBehaviour = GetComponent<AICombat>();
+            defaultBehaviour = GetComponent<DefaultBehaviour>();
         }
 
         public void GameStart()
         {
+            anim.SetTrigger("Spawn");
             enabled = true;
-            currentBehaviour.enabled = true;
         }
 
 
         private void FixedUpdate()
         {
-            if((nearestEnemy = FindNearestVisibleEnemy()) != null)
-                EnemyFoundEvent.Invoke();
+            nearestEnemy = FindNearestVisibleEnemy();
+            if(!forced)
+            {
+                combatBehaviour.enabled = nearestEnemy != null;
+                defaultBehaviour.enabled = nearestEnemy == null;
+            }
         }
 
         #region Combat
@@ -101,19 +111,12 @@ namespace AICreatures
 
         #region Statemachine
         [HideInInspector]
-        public bool forced;
-        public AIBehaviour currentBehaviour;
-        public void ChangeBehaviour(AIBehaviour newBehaviour)
+        public bool forced;        
+        public void ForceBehaviour(AIBehaviour behaviour)
         {
-            if (currentBehaviour == newBehaviour || forced)
-                return;
-            currentBehaviour.enabled = false;
-            currentBehaviour = newBehaviour;
-            currentBehaviour.enabled = true;
-        }
-        public void ForceBehaviour(AIBehaviour newBehaviour)
-        {
-            ChangeBehaviour(newBehaviour);
+            combatBehaviour.enabled = false;
+            defaultBehaviour.enabled = false;
+            behaviour.enabled = true;
             forced = true;
         }
         #endregion
@@ -128,4 +131,5 @@ public struct Stats
     public float vision;
     public int damage;
     public float range;
+    public float speed;
 }

@@ -7,19 +7,21 @@ namespace AICreatures
 {
     public class AIRally : AIBehaviour
     {
-        
+        public AIRally()
+        {
+            actions = new AIAction[] { new ActionWalk(this) };
+        }
         public void Rally(Vector3 rallyPoint)
         {
             entity.agent.SetDestination(rallyPoint);
-            ForceBehaviour();
+            entity.ForceBehaviour(this);
+            ChangeAction(0);
         }
-        private void FixedUpdate()
+
+        protected override void Check()
         {
-            if (entity.agent.remainingDistance <= 2)
-            {
-                entity.forced = false;
-                finished.Invoke();
-            }
+            entity.forced = false;
+            enabled = false;
         }
     }
 }
