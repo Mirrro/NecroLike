@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
@@ -19,12 +21,16 @@ public class Game : MonoBehaviour
     #endregion
 
     public enum Team { Skeletons, Humans };
-    private CreatureCard[] loadout;
+    private CreatureCard[] loadout = new CreatureCard[3];
     public CreatureCard[] allCards;
 
-    public static CreatureCard[] GetAllCreatureCards()
+    public static CreatureCard[] GetUnlockedCreatureCards()
     {
-        return instance.allCards;
+        List<CreatureCard> unlocked = new List<CreatureCard>();
+        foreach (CreatureCard card in instance.allCards)
+            if (card.Unlocked)
+                unlocked.Add(card);
+        return unlocked.ToArray();
     }
     public static int LoadoutSize()
     {
@@ -34,9 +40,17 @@ public class Game : MonoBehaviour
     {
         return instance.loadout[id];
     }
+    public static CreatureCard SetCreatureCard(int id, int type)
+    {
+        return instance.loadout[id] = instance.allCards[type];
+    }
     public static void LevelFinished()
     {
         SceneManager.LoadScene("Menu");
+    }
+    public static void LevelStart()
+    {
+        SceneManager.LoadScene("SampleScene");
     }
     public void UnlockCard(CreatureCard card)
     {

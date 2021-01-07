@@ -17,4 +17,4 @@ MonoBehaviour:
   spawnPrefab: {fileID: 3312118156029521908, guid: dacbc4e3538d2804ba6f7c8f2d43d7fa,
     type: 3}
   spawnAmount: 1
-  unlocked: 0
+  unlocked: 1
