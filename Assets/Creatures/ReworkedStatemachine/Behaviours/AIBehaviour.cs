@@ -25,7 +25,10 @@ namespace AICreatures
                 return;
             if (actions[currentAction].Run())
                 Check();
+            OnRun();
         }
+        public virtual void OnRun()
+        { }
 
         public void ChangeAction(int newAction)
         {

@@ -1,3 +1,4 @@
+using AICreatures;
 using UnityEngine;
 using UnityEngine.Events;
 public class Level : MonoBehaviour
@@ -7,7 +8,7 @@ public class Level : MonoBehaviour
     private void Awake()
     {
         if (instance != null)
-            Destroy(gameObject);
+            Destroy(instance.gameObject);
         else
         {
             instance = this;
@@ -22,11 +23,11 @@ public class Level : MonoBehaviour
     [SerializeField]
     protected Transform[] stateCameraTransforms;
 
-    [SerializeField] private Material shaderMaterialTransition;
     [SerializeField] private float transitionSpeedMultiplier = 0.5f;
     private void Start()
     {
         GameState = Game.GameState.Positioning;
+        positioningShader.Set();
     }
     public static UnityEvent FightState = new UnityEvent();
     public static Game.GameState GameState
@@ -56,23 +57,46 @@ public class Level : MonoBehaviour
                 timeUntilNextState = 0;
                 state = nextState;
                 if (instance.state == Game.GameState.Fighting)
+                {
                     FightState.Invoke();
+                    pingShader.Set();
+
+                }
             }
             Camera.main.transform.position = Vector3.Lerp(stateCameraTransforms[(int)state].position, stateCameraTransforms[(int)nextState].position, t);
             Camera.main.transform.rotation = Quaternion.Lerp(stateCameraTransforms[(int)state].rotation, stateCameraTransforms[(int)nextState].rotation, t);
             if(nextState == Game.GameState.Positioning)
-                ShaderLerp(t);
+                positioningShader.ShaderLerpRadius(t);
             else if(nextState == Game.GameState.Fighting)
-                ShaderLerp(1-t);
+                positioningShader.ShaderLerpRadius(1-t);
         }
+        if(pingAnimTimer>0)
+        {
+            pingAnimTimer -= Time.deltaTime;
+            pingShader.ShaderLerpRadius(pingAnimTimer - pingAnimTimer * pingAnimTimer);
+        }
+    }
+    private float pingAnimTimer;
+    public static void Rally(Vector3 position)
+    {
+        instance.pingAnimTimer = 1;
+        instance.pingShader.SetPosition(position);
+        int layerMask = 1 << 6;
+        Collider[] hitColliders = Physics.OverlapSphere(position, 10, layerMask);
+        foreach (Collider collider in hitColliders)
+        {
+            AIRally rally = collider.GetComponent<AIRally>();
+            if (rally != null)
+                rally.Rally(position);
+        };
     }
     #region Shader Handeling
 
-    private static readonly int RADIUS = Shader.PropertyToID("Vector1_8ca1ba16de1c45deb4e0cd5b6477bc66");
-    private void ShaderLerp(float t)
-    {
-        shaderMaterialTransition.SetFloat(RADIUS, -10 + (t * 100));
-    }
+    [SerializeField]
+    private ShaderHandler positioningShader;
+    [SerializeField]
+    private ShaderHandler pingShader;
+
     #endregion
     #region Creature Tracking
     [SerializeField]

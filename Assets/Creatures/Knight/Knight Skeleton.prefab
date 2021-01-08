@@ -88,10 +88,9 @@ MonoBehaviour:
   enemyTeam: 1
   stats:
     health: 10
-    vision: 5
     damage: 5
     range: 2
-    speed: 0
+    speed: 5
   DeathEvent:
     m_PersistentCalls:
       m_Calls:
@@ -154,7 +153,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   entity: {fileID: 0}
   currentAction: 0
-  fighter: 1
 --- !u!1001 &7694643651302803723
 PrefabInstance:
   m_ObjectHideFlags: 0

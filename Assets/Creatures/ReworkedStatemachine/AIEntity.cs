@@ -35,7 +35,8 @@ namespace AICreatures
             agent = GetComponent<NavMeshAgent>();
             Level.FightState.AddListener(GameStart);
             enabled = false;
-
+            agent.enabled = false;
+            anim.enabled = false;
             combatBehaviour = GetComponent<AICombat>();
             defaultBehaviour = GetComponent<DefaultBehaviour>();
         }
@@ -44,6 +45,8 @@ namespace AICreatures
         {
             anim.SetTrigger("Spawn");
             enabled = true;
+            agent.enabled = true;
+            anim.enabled = true;
         }
 
 
@@ -93,12 +96,13 @@ namespace AICreatures
             if (dead == true)
                 return;
             enabled = false;
+            agent.enabled = false;
+            combatBehaviour.enabled = false;
+            defaultBehaviour.enabled = false;
             dead = true;
             gameObject.layer = 0;
             Level.UnregisterCreature((int)team);
             DeathEvent.Invoke();
-            combatBehaviour.enabled = false;
-            defaultBehaviour.enabled = false;
             anim.SetTrigger("Death");
         }
         public void GetHit(int damage)

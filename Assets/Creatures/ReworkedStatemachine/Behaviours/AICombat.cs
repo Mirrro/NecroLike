@@ -19,7 +19,14 @@ namespace AICreatures
         {
             ChangeAction(0);
         }
-        
+
+        public override void OnRun()
+        {
+            if(entity.stats.damage > 0 && currentAction == 1)
+                entity.agent.SetDestination(entity.GetNearestEnemy().GetPosition());
+
+        }
+
         private void Fight()
         {
             switch (currentAction)
@@ -29,11 +36,7 @@ namespace AICreatures
                         if (entity.IsInRange(entity.GetNearestEnemy().GetPosition()))
                             ChangeAction(2);
                         else
-                        {
-                            entity.agent.SetDestination(entity.GetNearestEnemy().GetPosition());
                             ChangeAction(1);
-                        }
-
                         break;
                     }
                 case 1:
@@ -41,10 +44,7 @@ namespace AICreatures
                         if (entity.IsInRange(entity.GetNearestEnemy().GetPosition()))
                             ChangeAction(2);
                         else
-                        {
-                            entity.agent.SetDestination(entity.GetNearestEnemy().GetPosition());
                             ChangeAction(1);
-                        }
                         break;
                     }
 

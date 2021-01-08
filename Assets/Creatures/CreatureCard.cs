@@ -6,19 +6,19 @@ using UnityEngine.UI;
 
 public class CreatureCard : ScriptableObject
 {
-   /* [MenuItem("Assets/Create/CreatureCard")]
+    [MenuItem("Assets/Create/CreatureCard")]
     public static void CreateCreatureCard()
     {
         CreatureCard asset = CreateInstance<CreatureCard>();
 
-        AssetDatabase.CreateAsset(asset, "Assets/NewScripableObject.asset");
+        AssetDatabase.CreateAsset(asset, "Assets/CreatureCard.asset");
         AssetDatabase.SaveAssets();
 
         EditorUtility.FocusProjectWindow();
 
         Selection.activeObject = asset;
     }
-    */
+    
     [SerializeField]
     private GameObject spawnPrefab;
     [SerializeField]

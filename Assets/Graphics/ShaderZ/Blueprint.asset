@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21bc7f6c46bbf424d9b5d8ce336563a3, type: 3}
+  m_Name: Blueprint
+  m_EditorClassIdentifier: 
+  shader: {fileID: 2100000, guid: edf756ddcbb300c4890dcffed8638fef, type: 2}
+  startPosition: {x: -44.89, y: 0, z: -11.1}
+  startRadius: 0
+  maxRadius: 100
+  startThickness: -0.39
+  startHardness: 1.58
+  startTexture: {fileID: 2800000, guid: 89bba2cc26aad1340a248d8eaddbf684, type: 3}
+  startColor1: {r: 0, g: 1, b: 1, a: 0}
+  startColor2: {r: 0, g: 0.67058825, b: 1, a: 0}

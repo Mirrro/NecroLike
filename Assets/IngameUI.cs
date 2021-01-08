@@ -78,20 +78,8 @@ public class IngameUI : MonoBehaviour
             }
             else if (Level.GameState == Game.GameState.Fighting)
             {
-                Rally(hit.point);
+                Level.Rally(hit.point);
             }
         }
-    }
-
-    private void Rally(Vector3 position)
-    {
-        int layerMask = 1 << 6;
-        Collider[] hitColliders = Physics.OverlapSphere(position, 10, layerMask);
-        foreach (Collider collider in hitColliders)
-        {
-            AIRally rally = collider.GetComponent<AIRally>();
-            if (rally != null)
-                rally.Rally(position);
-        };
     }
 }
