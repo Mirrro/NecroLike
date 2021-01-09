@@ -16,7 +16,7 @@ namespace NecroCore.UI.INGAME
             {
                 if (_instance == null)
                 {
-                    _instance = GameObject.FindObjectOfType<UI_INGAME>();
+                    _instance = FindObjectOfType<UI_INGAME>();
 
                     if (_instance == null)
                     {
@@ -32,13 +32,15 @@ namespace NecroCore.UI.INGAME
         private void Start()
         {
             PauseGame();
+            AddToSkullScore(100);
+
         }
 
         #endregion
 
         #region Events
         
-        public event EventHandler<UI_ScoreEventArgs> EventUpdateSkullScore;
+        public event EventHandler<UI_ScoreEventArgs> EventAddToSkullScore;
         public event EventHandler<UI_ScoreEventArgs> EventUpdateCoinScore;
         public event EventHandler EventGamePaused;
         public event EventHandler EventGameEnd;
@@ -47,30 +49,30 @@ namespace NecroCore.UI.INGAME
 
         #region InvokeEventFunctions
 
-        public void UpdateSkullScore(int value)
+        public static void AddToSkullScore(int value)
         {
             var data = new UI_ScoreEventArgs {Score = value};
 
-            EventUpdateSkullScore?.Invoke(this, data);
+            Instance.EventAddToSkullScore?.Invoke(Instance, data);
         }
 
         public void UpdateCoinScore(int value)
         {
             var data = new UI_ScoreEventArgs {Score = value};
 
-            EventUpdateCoinScore?.Invoke(this, data);
+            Instance.EventUpdateCoinScore?.Invoke(Instance, data);
         }
         
         public void PauseGame()
         {
-            EventGamePaused?.Invoke(this, EventArgs.Empty);
+            Instance.EventGamePaused?.Invoke(Instance, EventArgs.Empty);
         }
         
         public void EndGame(int value)
         {
             var data = new UI_ScoreEventArgs {Score = value};
 
-            EventUpdateCoinScore?.Invoke(this, data);
+            Instance.EventUpdateCoinScore?.Invoke(Instance, data);
         }
 
         #endregion

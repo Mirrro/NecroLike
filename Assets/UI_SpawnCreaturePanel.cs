@@ -5,10 +5,11 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class IngameUI : MonoBehaviour
+public class UI_SpawnCreaturePanel : UI_InGameComponent
 {
     #region Singleton
-    public static IngameUI instance;
+
+    private static UI_SpawnCreaturePanel instance;
     private void Awake()
     {
         if (instance != null)
@@ -20,6 +21,28 @@ public class IngameUI : MonoBehaviour
     }
     #endregion
 
+    private void Start()
+    {
+        InitCards();
+    }
+
+    private void Update()
+    {
+        if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
+        {
+            Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out RaycastHit hit);
+            if (Level.GameState == Game.GameState.Positioning)
+            {
+                if (selectedButton != -1)
+                    SpawnCreature(hit.point);
+            }
+            else if (Level.GameState == Game.GameState.Fighting)
+            {
+                Level.Rally(hit.point);
+            }
+        }
+    }
+    
     #region Creature Cards
     private int usedCards;
     [SerializeField]
@@ -53,33 +76,11 @@ public class IngameUI : MonoBehaviour
             Level.GameState = Game.GameState.Fighting;
     }
     #endregion
-
+    
     [SerializeField]
     private Text humanCountText;
     public static void UpdateHumanCount(int count)
     {
         instance.humanCountText.text = count.ToString();
-    }
-
-    private void Start()
-    {
-        InitCards();
-    }
-
-    private void Update()
-    {
-        if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
-        {
-            Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out RaycastHit hit);
-            if (Level.GameState == Game.GameState.Positioning)
-            {
-                if (selectedButton != -1)
-                    SpawnCreature(hit.point);
-            }
-            else if (Level.GameState == Game.GameState.Fighting)
-            {
-                Level.Rally(hit.point);
-            }
-        }
     }
 }

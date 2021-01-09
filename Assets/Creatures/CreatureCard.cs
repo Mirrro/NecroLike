@@ -36,8 +36,8 @@ public class CreatureCard : ScriptableObject
     
     public void ConnectToButton(int button)
     {
-        IngameUI.GetButton(button).onClick.AddListener(delegate { IngameUI.SelectCard(button); });
-        IngameUI.GetButton(button).gameObject.SetActive(true);
+        UI_SpawnCreaturePanel.GetButton(button).onClick.AddListener(delegate { UI_SpawnCreaturePanel.SelectCard(button); });
+        UI_SpawnCreaturePanel.GetButton(button).gameObject.SetActive(true);
     }
     public void SpawnMob(Vector3 position)
     {

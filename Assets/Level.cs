@@ -1,6 +1,7 @@
 using AICreatures;
 using UnityEngine;
 using UnityEngine.Events;
+using NecroCore.UI.INGAME;
 public class Level : MonoBehaviour
 {
     #region Singleton
@@ -26,6 +27,7 @@ public class Level : MonoBehaviour
     [SerializeField] private float transitionSpeedMultiplier = 0.5f;
     private void Start()
     {
+        UI_INGAME.AddToSkullScore(349);
         GameState = Game.GameState.Positioning;
         positioningShader.Set();
     }
@@ -114,7 +116,7 @@ public class Level : MonoBehaviour
     {
         instance.creatureCount[team]++;
         if(team == (int)Game.Team.Humans)
-            IngameUI.UpdateHumanCount(instance.creatureCount[team]);
+            UI_SpawnCreaturePanel.UpdateHumanCount(instance.creatureCount[team]);
     }
 
     public static void UnregisterCreature(int team)
@@ -122,7 +124,7 @@ public class Level : MonoBehaviour
         instance.creatureCount[team]--;
         if (team == (int)Game.Team.Humans)
         {
-            IngameUI.UpdateHumanCount(instance.creatureCount[team]);
+            UI_SpawnCreaturePanel.UpdateHumanCount(instance.creatureCount[team]);
             if (instance.creatureCount[team] <= 0)
                 Game.LevelFinished();
         }
