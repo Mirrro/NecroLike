@@ -57,9 +57,7 @@ public class UI_SpawnCreaturePanel : UI_InGameComponent
         usedCards = 0;
         for (int i = 0; i < Game.loadout.Length; i++)
             if (Game.loadout[i] != null)
-            {
-                Game.loadout[i].ConnectToButton(i); // NEEDS TO BE CALLED IN EXTRA METHOD IN ORDER FOR DELEGATES TO WORK!
-            }
+                ConnectToButton(i); // NEEDS TO BE CALLED IN EXTRA METHOD IN ORDER FOR DELEGATES TO WORK!
     }
     public static void SelectCard(int button)
     {
@@ -67,13 +65,12 @@ public class UI_SpawnCreaturePanel : UI_InGameComponent
     }
     public void SpawnCreature(Vector3 pos)
     {
-        Game.loadout[selectedButton].SpawnMob(pos);
+        Level.SpawnMob(Game.loadout[selectedButton], pos);
         creatureSpawnButtons[selectedButton].gameObject.SetActive(false);
         selectedButton = -1;
-
         usedCards++;
         if (usedCards >= Game.loadout.Length)
-            Level.GameState = Game.GameState.Fighting;
+            Level.GoToState(Level.State.Fighting);
     }
     #endregion
     
@@ -83,4 +80,11 @@ public class UI_SpawnCreaturePanel : UI_InGameComponent
     {
         instance.humanCountText.text = count.ToString();
     }
+
+    public void ConnectToButton(int button)
+    {
+        GetButton(button).onClick.AddListener(delegate { SelectCard(button); });
+        GetButton(button).gameObject.SetActive(true);
+    }
+
 }

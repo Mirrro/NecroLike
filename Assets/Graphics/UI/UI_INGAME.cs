@@ -76,7 +76,7 @@ namespace NecroCore.UI.INGAME
         }
 
         #endregion
-        
+
     }
     
 }
