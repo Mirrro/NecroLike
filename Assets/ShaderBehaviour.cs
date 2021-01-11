@@ -9,8 +9,6 @@ public class ShaderBehaviour : MonoBehaviour,  ILevelStateListener
     [SerializeField]
     private ShaderHandler pingShader;
 
-
-
     public IEnumerator TransitionToBlueprint()
     {
         blueprintShader.Set();
@@ -27,10 +25,11 @@ public class ShaderBehaviour : MonoBehaviour,  ILevelStateListener
             blueprintShader.ShaderLerpRadius(t);
             yield return null;
         }
+        print("pingshader set");
         pingShader.Set();
     }
 
-    public IEnumerator Ping()
+    public IEnumerator PingAnimation()
     {
         for (float t = 1f; t > 0; t -= Time.deltaTime * Level.TransitionSpeed)
         {
@@ -39,13 +38,26 @@ public class ShaderBehaviour : MonoBehaviour,  ILevelStateListener
         }
     }
 
+    public void Ping(Vector3 position)
+    {
+        pingShader.SetPosition(position);
+        StartCoroutine(PingAnimation());
+    }
+
+    private void Start()
+    {
+        Game.level.rallyEvent.AddListener(Ping);    
+    }
+
     public void OnStateEnd(Level.State state)
     {
-        throw new System.NotImplementedException();
+        if (state == Level.State.Entry)
+            StartCoroutine(TransitionToBlueprint());
+        else if (state == Level.State.Positioning)
+            StartCoroutine(TransitionToFight());
     }
 
     public void OnStateBegin(Level.State state)
     {
-        throw new System.NotImplementedException();
     }
 }

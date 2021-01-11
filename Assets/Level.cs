@@ -8,8 +8,13 @@ public class Level : MonoBehaviour
 {
     public enum State { Entry, Positioning, Fighting, End };
     protected  State currentState = State.Entry;
-    public  UnityEvent<State> StateBegin = new UnityEvent<State>();
-    public  UnityEvent<State> StateEnd = new UnityEvent<State>();
+    public static UnityEvent<State> StateBegin = new UnityEvent<State>();
+    public static UnityEvent<State> StateEnd = new UnityEvent<State>();
+    public static void InitStateListener(ILevelStateListener listener)
+    {
+        StateBegin.AddListener(listener.OnStateBegin);
+        StateEnd.AddListener(listener.OnStateEnd);
+    }
 
     [SerializeField] protected float transitionSpeed;
     public static float TransitionSpeed {
@@ -24,17 +29,19 @@ public class Level : MonoBehaviour
         if (FindObjectOfType<Loader>() == null)
             Game.Load();
         Game.InitLevel(this);
-
+        InputHandler.PositionCreatureEvent.AddListener(OnCreaturePlacement);
     }
 
-    private void Update()
+
+    public void GoToState(State state)
     {
-        if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
-            Game.FireInput();
+        if(state!=currentState)
+            StartCoroutine(TransitionState(state));
     }
 
-    public  IEnumerator GoToState(State state)
+    public IEnumerator TransitionState(State state)
     {
+        print(state.ToString());
         StateEnd.Invoke(currentState);
         for (float t = 0f; t < 1; t += Time.deltaTime*Game.level.transitionSpeed)
         {
@@ -44,21 +51,19 @@ public class Level : MonoBehaviour
         currentState = state;
     }
 
-    #region Player Input
-    public void OnInput(Vector3 input)
+    int placedCreatures = 0;
+    public void OnCreaturePlacement(CreaturePlacementData data)
     {
-        if (currentState == State.Positioning && selectedCreature != -1)
-            SpawnMob(Game.loadout[selectedCreature], input);
-        else if (currentState == State.Fighting)
-            Rally(input);
+        SpawnMob(Game.loadout[data.creature], data.position);
+        placedCreatures++;
+        if (placedCreatures >= Game.loadout.Length)
+            GoToState(State.Fighting);
     }
-
-    public int selectedCreature;
-    public void OnCreatureSelected(int creature)
+    [SerializeField] protected Transform mobs;
+    public void SpawnMob(GameObject mob, Vector3 position)
     {
-        selectedCreature = creature;
+        Instantiate(mob, position, Quaternion.identity, mobs);
     }
-
     public UnityEvent<Vector3> rallyEvent = new UnityEvent<Vector3>();
     public void Rally(Vector3 position)
     {
@@ -73,13 +78,20 @@ public class Level : MonoBehaviour
         };
     }
 
-    [SerializeField] protected Transform mobs;
-    public void SpawnMob(GameObject mob, Vector3 position)
+    private int humanCount;
+    public void CountDown(Game.Team team)
     {
-        Instantiate(mob, position, Quaternion.identity, mobs);
+        if (team == Game.Team.Humans)
+        {
+            humanCount--;
+            if (humanCount <= 0)
+                GoToState(State.End);
+        }
     }
-    #endregion
-
-
+    public void CountUp(Game.Team team)
+    {
+        if (team == Game.Team.Humans)
+            humanCount++;
+    }
 
 }

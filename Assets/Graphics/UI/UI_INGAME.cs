@@ -31,7 +31,6 @@ namespace NecroCore.UI.INGAME
 
         private void Start()
         {
-            PauseGame();
             AddToSkullScore(100);
 
         }

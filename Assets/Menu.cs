@@ -6,12 +6,12 @@ using UnityEngine.UI;
 public class Menu : MonoBehaviour
 {
     public Dropdown[] creatureSlots;
-    public GameObject[] allCreatures = new GameObject[3];
 
     private void Awake()
     {
         if (FindObjectOfType<Loader>() == null)
             Game.Load();
+        Game.loadout = new GameObject[] { Game.allCreatures[0], Game.allCreatures[0], Game.allCreatures[0], Game.allCreatures[0], Game.allCreatures[0], Game.allCreatures[0] };
     }
 
     public void StartLevel()

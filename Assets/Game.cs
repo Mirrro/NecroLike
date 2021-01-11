@@ -21,31 +21,23 @@ public static class Game
             scoreEvent.Invoke();
         }
     }
-    public static void IncreaseScore(int value)
-    {
-
-        Score += value;
-    }
     #endregion
-
-    #region Creatures
+    
     public enum Team { Undead, Humans };
-    public enum Creature { Skeleton, Knight}
-
-    public static GameObject[] loadout = new GameObject[6];
+    public enum Creature { Skeleton, Knight }
     public static GameObject[] allCreatures = new GameObject[2];
 
+    #region Loadout
+    public static GameObject[] loadout = new GameObject[6];
+
+
+
+    #endregion
 
     public static UnityEvent<Team> DeathEvent = new UnityEvent<Team>();
+    public static void CreatureDeath(Team team){DeathEvent.Invoke(team);}
     public static UnityEvent<Team> SpawnEvent = new UnityEvent<Team>();
-    public static void CreatureDeath(Team team)
-    {
-        DeathEvent.Invoke(team);
-    }
-    public static void CreatureSpawn(Team team)
-    {
-        SpawnEvent.Invoke(team);
-    }
+    public static void CreatureSpawn(Team team){SpawnEvent.Invoke(team);}
 
     public static bool[] unlocked = new bool[] { true, false };
     public static UnityEvent UnlockEvent = new UnityEvent();
@@ -54,21 +46,6 @@ public static class Game
         unlocked[(int)creature] = true;
         UnlockEvent.Invoke();
     }
-    #endregion
-
-    #region Input
-    public static UnityEvent<Vector3> inputEvent = new UnityEvent<Vector3>();
-    public static void FireInput()
-    {
-        Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out RaycastHit hit);
-        inputEvent.Invoke(hit.point);
-    }
-    public static UnityEvent<int> selectEvent = new UnityEvent<int>();
-    public static void SelectCreature(int creature)
-    {
-        selectEvent.Invoke(creature);
-    }
-    #endregion
 
     #region Loading
     public static void Load()
@@ -90,12 +67,11 @@ public static class Game
         Game.level = level;
         var levelStateListeners = Object.FindObjectsOfType<MonoBehaviour>().OfType<ILevelStateListener>();
         foreach (ILevelStateListener s in levelStateListeners)
-        {
-            level.StateBegin.AddListener(s.OnStateBegin);
-            level.StateEnd.AddListener(s.OnStateEnd);
-        }
-        inputEvent.AddListener(level.OnInput);
-        selectEvent.AddListener(level.OnCreatureSelected);
+            Level.InitStateListener(s);
+        DeathEvent.AddListener(level.CountDown);
+        SpawnEvent.AddListener(level.CountUp);
+
+        level.GoToState(Level.State.Positioning);
     }
     #endregion
 

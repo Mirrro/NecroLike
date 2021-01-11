@@ -7,39 +7,23 @@ using UnityEngine.UI;
 
 public class UI_SpawnCreaturePanel : UI_InGameComponent
 {
+    Button[] creatureSpawnButtons;
     private void Awake()
     {
-        InitButtons();
-    }
-
-    
-    
-    private int usedCards;
-
-
-    private void InitButtons()
-    {
-        usedCards = 0;
+        creatureSpawnButtons = GetComponentsInChildren<Button>();
         for (int i = 0; i < Game.loadout.Length; i++)
             if (Game.loadout[i] != null)
-                ConnectToButton(i); // NEEDS TO BE CALLED IN EXTRA METHOD IN ORDER FOR DELEGATES TO WORK!
-    }
-    public  void SelectCard(int button)
-    {
-        
+                ConnectToButton(i);
+        InputHandler.PositionCreatureEvent.AddListener(HideButton);
     }
     
-    [SerializeField]
-    private Text humanCountText;
-    public  void UpdateHumanCount(int count)
-    {
-        humanCountText.text = count.ToString();
-    }
-    [SerializeField] private Button[] creatureSpawnButtons;
     public void ConnectToButton(int button)
     {
-        creatureSpawnButtons[button].onClick.AddListener(delegate { SelectCard(button); });
-        creatureSpawnButtons[button].gameObject.SetActive(true);
+        creatureSpawnButtons[button].onClick.AddListener(delegate { InputHandler.SelectCreature(button); });
     }
 
+    public void HideButton(CreaturePlacementData data)
+    {
+        creatureSpawnButtons[data.creature].gameObject.SetActive(false);
+    }
 }

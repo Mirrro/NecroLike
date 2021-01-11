@@ -17,10 +17,7 @@ namespace AICreatures
         public Game.Team team;
         public Game.Team enemyTeam;
         public Stats stats;
-
-        public UnityEvent<Game.Team> DeathEvent = new UnityEvent<Game.Team>();
-        public UnityEvent<Game.Team> SpawnEvent = new UnityEvent<Game.Team>();
-
+        
         [HideInInspector]
         public Animator anim;
         [HideInInspector]
@@ -29,10 +26,9 @@ namespace AICreatures
         private AICombat combatBehaviour;
         private DefaultBehaviour defaultBehaviour;
 
-
-        private void Start()
+        private void Awake()
         {
-            Game.CreatureSpawn(team);
+            Level.InitStateListener(this);
             anim = GetComponentInChildren<Animator>();
             agent = GetComponent<NavMeshAgent>();
             enabled = false;
@@ -42,8 +38,13 @@ namespace AICreatures
             defaultBehaviour = GetComponent<DefaultBehaviour>();
         }
 
-        public void GameStart()
+        private void Start()
         {
+            Game.CreatureSpawn(team);
+        }
+
+        public void GameStart()
+        {            
             anim.SetTrigger("Spawn");
             enabled = true;
             agent.enabled = true;
@@ -102,7 +103,7 @@ namespace AICreatures
             defaultBehaviour.enabled = false;
             dead = true;
             gameObject.layer = 0;
-            DeathEvent.Invoke(team);
+            Game.CreatureDeath(team);
             anim.SetTrigger("Death");
         }
         public void GetHit(int damage)

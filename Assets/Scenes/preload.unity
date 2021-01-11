@@ -167,5 +167,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   allCreatures:
-  - {fileID: 7612626365525699399, guid: 4dc431fea1256ec418a9cede1c53ca6d, type: 3}
   - {fileID: 3312118156029521908, guid: 4f059679593789a41b310a2331bd79a5, type: 3}
+  - {fileID: 3312118156029521908, guid: dacbc4e3538d2804ba6f7c8f2d43d7fa, type: 3}

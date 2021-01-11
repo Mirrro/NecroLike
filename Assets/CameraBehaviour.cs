@@ -8,12 +8,10 @@ public class CameraBehaviour : MonoBehaviour, ILevelStateListener
 
     public void OnStateBegin(Level.State state)
     {
-        throw new System.NotImplementedException();
     }
-
     public void OnStateEnd(Level.State state)
     {
-        throw new System.NotImplementedException();
+        StartCoroutine(Transition(((int)state) + 1));
     }
 
     public IEnumerator Transition(int position)
