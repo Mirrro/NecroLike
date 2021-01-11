@@ -47,6 +47,7 @@ namespace NecroCore.UI.INGAME
 
         #endregion
 
+
         #region InvokeEventFunctions
 
         public static void AddToSkullScore(int value)

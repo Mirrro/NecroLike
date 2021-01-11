@@ -16,6 +16,6 @@ public class Menu : MonoBehaviour
 
     public void StartLevel()
     {
-        Game.LevelStart();
+        Game.LoadLevel();
     }
 }

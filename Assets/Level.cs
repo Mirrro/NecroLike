@@ -1,25 +1,16 @@
 using AICreatures;
 using UnityEngine;
 using UnityEngine.Events;
-using NecroCore.UI.INGAME;
 using System.Collections;
-using System.Linq;
+using UnityEngine.EventSystems;
 
 public class Level : MonoBehaviour
 {
-    #region Singleton
-    private void Awake()
-    {
-        Game.level = this;
-    }
-    #endregion
-
     public enum State { Entry, Positioning, Fighting, End };
-    protected static State currentState = State.Entry;
-    public static UnityEvent<State> stateBegin = new UnityEvent<State>();
-    public static UnityEvent<State> stateEnd = new UnityEvent<State>();
+    protected  State currentState = State.Entry;
+    public  UnityEvent<State> StateBegin = new UnityEvent<State>();
+    public  UnityEvent<State> StateEnd = new UnityEvent<State>();
 
-    public static UnityEvent<Vector3> rallyEvent = new UnityEvent<Vector3>();
     [SerializeField] protected float transitionSpeed;
     public static float TransitionSpeed {
         get
@@ -28,30 +19,48 @@ public class Level : MonoBehaviour
         }
     }
 
-    private void Start()
+    private void Awake()
     {
         if (FindObjectOfType<Loader>() == null)
             Game.Load();
+        Game.InitLevel(this);
 
-        var listeners = FindObjectsOfType<MonoBehaviour>().OfType<ILevelStateListener>();
-        foreach (ILevelStateListener s in listeners)
-        {
-            stateBegin.AddListener(s.OnStateBegin);
-            stateEnd.AddListener(s.OnStateEnd);
-        }
     }
-    public static IEnumerator GoToState(State state)
+
+    private void Update()
     {
-        stateEnd.Invoke(currentState);
+        if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
+            Game.FireInput();
+    }
+
+    public  IEnumerator GoToState(State state)
+    {
+        StateEnd.Invoke(currentState);
         for (float t = 0f; t < 1; t += Time.deltaTime*Game.level.transitionSpeed)
         {
             yield return null;
         }
-        stateBegin.Invoke(state);
+        StateBegin.Invoke(state);
         currentState = state;
     }
-    
-    public static void Rally(Vector3 position)
+
+    #region Player Input
+    public void OnInput(Vector3 input)
+    {
+        if (currentState == State.Positioning && selectedCreature != -1)
+            SpawnMob(Game.loadout[selectedCreature], input);
+        else if (currentState == State.Fighting)
+            Rally(input);
+    }
+
+    public int selectedCreature;
+    public void OnCreatureSelected(int creature)
+    {
+        selectedCreature = creature;
+    }
+
+    public UnityEvent<Vector3> rallyEvent = new UnityEvent<Vector3>();
+    public void Rally(Vector3 position)
     {
         rallyEvent.Invoke(position);
         int layerMask = 1 << 6;
@@ -64,36 +73,13 @@ public class Level : MonoBehaviour
         };
     }
 
-    #region Creature Tracking
-    [SerializeField]
-    protected Transform mobs;
-    public static void SpawnMob(GameObject mob, Vector3 position)
+    [SerializeField] protected Transform mobs;
+    public void SpawnMob(GameObject mob, Vector3 position)
     {
-        Instantiate(mob, position, Quaternion.identity, Mobs).GetComponent<AIEntity>();
-    }
-    public static Transform Mobs
-    {
-        get
-        {
-            return Game.level.mobs;
-        }
-    }
-    private int[] creatureCount = new int[2] { 0, 0 };
-
-    public static void RegisterCreature(int team)
-    {
-        Game.level.creatureCount[team]++;
-        if(team == (int)Game.Team.Humans)
-            UI_SpawnCreaturePanel.UpdateHumanCount(Game.level.creatureCount[team]);
-    }
-
-    public static void UnregisterCreature(int team)
-    {
-        Game.level.creatureCount[team]--;
-        if (team == (int)Game.Team.Humans)
-        {
-            UI_SpawnCreaturePanel.UpdateHumanCount(Game.level.creatureCount[team]);
-        }
+        Instantiate(mob, position, Quaternion.identity, mobs);
     }
     #endregion
+
+
+
 }

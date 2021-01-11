@@ -10,15 +10,16 @@ namespace AICreatures
     [RequireComponent(typeof(Collider))]
     [RequireComponent(typeof(DefaultBehaviour))]
     [RequireComponent(typeof(AICombat))]
-    public class AIEntity : MonoBehaviour
+    public class AIEntity : MonoBehaviour, ILevelStateListener
     {
         private bool dead;
         [Header("Combat Settings")]
         public Game.Team team;
         public Game.Team enemyTeam;
         public Stats stats;
-        
-        public UnityEvent DeathEvent = new UnityEvent();
+
+        public UnityEvent<Game.Team> DeathEvent = new UnityEvent<Game.Team>();
+        public UnityEvent<Game.Team> SpawnEvent = new UnityEvent<Game.Team>();
 
         [HideInInspector]
         public Animator anim;
@@ -28,12 +29,12 @@ namespace AICreatures
         private AICombat combatBehaviour;
         private DefaultBehaviour defaultBehaviour;
 
+
         private void Start()
         {
-            Level.RegisterCreature((int)team);
+            Game.CreatureSpawn(team);
             anim = GetComponentInChildren<Animator>();
             agent = GetComponent<NavMeshAgent>();
-            Level.FightState.AddListener(GameStart);
             enabled = false;
             agent.enabled = false;
             anim.enabled = false;
@@ -101,8 +102,7 @@ namespace AICreatures
             defaultBehaviour.enabled = false;
             dead = true;
             gameObject.layer = 0;
-            Level.UnregisterCreature((int)team);
-            DeathEvent.Invoke();
+            DeathEvent.Invoke(team);
             anim.SetTrigger("Death");
         }
         public void GetHit(int damage)
@@ -134,6 +134,15 @@ namespace AICreatures
         }
         #endregion
 
+        public void OnStateEnd(Level.State state)
+        {
+        }
+
+        public void OnStateBegin(Level.State state)
+        {
+            if (state == Level.State.Fighting)
+                GameStart();
+        }
     }
 
 }
