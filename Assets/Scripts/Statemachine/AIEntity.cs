@@ -40,7 +40,7 @@ namespace AICreatures
 
         private void Start()
         {
-            Game.CreatureSpawn(team);
+            Game.level.CountUp(team);
         }
 
         public void GameStart()
@@ -103,7 +103,7 @@ namespace AICreatures
             defaultBehaviour.enabled = false;
             dead = true;
             gameObject.layer = 0;
-            Game.CreatureDeath(team);
+            Game.level.CountDown(team);
             anim.SetTrigger("Death");
         }
         public void GetHit(int damage)

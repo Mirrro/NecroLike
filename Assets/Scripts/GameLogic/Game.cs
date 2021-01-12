@@ -26,16 +26,8 @@ public static class Game
     public enum Creature { Skeleton, Knight }
     public static GameObject[] creaturePrefabs;
     public static Sprite[] creatureIcons;
-
-    #region Loadout
+    
     public static GameObject[] loadout = new GameObject[6];
-
-    #endregion
-
-    public static UnityEvent<Team> DeathEvent = new UnityEvent<Team>();
-    public static void CreatureDeath(Team team){DeathEvent.Invoke(team);}
-    public static UnityEvent<Team> SpawnEvent = new UnityEvent<Team>();
-    public static void CreatureSpawn(Team team){SpawnEvent.Invoke(team);}
 
     public static bool[] unlocked = new bool[] { true, false };
     public static UnityEvent UnlockEvent = new UnityEvent();
@@ -66,9 +58,6 @@ public static class Game
         var levelStateListeners = Object.FindObjectsOfType<MonoBehaviour>().OfType<ILevelStateListener>();
         foreach (ILevelStateListener s in levelStateListeners)
             Level.InitStateListener(s);
-        DeathEvent.AddListener(level.CountDown);
-        SpawnEvent.AddListener(level.CountUp);
-
         level.GoToState(Level.State.Positioning);
     }
     #endregion
