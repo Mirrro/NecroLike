@@ -9,6 +9,8 @@ public class ShaderBehaviour : MonoBehaviour,  ILevelStateListener
     [SerializeField]
     private ShaderHandler pingShader;
 
+   private Coroutine pingAnimation;
+
     public IEnumerator TransitionToBlueprint()
     {
         blueprintShader.Set();
@@ -25,13 +27,12 @@ public class ShaderBehaviour : MonoBehaviour,  ILevelStateListener
             blueprintShader.ShaderLerpRadius(t);
             yield return null;
         }
-        print("pingshader set");
         pingShader.Set();
     }
-
+    
     public IEnumerator PingAnimation()
     {
-        for (float t = 1f; t > 0; t -= Time.deltaTime * Level.TransitionSpeed)
+        for (float t = 1f; t > 0; t -= Time.deltaTime)
         {
             pingShader.ShaderLerpRadius(t - t * t);
             yield return null;
@@ -41,7 +42,10 @@ public class ShaderBehaviour : MonoBehaviour,  ILevelStateListener
     public void Ping(Vector3 position)
     {
         pingShader.SetPosition(position);
-        StartCoroutine(PingAnimation());
+        if(pingAnimation!=null)
+            StopCoroutine(pingAnimation);
+        pingAnimation = StartCoroutine(PingAnimation());
+  
     }
 
     private void Start()

@@ -35,6 +35,7 @@ public class InputHandler : MonoBehaviour, ILevelStateListener
         if (allowPlacement && selectedCreature != -1)
         {
             PositionCreatureEvent.Invoke(new CreaturePlacementData(selectedCreature, input));
+            selectedCreature = -1;
         }
         else if (allowRallying)
             Game.level.Rally(input);

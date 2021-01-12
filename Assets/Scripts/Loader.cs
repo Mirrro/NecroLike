@@ -5,11 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class Loader : MonoBehaviour
 {
-    public GameObject[] allCreatures = new GameObject[2];
+    public GameObject[] allCreatures;
+    public Sprite[] creatureIcons;
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
-        Game.allCreatures = allCreatures;
+        Game.creaturePrefabs = allCreatures;
+        Game.creatureIcons = creatureIcons;
         Game.LoadMenu();
     }   
 }

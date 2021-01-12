@@ -1,5 +1,4 @@
-﻿
-using System.Linq;
+﻿using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
@@ -25,12 +24,11 @@ public static class Game
     
     public enum Team { Undead, Humans };
     public enum Creature { Skeleton, Knight }
-    public static GameObject[] allCreatures = new GameObject[2];
+    public static GameObject[] creaturePrefabs;
+    public static Sprite[] creatureIcons;
 
     #region Loadout
     public static GameObject[] loadout = new GameObject[6];
-
-
 
     #endregion
 

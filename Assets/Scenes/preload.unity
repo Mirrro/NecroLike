@@ -169,3 +169,6 @@ MonoBehaviour:
   allCreatures:
   - {fileID: 3312118156029521908, guid: 4f059679593789a41b310a2331bd79a5, type: 3}
   - {fileID: 3312118156029521908, guid: dacbc4e3538d2804ba6f7c8f2d43d7fa, type: 3}
+  creatureIcons:
+  - {fileID: 21300000, guid: 17862ca465383eb43a67aee5b72bf350, type: 3}
+  - {fileID: 21300000, guid: fe591dcc8b02300479afd2e7b8751eb9, type: 3}
