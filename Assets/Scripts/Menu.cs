@@ -1,11 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Menu : MonoBehaviour
 {
     public GameObject creatureIconPrefab;
+    public Transform allCreaturePanel;
     private int selectedCreature = -1;
 
     private void Awake()
@@ -40,7 +39,7 @@ public class Menu : MonoBehaviour
     {
         int x = (i % 5) * 120 - 200;
         int y = (i / 5) * 120 + 200;
-        GameObject creatureIcon = Instantiate(creatureIconPrefab, new Vector3(x, y, 0) - transform.worldToLocalMatrix.MultiplyPoint(new Vector3(0, 0, 0)), Quaternion.identity, transform);
+        GameObject creatureIcon = Instantiate(creatureIconPrefab, Vector3.zero, Quaternion.identity, allCreaturePanel);
         creatureIcon.transform.GetChild(0).GetComponent<Image>().sprite = Game.creatureIcons[i];
         creatureIcon.GetComponent<Button>().onClick.AddListener(delegate { SelectCreature(i); });
     }
