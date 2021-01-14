@@ -1,6 +1,4 @@
 using System;
-using System.ComponentModel.Design.Serialization;
-using UI;
 using UnityEngine;
 using UnityEngine.UI;
 

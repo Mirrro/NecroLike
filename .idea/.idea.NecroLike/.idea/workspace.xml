@@ -20,9 +20,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="65b49190-1ef6-4efb-ad42-a6299a0453fc" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.NecroLike/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.NecroLike/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3D/skeletonWalk.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3D/skeletonWalk.controller" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.NecroLike/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.NecroLike/.idea/indexLayout.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/UI_BottomPanel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/UI_BottomPanel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/UI_InGameComponent.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/UI_InGameComponent.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/UI_SkullCounter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/UI_SkullCounter.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/UI_SpawnCreaturePanel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/UI_SpawnCreaturePanel.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -40,6 +42,8 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/Assets/AICreature.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/UI/UI_InGameComponent.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/UI/UI_SkullCounter.cs" />
       </list>
     </option>
   </component>
@@ -91,6 +95,7 @@
       <option name="presentableId" value="Default" />
       <updated>1609327966728</updated>
       <workItem from="1609327976853" duration="2736000" />
+      <workItem from="1610644762209" duration="1305000" />
     </task>
     <servers />
   </component>

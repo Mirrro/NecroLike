@@ -4,26 +4,173 @@
     <e p="C:\Users\MiroKroslin\AppData\Local\JetBrains\Rider2020.2\extResources" t="IncludeRecursive" />
     <e p="C:\Users\MiroKroslin\AppData\Local\JetBrains\Rider2020.2\resharper-host\Local\Transient\Rider\v202\SolutionCaches\_NecroLike.-2136419366.00" t="ExcludeRecursive" />
     <e p="D:\GitHubRepos\NecroLike" t="IncludeRecursive">
+      <e p="Assembly-CSharp-Editor.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
-        <e p="Ability.cs" t="Include" />
-        <e p="AbilitySpawn.cs" t="Include" />
-        <e p="AICreature.cs" t="Include" />
-        <e p="AIManager.cs" t="Include" />
-        <e p="AIStates" t="Include">
-          <e p="AIState.cs" t="Include" />
-          <e p="AIStateDeadHuman.cs" t="Include" />
-          <e p="AIStateDeadSkeleton.cs" t="Include" />
-          <e p="AIStateFight.cs" t="Include" />
-          <e p="AIStateFlee.cs" t="Include" />
-          <e p="AIStateIdle.cs" t="Include" />
-          <e p="AIStatePatrol.cs" t="Include" />
-          <e p="AIStateSpawning.cs" t="Include" />
-          <e p="AIStateWander.cs" t="Include" />
+        <e p="ExternalDependencyManager" t="Include">
+          <e p="Editor" t="Include">
+            <e p="external-dependency-manager_version-1.2.162_manifest.txt" t="Include" />
+          </e>
         </e>
-        <e p="Game.cs" t="Include" />
-        <e p="ITargetable.cs" t="Include" />
-        <e p="Player.cs" t="Include" />
+        <e p="GooglePlayGames" t="Include">
+          <e p="BasicApi" t="Include">
+            <e p="Achievement.cs" t="Include" />
+            <e p="CommonStatusCodes.cs" t="Include" />
+            <e p="CommonTypes.cs" t="Include" />
+            <e p="DummyClient.cs" t="Include" />
+            <e p="Events" t="Include">
+              <e p="Event.cs" t="Include" />
+              <e p="IEvent.cs" t="Include" />
+              <e p="IEventsClient.cs" t="Include" />
+            </e>
+            <e p="IPlayGamesClient.cs" t="Include" />
+            <e p="LeaderboardScoreData.cs" t="Include" />
+            <e p="Nearby" t="Include">
+              <e p="AdvertisingResult.cs" t="Include" />
+              <e p="ConnectionRequest.cs" t="Include" />
+              <e p="ConnectionResponse.cs" t="Include" />
+              <e p="DummyNearbyConnectionClient.cs" t="Include" />
+              <e p="EndpointDetails.cs" t="Include" />
+              <e p="INearbyConnectionClient.cs" t="Include" />
+              <e p="NearbyConnectionConfiguration.cs" t="Include" />
+            </e>
+            <e p="Player.cs" t="Include" />
+            <e p="PlayerProfile.cs" t="Include" />
+            <e p="PlayerStats.cs" t="Include" />
+            <e p="PlayGamesClientConfiguration.cs" t="Include" />
+            <e p="SavedGame" t="Include">
+              <e p="ISavedGameClient.cs" t="Include" />
+              <e p="ISavedGameMetadata.cs" t="Include" />
+              <e p="SavedGameMetadataUpdate.cs" t="Include" />
+            </e>
+            <e p="ScorePageToken.cs" t="Include" />
+            <e p="SignInHelper.cs" t="Include" />
+            <e p="SignInInteractivity.cs" t="Include" />
+            <e p="SignInStatus.cs" t="Include" />
+            <e p="Video" t="Include">
+              <e p="CaptureOverlayStateListener.cs" t="Include" />
+              <e p="IVideoClient.cs" t="Include" />
+              <e p="VideoCapabilities.cs" t="Include" />
+              <e p="VideoCaptureState.cs" t="Include" />
+            </e>
+          </e>
+          <e p="Editor" t="Include">
+            <e p="GooglePlayGamesPlugin_v0.10.12.txt" t="Include" />
+            <e p="GooglePlayGamesPluginDependencies.xml" t="Include" />
+            <e p="GPGSAndroidSetupUI.cs" t="Include" />
+            <e p="GPGSDocsUI.cs" t="Include" />
+            <e p="GPGSPostBuild.cs" t="Include" />
+            <e p="GPGSProjectSettings.cs" t="Include" />
+            <e p="GPGSStrings.cs" t="Include" />
+            <e p="GPGSUpgrader.cs" t="Include" />
+            <e p="GPGSUtil.cs" t="Include" />
+            <e p="m2repository" t="Include">
+              <e p="com" t="Include">
+                <e p="google" t="Include">
+                  <e p="games" t="Include">
+                    <e p="gpgs-plugin-support" t="Include">
+                      <e p="maven-metadata.xml" t="Include" />
+                    </e>
+                  </e>
+                </e>
+              </e>
+            </e>
+            <e p="NearbyConnectionUI.cs" t="Include" />
+            <e p="template-AndroidManifest.txt" t="Include" />
+            <e p="template-Constants.txt" t="Include" />
+            <e p="template-GameInfo.txt" t="Include" />
+          </e>
+          <e p="GameInfo.cs" t="Include" />
+          <e p="ISocialPlatform" t="Include">
+            <e p="PlayGamesAchievement.cs" t="Include" />
+            <e p="PlayGamesLeaderboard.cs" t="Include" />
+            <e p="PlayGamesLocalUser.cs" t="Include" />
+            <e p="PlayGamesPlatform.cs" t="Include" />
+            <e p="PlayGamesScore.cs" t="Include" />
+            <e p="PlayGamesUserProfile.cs" t="Include" />
+          </e>
+          <e p="OurUtils" t="Include">
+            <e p="Logger.cs" t="Include" />
+            <e p="Misc.cs" t="Include" />
+            <e p="NearbyHelperObject.cs" t="Include" />
+            <e p="PlatformUtils.cs" t="Include" />
+            <e p="PlayGamesHelperObject.cs" t="Include" />
+          </e>
+          <e p="Platforms" t="Include">
+            <e p="Android" t="Include">
+              <e p="AndroidClient.cs" t="Include" />
+              <e p="AndroidEventsClient.cs" t="Include" />
+              <e p="AndroidHelperFragment.cs" t="Include" />
+              <e p="AndroidJavaConverter.cs" t="Include" />
+              <e p="AndroidNearbyConnectionClient.cs" t="Include" />
+              <e p="AndroidSavedGameClient.cs" t="Include" />
+              <e p="AndroidSnapshotMetadata.cs" t="Include" />
+              <e p="AndroidTaskUtils.cs" t="Include" />
+              <e p="AndroidTokenClient.cs" t="Include" />
+              <e p="AndroidVideoClient.cs" t="Include" />
+            </e>
+            <e p="NearbyConnectionClientFactory.cs" t="Include" />
+            <e p="PlayGamesClientFactory.cs" t="Include" />
+            <e p="TokenClient.cs" t="Include" />
+          </e>
+          <e p="Plugins" t="Include">
+            <e p="Android" t="Include">
+              <e p="GooglePlayGamesManifest.plugin" t="Include">
+                <e p="AndroidManifest.xml" t="Include" />
+              </e>
+            </e>
+          </e>
+          <e p="PluginVersion.cs" t="Include" />
+        </e>
+        <e p="Graphics" t="Include">
+          <e p="UI" t="Include">
+            <e p="Fonts" t="Include">
+              <e p="Fredoka_One" t="Include">
+                <e p="OFL.txt" t="Include" />
+              </e>
+            </e>
+          </e>
+        </e>
+        <e p="Scripts" t="Include">
+          <e p="GameLogic" t="Include">
+            <e p="CameraBehaviour.cs" t="Include" />
+            <e p="Game.cs" t="Include" />
+            <e p="ILevelStateListener.cs" t="Include" />
+            <e p="InputHandler.cs" t="Include" />
+            <e p="Level.cs" t="Include" />
+            <e p="ShaderBehaviour.cs" t="Include" />
+            <e p="ShaderHandler.cs" t="Include" />
+          </e>
+          <e p="GPGSIds.cs" t="Include" />
+          <e p="Loader.cs" t="Include" />
+          <e p="Menu.cs" t="Include" />
+          <e p="Statemachine" t="Include">
+            <e p="Actions" t="Include">
+              <e p="ActionAttack.cs" t="Include" />
+              <e p="ActionFlee.cs" t="Include" />
+              <e p="ActionWait.cs" t="Include" />
+              <e p="ActionWalk.cs" t="Include" />
+              <e p="AIAction.cs" t="Include" />
+            </e>
+            <e p="AIEntity.cs" t="Include" />
+            <e p="Behaviours" t="Include">
+              <e p="AIBehaviour.cs" t="Include" />
+              <e p="AICombat.cs" t="Include" />
+              <e p="AIPatrol.cs" t="Include" />
+              <e p="AIRally.cs" t="Include" />
+              <e p="AIWander.cs" t="Include" />
+              <e p="DefaultBehaviour.cs" t="Include" />
+            </e>
+          </e>
+          <e p="UI" t="Include">
+            <e p="UI_BottomPanel.cs" t="Include" />
+            <e p="UI_INGAME.cs" t="Include" />
+            <e p="UI_InGameComponent.cs" t="Include" />
+            <e p="UI_ScoreEventArgs.cs" t="Include" />
+            <e p="UI_SkullCounter.cs" t="Include" />
+            <e p="UI_SpawnCreaturePanel.cs" t="Include" />
+          </e>
+        </e>
       </e>
       <e p="NecroLike.sln" t="IncludeFlat" />
       <e p="obj" t="ExcludeRecursive" />
