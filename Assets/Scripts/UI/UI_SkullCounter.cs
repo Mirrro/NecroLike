@@ -1,8 +1,7 @@
-using NecroCore.UI.INGAME;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace MyNamespace
+namespace NecroCore.UI.INGAME
 {
     public class UI_SkullCounter : UI_InGameComponent
     {
