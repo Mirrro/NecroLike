@@ -10,7 +10,10 @@ public class Menu : MonoBehaviour
     private void Awake()
     {
         if (FindObjectOfType<Loader>() == null)
+        {
             Game.Load();
+            return;
+        }
         CreateCreatureIcons();
         Game.loadout = new GameObject[] { Game.creaturePrefabs[0], Game.creaturePrefabs[0], Game.creaturePrefabs[0], Game.creaturePrefabs[0], Game.creaturePrefabs[0], Game.creaturePrefabs[0] };
     }

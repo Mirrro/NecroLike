@@ -27,7 +27,10 @@ public class Level : MonoBehaviour
     private void Awake()
     {
         if (FindObjectOfType<Loader>() == null)
+        {
             Game.Load();
+            return;
+        }
         Game.InitLevel(this);
         InputHandler.PositionCreatureEvent.AddListener(OnCreaturePlacement);
     }
