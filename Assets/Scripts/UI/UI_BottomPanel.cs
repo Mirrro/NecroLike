@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace NecroCore.UI.INGAME
 {
-    public class UI_BottomPanel : UI_InGameComponent
+    public class UI_BottomPanel : UI_InGameComponent, ILevelStateListener
     {
         [SerializeField] private Button button;
 
@@ -37,6 +37,16 @@ namespace NecroCore.UI.INGAME
             }
             ani.SetTrigger(IsShow ? Hide : Show);
             IsShow = !IsShow;
+        }
+
+        public void OnLevelStateEnd(Level.State state)
+        {
+
+        }
+
+        public void OnLevelStateBegin(Level.State state)
+        {
+
         }
     }
 }

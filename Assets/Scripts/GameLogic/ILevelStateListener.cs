@@ -4,6 +4,6 @@ using UnityEngine;
 
 public interface ILevelStateListener
 {
-    void OnStateEnd(Level.State state);
-    void OnStateBegin(Level.State state);
+    void OnLevelStateEnd(Level.State state);
+    void OnLevelStateBegin(Level.State state);
 }

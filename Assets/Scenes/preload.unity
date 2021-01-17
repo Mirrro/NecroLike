@@ -166,9 +166,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a76494900dd739342b4e74c9affff359, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allCreatures:
-  - {fileID: 3312118156029521908, guid: 4f059679593789a41b310a2331bd79a5, type: 3}
-  - {fileID: 3312118156029521908, guid: dacbc4e3538d2804ba6f7c8f2d43d7fa, type: 3}
-  creatureIcons:
-  - {fileID: 21300000, guid: 17862ca465383eb43a67aee5b72bf350, type: 3}
-  - {fileID: 21300000, guid: fe591dcc8b02300479afd2e7b8751eb9, type: 3}
+  creatures:
+  - type: 0
+    icon: {fileID: 21300000, guid: fe591dcc8b02300479afd2e7b8751eb9, type: 3}
+    prefab: {fileID: 3312118156029521908, guid: 4f059679593789a41b310a2331bd79a5,
+      type: 3}
+    stats:
+      health: 10
+      damage: 2
+      range: 2
+      speed: 10
+    unlocked: 1
+  - type: 1
+    icon: {fileID: 21300000, guid: 17862ca465383eb43a67aee5b72bf350, type: 3}
+    prefab: {fileID: 3312118156029521908, guid: dacbc4e3538d2804ba6f7c8f2d43d7fa,
+      type: 3}
+    stats:
+      health: 20
+      damage: 5
+      range: 3
+      speed: 10
+    unlocked: 1

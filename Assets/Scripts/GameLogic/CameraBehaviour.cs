@@ -6,10 +6,10 @@ public class CameraBehaviour : MonoBehaviour, ILevelStateListener
 {
     [SerializeField] protected Transform[] stateTransforms;
 
-    public void OnStateBegin(Level.State state)
+    public void OnLevelStateBegin(Level.State state)
     {
     }
-    public void OnStateEnd(Level.State state)
+    public void OnLevelStateEnd(Level.State state)
     {
         StartCoroutine(Transition(((int)state) + 1));
     }

@@ -46,7 +46,7 @@ public class InputHandler : MonoBehaviour, ILevelStateListener
         selectedCreature = creature;
     }
 
-    public void OnStateEnd(Level.State state)
+    public void OnLevelStateEnd(Level.State state)
     {
         if (state == Level.State.Positioning)
             allowPlacement = false;
@@ -54,7 +54,7 @@ public class InputHandler : MonoBehaviour, ILevelStateListener
             allowRallying = false;
     }
 
-    public void OnStateBegin(Level.State state)
+    public void OnLevelStateBegin(Level.State state)
     {
         if (state == Level.State.Positioning)
             allowPlacement = true;

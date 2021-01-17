@@ -34,7 +34,7 @@ public class ShaderBehaviour : MonoBehaviour,  ILevelStateListener
     {
         for (float t = 1f; t > 0; t -= Time.deltaTime)
         {
-            pingShader.ShaderLerpRadius(t - t * t);
+            pingShader.ShaderLerpRadius(t*t);
             yield return null;
         }
     }
@@ -53,7 +53,7 @@ public class ShaderBehaviour : MonoBehaviour,  ILevelStateListener
         Game.level.rallyEvent.AddListener(Ping);    
     }
 
-    public void OnStateEnd(Level.State state)
+    public void OnLevelStateEnd(Level.State state)
     {
         if (state == Level.State.Entry)
             StartCoroutine(TransitionToBlueprint());
@@ -61,7 +61,7 @@ public class ShaderBehaviour : MonoBehaviour,  ILevelStateListener
             StartCoroutine(TransitionToFight());
     }
 
-    public void OnStateBegin(Level.State state)
+    public void OnLevelStateBegin(Level.State state)
     {
     }
 }

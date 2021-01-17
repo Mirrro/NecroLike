@@ -18,7 +18,7 @@ GameObject:
   m_Layer: 6
   m_Name: Skeleton
   m_TagString: Skeleton
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -84,15 +84,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8927ca44533a1be43924c22cb4dbab49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  team: 0
-  enemyTeam: 1
-  stats:
-    health: 5
-    vision: 5
-    damage: 3
-    range: 2
-    speed: 10
-  DeathEvent:
+  deathEvent:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 3312118156029521908}
@@ -107,6 +99,13 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  team: 0
+  enemyTeam: 1
+  stats:
+    health: 5
+    damage: 3
+    range: 2
+    speed: 10
   anim: {fileID: 0}
   agent: {fileID: 0}
   forced: 0
@@ -171,7 +170,17 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 799855958310056302, guid: 1de71d0dd1182174fbcfaad65af3b953,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 951308809979185947, guid: 1de71d0dd1182174fbcfaad65af3b953,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1225035687911616158, guid: 1de71d0dd1182174fbcfaad65af3b953,
         type: 3}
       propertyPath: m_Layer
       value: 6
@@ -217,6 +226,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: a171f2e5090ba5940825e8f4d367830f, type: 2}
     - target: {fileID: 5608749652596498314, guid: 1de71d0dd1182174fbcfaad65af3b953,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6047647236374492140, guid: 1de71d0dd1182174fbcfaad65af3b953,
         type: 3}
       propertyPath: m_Layer
       value: 6

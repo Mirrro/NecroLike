@@ -240,7 +240,7 @@ GameObject:
   m_Layer: 7
   m_Name: Knight
   m_TagString: Human
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -320,6 +320,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8927ca44533a1be43924c22cb4dbab49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deathEvent:
+    m_PersistentCalls:
+      m_Calls: []
   team: 1
   enemyTeam: 0
   stats:
@@ -327,21 +330,6 @@ MonoBehaviour:
     damage: 5
     range: 2
     speed: 5
-  DeathEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 11400000, guid: 6be7c0a3c233b8e4ba82648173449a47, type: 2}
-        m_TargetAssemblyTypeName: CreatureCard, Assembly-CSharp
-        m_MethodName: set_Unlocked
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
   anim: {fileID: 0}
   agent: {fileID: 0}
   forced: 0

@@ -12,6 +12,7 @@ namespace AICreatures
     [RequireComponent(typeof(AICombat))]
     public class AIEntity : MonoBehaviour, ILevelStateListener
     {
+        public UnityEvent deathEvent = new UnityEvent();
         private bool dead;
         [Header("Combat Settings")]
         public Game.Team team;
@@ -28,12 +29,10 @@ namespace AICreatures
 
         private void Awake()
         {
-            Level.InitStateListener(this);
             anim = GetComponentInChildren<Animator>();
             agent = GetComponent<NavMeshAgent>();
             enabled = false;
             agent.enabled = false;
-            anim.enabled = false;
             combatBehaviour = GetComponent<AICombat>();
             defaultBehaviour = GetComponent<DefaultBehaviour>();
         }
@@ -55,7 +54,7 @@ namespace AICreatures
         private void FixedUpdate()
         {
             nearestEnemy = FindNearestVisibleEnemy();
-            if(!forced)
+            if (!forced && !dead)
             {
                 combatBehaviour.enabled = nearestEnemy != null;
                 defaultBehaviour.enabled = nearestEnemy == null;
@@ -72,7 +71,7 @@ namespace AICreatures
         private AIEntity FindNearestVisibleEnemy()
         {
             int layerMask = 1 << (6 + ((int)enemyTeam));
-            Collider[] hitColliders = Physics.OverlapSphere(GetPosition(), 7, layerMask);
+            Collider[] hitColliders = Physics.OverlapSphere(GetPosition(), 12, layerMask);
 
             layerMask = ~layerMask;
             Collider closestCollider = null;
@@ -97,6 +96,7 @@ namespace AICreatures
         {
             if (dead == true)
                 return;
+            deathEvent.Invoke();
             enabled = false;
             agent.enabled = false;
             combatBehaviour.enabled = false;
@@ -135,11 +135,11 @@ namespace AICreatures
         }
         #endregion
 
-        public void OnStateEnd(Level.State state)
+        public void OnLevelStateEnd(Level.State state)
         {
         }
 
-        public void OnStateBegin(Level.State state)
+        public void OnLevelStateBegin(Level.State state)
         {
             if (state == Level.State.Fighting)
                 GameStart();

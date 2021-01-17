@@ -22,7 +22,7 @@ namespace AICreatures
 
         public override void OnRun()
         {
-            if(entity.stats.damage > 0 && currentAction == 1)
+            if(entity.stats.damage > 0)
                 entity.agent.SetDestination(entity.GetNearestEnemy().GetPosition());
 
         }
