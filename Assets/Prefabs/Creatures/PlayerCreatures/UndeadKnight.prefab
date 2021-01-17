@@ -115,7 +115,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entity: {fileID: 0}
-  currentAction: 0
 --- !u!114 &531057764110515688
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -129,7 +128,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entity: {fileID: 0}
-  currentAction: 0
   wanderingDistance: 1
   wanderingCenter: {fileID: 3312118156029521904}
 --- !u!114 &7862663541190557405
@@ -145,7 +143,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entity: {fileID: 0}
-  currentAction: 0
+  cooldown: 1
+  attackTime: 0.9
 --- !u!1001 &276068625699926317
 PrefabInstance:
   m_ObjectHideFlags: 0

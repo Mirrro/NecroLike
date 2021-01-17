@@ -9,10 +9,6 @@ namespace AICreatures
     {
         public Vector3[] waypoints;
         int currentWaypoint;
-        public override void InitStates()
-        {
-            actions = new AIAction[] { new ActionWait(this), new ActionWalk(this) };
-        }
         protected override void Check()
         {
             switch (currentAction)

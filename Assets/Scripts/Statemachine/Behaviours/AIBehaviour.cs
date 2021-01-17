@@ -8,10 +8,9 @@ namespace AICreatures
     [RequireComponent(typeof(AIEntity))]
     public abstract class AIBehaviour : MonoBehaviour
     {
-        [HideInInspector]
-        public AIEntity entity;
+        [HideInInspector] public AIEntity entity;
         protected AIAction[] actions;
-        public int currentAction;
+        protected int currentAction;
         private void Awake()
         {
             entity = GetComponent<AIEntity>();

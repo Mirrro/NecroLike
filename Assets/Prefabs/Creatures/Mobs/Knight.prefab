@@ -308,7 +308,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entity: {fileID: 0}
-  currentAction: 0
+  cooldown: 1
+  attackTime: 0.23
 --- !u!114 &1531317723221714479
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -351,7 +352,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entity: {fileID: 0}
-  currentAction: 0
   waypoints:
   - {x: -14.8, y: 0, z: 14.4}
   - {x: 6.4, y: 0, z: 14.4}

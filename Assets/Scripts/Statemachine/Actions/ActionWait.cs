@@ -6,8 +6,11 @@ namespace AICreatures
 {
     public class ActionWait : AIAction
     {
-        public ActionWait(AIBehaviour main) : base(main) { }
         private float timeLeft;
+        public ActionWait(AIBehaviour main, float time) : base(main)
+        {
+            timeLeft = time;
+        }
         public override bool Run()
         {
             timeLeft -= Time.deltaTime;

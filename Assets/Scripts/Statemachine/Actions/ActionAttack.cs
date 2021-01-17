@@ -6,8 +6,11 @@ namespace AICreatures
 {
     public class ActionAttack : AIAction
     {
-        public ActionAttack(AIBehaviour main) : base(main) { }
         private float timeLeft;
+        public ActionAttack(AIBehaviour main, float time) : base(main)
+        {
+            timeLeft = time;        
+        }
         public override bool Run()
         {
             if(timeLeft<= 0)

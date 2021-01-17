@@ -10,7 +10,7 @@ namespace AICreatures
     {
         public override void InitStates()
         {
-            actions = new AIAction[] { new ActionWait(this), new ActionWalk(this) };
+            actions = new AIAction[] { new ActionWait(this, 1), new ActionWalk(this) };
         }
 
         protected override void Check()

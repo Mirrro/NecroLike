@@ -6,11 +6,12 @@ namespace AICreatures
 {
     public class AICombat : AIBehaviour
     {
-        AIAction combatAction;
+        [SerializeField] private float cooldown;
+        [SerializeField] private float attackTime;
         public override void InitStates()
         {
             if (entity.stats.damage>0)
-                actions = new AIAction[] { new ActionWait(this), new ActionWalk(this), new ActionAttack(this) };
+                actions = new AIAction[] { new ActionWait(this, cooldown), new ActionWalk(this), new ActionAttack(this, attackTime) };
             else
                 actions = new AIAction[] { new ActionFlee(this) };
             
