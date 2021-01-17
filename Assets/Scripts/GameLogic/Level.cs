@@ -109,6 +109,8 @@ public class Level : MonoBehaviour
     {
         if (team == Game.Team.Humans)
             humanCount++;
+        else
+            undeadCount++;
     }
     #endregion
 }

@@ -7,6 +7,7 @@ public class Menu : MonoBehaviour
     public Transform allCreaturePanel;
     private int selectedCreature = 0;
     public GameObject previewPeddle;
+    public Text nameDisplay;
     public Text healthDisplay;
     public Text damageDisplay;
     public Text rangeDisplay;
@@ -52,7 +53,7 @@ public class Menu : MonoBehaviour
         int x = (i % 5) * 120 - 200;
         int y = (i / 5) * 120 + 200;
         GameObject creatureIcon = Instantiate(creatureIconPrefab, Vector3.zero, Quaternion.identity, allCreaturePanel);
-        creatureIcon.transform.GetChild(0).GetComponent<Image>().sprite = Game.templateCreatures[i].icon;
+        creatureIcon.transform.GetComponent<Image>().sprite = Game.templateCreatures[i].icon;
         creatureIcon.GetComponent<Button>().onClick.AddListener(delegate { SelectCreature(i); });
     }
 
@@ -62,6 +63,7 @@ public class Menu : MonoBehaviour
         if(previewPeddle.transform.childCount>0)
             Destroy(previewPeddle.transform.GetChild(0).gameObject);
         Instantiate(Game.templateCreatures[selectedCreature].prefab, previewPeddle.transform);
+        nameDisplay.text = Game.templateCreatures[selectedCreature].name;
         healthDisplay.text = Game.templateCreatures[selectedCreature].stats.health.ToString();
         damageDisplay.text = Game.templateCreatures[selectedCreature].stats.damage.ToString();
         rangeDisplay.text = Game.templateCreatures[selectedCreature].stats.range.ToString();

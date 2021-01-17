@@ -30,7 +30,6 @@ public static class Game
         LoadMenu();
     }
     public enum Team { Undead, Humans };
-    public enum Creature { Skeleton, Knight }
     public static PlayerCreature[] templateCreatures;
     /*public static PlayerCreature GetCreature(int type)
     {
@@ -116,7 +115,7 @@ public static class Game
 [System.Serializable]
 public struct PlayerCreature
 {
-    public Game.Creature type;
+    public string name;
     public Sprite icon;
     public GameObject prefab;
     public Stats stats;

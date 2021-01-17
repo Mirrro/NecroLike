@@ -12,6 +12,7 @@ namespace AICreatures
     [RequireComponent(typeof(AICombat))]
     public class AIEntity : MonoBehaviour, ILevelStateListener
     {
+        public UnityEvent hitEvent = new UnityEvent();
         public UnityEvent deathEvent = new UnityEvent();
         private bool dead;
         [Header("Combat Settings")]
@@ -64,7 +65,7 @@ namespace AICreatures
         #region Combat
         public static bool IsAlive(AIEntity entity)
         {
-            return entity != null && entity.stats.health > 0;
+            return entity != null && entity.stats.lostHealth >= entity.stats.health;
         }
 
         private AIEntity nearestEnemy;
@@ -106,11 +107,16 @@ namespace AICreatures
             Game.level.CountDown(team);
             anim.SetTrigger("Death");
         }
-        public void GetHit(int damage)
+        public bool GetHit(int damage)
         {
-            stats.health -= damage;
-            if (stats.health <= 0)
+            stats.lostHealth += damage;
+            hitEvent.Invoke();
+            if (stats.lostHealth>=stats.health)
+            {
                 Death();
+                return true;
+            }
+            return false;
         }
         public Vector3 GetPosition()
         {
@@ -151,6 +157,7 @@ namespace AICreatures
 public struct Stats
 {
     public int health;
+    public int lostHealth;
     public int damage;
     public float range;
     public float speed;
