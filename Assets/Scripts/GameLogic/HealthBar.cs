@@ -6,16 +6,16 @@ using AICreatures;
 
 public class HealthBar : MonoBehaviour
 {
-    AIEntity entity;
     Slider slider;
     private void Awake()
     {
         slider = GetComponent<Slider>();
-        entity = GetComponentInParent<AIEntity>();
+
+        AIEntity entity = GetComponentInParent<AIEntity>();
         entity.hitEvent.AddListener(UpdateBar);
         entity.deathEvent.AddListener(delegate { gameObject.SetActive(false); }) ;
         slider.maxValue = entity.stats.health;
-        UpdateBar();
+        UpdateBar(entity);
     }
     private void Update()
     {
@@ -25,9 +25,9 @@ public class HealthBar : MonoBehaviour
 
     }
 
-    public void UpdateBar()
+    public void UpdateBar(AIEntity entity)
     {
-        if (entity.stats.lostHealth == 0)
+        if (entity.stats.lostHealth == 0 || entity.stats.lostHealth >= entity.stats.health)
             gameObject.SetActive(false);
         else
         {

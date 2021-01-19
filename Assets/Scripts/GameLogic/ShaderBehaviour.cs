@@ -48,11 +48,6 @@ public class ShaderBehaviour : MonoBehaviour,  ILevelStateListener
   
     }
 
-    private void Start()
-    {
-        Game.level.rallyEvent.AddListener(Ping);    
-    }
-
     public void OnLevelStateEnd(Level.State state)
     {
         if (state == Level.State.Entry)

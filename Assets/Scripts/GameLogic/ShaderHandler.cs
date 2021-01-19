@@ -6,7 +6,7 @@ using UnityEngine;
 public class ShaderHandler : ScriptableObject
 {
 
-    [MenuItem("Assets/Create/ShaderHandler")]
+    /*[MenuItem("Assets/Create/ShaderHandler")]
     public static void CreateShaderHandler()
     {
         ShaderHandler asset = CreateInstance<ShaderHandler>();
@@ -18,7 +18,7 @@ public class ShaderHandler : ScriptableObject
 
         Selection.activeObject = asset;
     }
-
+    */
     [SerializeField] private Material shader;
 
     private static readonly int POS = Shader.PropertyToID("Vector3_4251960c556e4888853e72ddd90e10ff");

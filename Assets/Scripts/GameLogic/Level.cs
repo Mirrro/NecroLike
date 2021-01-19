@@ -8,7 +8,7 @@ using System.Collections.Generic;
 public class Level : MonoBehaviour
 {
     public enum State { Entry, Positioning, Fighting, End };
-    protected  State currentState = State.Entry;
+    public  State currentState = State.Entry;
     public UnityEvent<State> LevelStateBegin = new UnityEvent<State>();
     public UnityEvent<State> LevelStateEnd = new UnityEvent<State>();
     public void InitLevelStateListener(ILevelStateListener listener)
@@ -45,23 +45,35 @@ public class Level : MonoBehaviour
 
     public IEnumerator TransitionState(State state)
     {
-        print(state.ToString());
         LevelStateEnd.Invoke(currentState);
         for (float t = 0f; t < 1; t += Time.deltaTime*Game.level.transitionSpeed)
         {
             yield return null;
         }
+        print(state.ToString());
         LevelStateBegin.Invoke(state);
         currentState = state;
     }
 
-    #region Player Input
+
+
+    #region Creatures
+    [SerializeField] protected Transform mobs;
+    private List<AIEntity> monsters = new List<AIEntity>();
+    private List<AIEntity> humans = new List<AIEntity>();
+
+    public AIEntity[] GetEnemies(Game.Team enemyTeam)
+    {
+        if (enemyTeam == Game.Team.Humans)
+            return humans.ToArray();
+        return monsters.ToArray();
+    }
+
     public AIEntity[] inGameLoadout = new AIEntity[Game.loadout.Length];
     int placedCreatures = 0;
     public void OnCreaturePlacement(CreaturePlacementData data)
     {
         AIEntity creature = Instantiate(Game.loadout[data.creature].prefab, data.position, Quaternion.identity, mobs).GetComponent<AIEntity>();
-        InitLevelStateListener(creature);
         creature.stats = Game.loadout[data.creature].stats;
         inGameLoadout[data.creature] = creature;
 
@@ -69,48 +81,32 @@ public class Level : MonoBehaviour
         if (placedCreatures >= Game.AvailableCreatures)
             GoToState(State.Fighting);
     }
-    [SerializeField] protected Transform mobs;
-
-
-    public UnityEvent<Vector3> rallyEvent = new UnityEvent<Vector3>();
-    public void Rally(Vector3 position)
+    public void RegisterCreature(AIEntity creature)
     {
-        rallyEvent.Invoke(position);
-        int layerMask = 1 << 6;
-        Collider[] hitColliders = Physics.OverlapSphere(position, 5, layerMask);
-        foreach (Collider collider in hitColliders)
-        {
-            AIRally rally = collider.GetComponent<AIRally>();
-            if (rally != null)
-                rally.Rally(position);
-        };
+        print("reg");
+        LevelStateBegin.AddListener(creature.OnLevelStateBegin);
+        creature.deathEvent.AddListener(UnregisterCreature);
+
+        if (creature.team == Game.Team.Humans)
+            humans.Add(creature);
+        else
+            monsters.Add(creature);
     }
-    #endregion
-
-    #region Creature Tracking
-    private int humanCount;
-    private int undeadCount;
-    public void CountDown(Game.Team team)
+    public void UnregisterCreature(AIEntity creature)
     {
-        if (team == Game.Team.Humans)
+        if (creature.team == Game.Team.Humans)
         {
-            humanCount--;
-            if (humanCount <= 0)
+            humans.Remove(creature);
+            if (humans.Count <= 0)
                 GoToState(State.End);
         }
         else
         {
-            undeadCount--;
-            if(undeadCount <= 0)
+            monsters.Remove(creature);
+            if (monsters.Count <= 0)
                 GoToState(State.End);
         }
-    }
-    public void CountUp(Game.Team team)
-    {
-        if (team == Game.Team.Humans)
-            humanCount++;
-        else
-            undeadCount++;
+
     }
     #endregion
 }

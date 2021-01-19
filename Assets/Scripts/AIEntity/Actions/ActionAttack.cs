@@ -15,8 +15,10 @@ namespace AICreatures
         {
             if(timeLeft<= 0)
             {
-                if (main.entity.GetNearestEnemy()!= null)
-                    main.entity.GetNearestEnemy().GetHit(main.entity.stats.damage);
+                if (main.entity.GetNearestEnemy() != null)
+                    if (main.entity.GetNearestEnemy().GetHit(main.entity.stats.damage))
+                        main.entity.killEvent.Invoke(main.entity);
+                
                 return true;
             }
 

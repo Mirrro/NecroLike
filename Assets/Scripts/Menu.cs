@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using AICreatures;
 
 public class Menu : MonoBehaviour
 {
@@ -62,7 +63,12 @@ public class Menu : MonoBehaviour
         selectedCreature = creature;
         if(previewPeddle.transform.childCount>0)
             Destroy(previewPeddle.transform.GetChild(0).gameObject);
-        Instantiate(Game.templateCreatures[selectedCreature].prefab, previewPeddle.transform);
+
+        GameObject preview = Instantiate(Game.templateCreatures[selectedCreature].prefab, previewPeddle.transform);
+        preview.GetComponent<AIEntity>().enabled = false;
+        preview.GetComponent<AICombat>().enabled = false;
+        preview.GetComponent<DefaultBehaviour>().enabled = false;
+
         nameDisplay.text = Game.templateCreatures[selectedCreature].name;
         healthDisplay.text = Game.templateCreatures[selectedCreature].stats.health.ToString();
         damageDisplay.text = Game.templateCreatures[selectedCreature].stats.damage.ToString();

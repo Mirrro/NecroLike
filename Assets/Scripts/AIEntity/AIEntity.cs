@@ -10,10 +10,12 @@ namespace AICreatures
     [RequireComponent(typeof(Collider))]
     [RequireComponent(typeof(DefaultBehaviour))]
     [RequireComponent(typeof(AICombat))]
-    public class AIEntity : MonoBehaviour, ILevelStateListener
+    public class AIEntity : MonoBehaviour
     {
-        public UnityEvent hitEvent = new UnityEvent();
-        public UnityEvent deathEvent = new UnityEvent();
+        public UnityEvent<AIEntity> killEvent = new UnityEvent<AIEntity>();
+        public UnityEvent<AIEntity> hitEvent = new UnityEvent<AIEntity>();
+        public UnityEvent<AIEntity> deathEvent = new UnityEvent<AIEntity>();
+
         private bool dead;
         [Header("Combat Settings")]
         public Game.Team team;
@@ -32,15 +34,21 @@ namespace AICreatures
         {
             anim = GetComponentInChildren<Animator>();
             agent = GetComponent<NavMeshAgent>();
-            enabled = false;
-            agent.enabled = false;
             combatBehaviour = GetComponent<AICombat>();
-            defaultBehaviour = GetComponent<DefaultBehaviour>();
+            defaultBehaviour = GetComponent<DefaultBehaviour>();       
         }
 
         private void Start()
         {
-            Game.level.CountUp(team);
+            Game.level.RegisterCreature(this);
+
+            if (Game.level.currentState == Level.State.Fighting)
+                GameStart();
+            else
+            {
+                enabled = false;
+                agent.enabled = false;
+            }
         }
 
         public void GameStart()
@@ -54,7 +62,7 @@ namespace AICreatures
 
         private void FixedUpdate()
         {
-            nearestEnemy = FindNearestVisibleEnemy();
+            nearestEnemy = FindNearestEnemy();
             if (!forced && !dead)
             {
                 combatBehaviour.enabled = nearestEnemy != null;
@@ -69,25 +77,18 @@ namespace AICreatures
         }
 
         private AIEntity nearestEnemy;
-        private AIEntity FindNearestVisibleEnemy()
+        private AIEntity FindNearestEnemy()
         {
-            int layerMask = 1 << (6 + ((int)enemyTeam));
-            Collider[] hitColliders = Physics.OverlapSphere(GetPosition(), 12, layerMask);
-
-            layerMask = ~layerMask;
-            Collider closestCollider = null;
-            foreach (var hitCollider in hitColliders)
-            {
-                if (!Physics.Raycast(transform.position, hitCollider.transform.position - transform.position, out RaycastHit hit, Vector3.Distance(transform.position, hitCollider.transform.position), layerMask))
-                {
-                    if (closestCollider == null || Vector3.Distance(transform.position, hitCollider.transform.position) < Vector3.Distance(transform.position, closestCollider.transform.position))
-                        closestCollider = hitCollider;
-                }
-            }
-            if (closestCollider == null)
+            AIEntity[] enemies = Game.level.GetEnemies(enemyTeam);
+            if (enemies.Length == 0)
                 return null;
-            return closestCollider.GetComponent<AIEntity>();
-            
+            AIEntity closestEnemy = enemies[0];
+            foreach (AIEntity enemy in enemies)
+            {
+                if (Vector3.Distance(enemy.transform.position, transform.position) < Vector3.Distance(closestEnemy.transform.position, transform.position))
+                    closestEnemy = enemy;
+            }
+            return closestEnemy;            
         }
         public AIEntity GetNearestEnemy()
         {
@@ -95,23 +96,20 @@ namespace AICreatures
         }
         public void Death()
         {
-            if (dead == true)
-                return;
-            deathEvent.Invoke();
+            deathEvent.Invoke(this);
             enabled = false;
             agent.enabled = false;
             combatBehaviour.enabled = false;
             defaultBehaviour.enabled = false;
             dead = true;
             gameObject.layer = 0;
-            Game.level.CountDown(team);
             anim.SetTrigger("Death");
         }
         public bool GetHit(int damage)
         {
             stats.lostHealth += damage;
-            hitEvent.Invoke();
-            if (stats.lostHealth>=stats.health)
+            hitEvent.Invoke(this);
+            if (stats.lostHealth>=stats.health && !dead)
             {
                 Death();
                 return true;
@@ -141,12 +139,9 @@ namespace AICreatures
         }
         #endregion
 
-        public void OnLevelStateEnd(Level.State state)
-        {
-        }
-
         public void OnLevelStateBegin(Level.State state)
         {
+            print("BEIGN");
             if (state == Level.State.Fighting)
                 GameStart();
         }

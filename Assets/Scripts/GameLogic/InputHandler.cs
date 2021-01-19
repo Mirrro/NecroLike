@@ -11,7 +11,6 @@ public class InputHandler : MonoBehaviour, ILevelStateListener
     public static UnityEvent<Vector3> InputEvent = new UnityEvent<Vector3>();
 
     bool allowPlacement;
-    bool allowRallying;
 
     private void Awake()
     {
@@ -37,8 +36,6 @@ public class InputHandler : MonoBehaviour, ILevelStateListener
             PositionCreatureEvent.Invoke(new CreaturePlacementData(selectedCreature, input));
             selectedCreature = -1;
         }
-        else if (allowRallying)
-            Game.level.Rally(input);
     }
 
     public static void SelectCreature(int creature)
@@ -50,16 +47,12 @@ public class InputHandler : MonoBehaviour, ILevelStateListener
     {
         if (state == Level.State.Positioning)
             allowPlacement = false;
-        else if (state == Level.State.Fighting)
-            allowRallying = false;
     }
 
     public void OnLevelStateBegin(Level.State state)
     {
         if (state == Level.State.Positioning)
             allowPlacement = true;
-        else if (state == Level.State.Fighting)
-            allowRallying = true;
     }
 }
 

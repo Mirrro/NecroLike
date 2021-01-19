@@ -8,17 +8,21 @@ namespace AICreatures
     {
         [SerializeField] private float cooldown;
         [SerializeField] private float attackTime;
+        [SerializeField] private CreatureAbility ability;
         public override void InitStates()
         {
-            if (entity.stats.damage>0)
-                actions = new AIAction[] { new ActionWait(this, cooldown), new ActionWalk(this), new ActionAttack(this, attackTime) };
-            else
-                actions = new AIAction[] { new ActionFlee(this) };
+            actions = new AIAction[] 
+            {
+                new ActionWait(this, cooldown),
+                new ActionWalk(this),
+                new ActionAttack(this, attackTime),
+                new ActionFlee(this)
+            };
             
         }
         private void OnEnable()
         {
-            ChangeAction(0);
+            ChangeAction(entity.stats.damage > 0?0:3);
         }
 
         public override void OnRun()

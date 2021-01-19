@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 5317877426570767782}
   - component: {fileID: 531057764110515688}
   - component: {fileID: 7862663541190557405}
+  - component: {fileID: 7866815191225132238}
   m_Layer: 6
   m_Name: UndeadKnight
   m_TagString: Skeleton
@@ -85,6 +86,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8927ca44533a1be43924c22cb4dbab49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  killEvent:
+    m_PersistentCalls:
+      m_Calls: []
   hitEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -145,6 +149,22 @@ MonoBehaviour:
   entity: {fileID: 0}
   cooldown: 1
   attackTime: 0.9
+  ability: {fileID: 0}
+--- !u!114 &7866815191225132238
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3312118156029521908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b1a5fc3c3d50f74fa9ddcaa0df829f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerAmount: 1
+  skeletonPrefab: {fileID: 3312118156029521908, guid: 4f059679593789a41b310a2331bd79a5,
+    type: 3}
 --- !u!1001 &276068625699926317
 PrefabInstance:
   m_ObjectHideFlags: 0
