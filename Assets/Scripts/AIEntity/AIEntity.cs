@@ -141,7 +141,6 @@ namespace AICreatures
 
         public void OnLevelStateBegin(Level.State state)
         {
-            print("BEIGN");
             if (state == Level.State.Fighting)
                 GameStart();
         }

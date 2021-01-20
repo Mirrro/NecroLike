@@ -4,65 +4,42 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
-public class InputHandler : MonoBehaviour, ILevelStateListener
+public class InputHandler : MonoBehaviour
 {
-    private static int selectedCreature = -1;
-    public static UnityEvent<CreaturePlacementData> PositionCreatureEvent = new UnityEvent<CreaturePlacementData>();
-    public static UnityEvent<Vector3> InputEvent = new UnityEvent<Vector3>();
-
-    bool allowPlacement;
+    public enum SelectionState { None, Dragging}
+    public UnityEvent<SelectionState> SelectCreatureEvent = new UnityEvent<SelectionState>();    
+    public UnityEvent<CreaturePlacementData> PositionCreatureEvent = new UnityEvent<CreaturePlacementData>();
+    public Vector3 worldMousePositon;
 
     private void Awake()
     {
-        InputEvent.AddListener(OnInput);
+        Game.InitInputHander(this);
     }
-
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
-            FireInput();
-    }
-
-    public static void FireInput()
-    {
         Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out RaycastHit hit);
-        InputEvent.Invoke(hit.point);
+        worldMousePositon = new Vector3((int)hit.point.x, (int)hit.point.y, (int)hit.point.z);       
     }
 
-    public void OnInput(Vector3 input)
+    public void Release(CreaturePlacementData data)
     {
-        if (allowPlacement && selectedCreature != -1)
-        {
-            PositionCreatureEvent.Invoke(new CreaturePlacementData(selectedCreature, input));
-            selectedCreature = -1;
-        }
+        PositionCreatureEvent.Invoke(data);
+        SelectCreatureEvent.Invoke(SelectionState.None);
     }
 
-    public static void SelectCreature(int creature)
+    public void Drag()
     {
-        selectedCreature = creature;
-    }
-
-    public void OnLevelStateEnd(Level.State state)
-    {
-        if (state == Level.State.Positioning)
-            allowPlacement = false;
-    }
-
-    public void OnLevelStateBegin(Level.State state)
-    {
-        if (state == Level.State.Positioning)
-            allowPlacement = true;
+        SelectCreatureEvent.Invoke(SelectionState.Dragging);
     }
 }
 
 public struct CreaturePlacementData
 {
-    public int creature;
-    public Vector3 position;
-    public CreaturePlacementData(int creature, Vector3 position)
+    public int slot;
+    public GameObject creature;
+    public CreaturePlacementData(int slot, GameObject creature)
     {
+        this.slot = slot;
         this.creature = creature;
-        this.position = position;
     }
 }

@@ -5,17 +5,13 @@ using System.Collections;
 using UnityEngine.EventSystems;
 using System.Collections.Generic;
 
-public class Level : MonoBehaviour
+public class Level : MonoBehaviour, IPlacementListener
 {
+    #region Level State
     public enum State { Entry, Positioning, Fighting, End };
     public  State currentState = State.Entry;
     public UnityEvent<State> LevelStateBegin = new UnityEvent<State>();
-    public UnityEvent<State> LevelStateEnd = new UnityEvent<State>();
-    public void InitLevelStateListener(ILevelStateListener listener)
-    {
-        LevelStateBegin.AddListener(listener.OnLevelStateBegin);
-        LevelStateEnd.AddListener(listener.OnLevelStateEnd);
-    }
+    public UnityEvent<State> LevelStateEnd = new UnityEvent<State>();    
 
     [SerializeField] protected float transitionSpeed;
     public static float TransitionSpeed {
@@ -33,9 +29,7 @@ public class Level : MonoBehaviour
             return;
         }
         Game.InitLevel(this);
-        InputHandler.PositionCreatureEvent.AddListener(OnCreaturePlacement);
     }
-
 
     public void GoToState(State state)
     {
@@ -50,13 +44,11 @@ public class Level : MonoBehaviour
         {
             yield return null;
         }
-        print(state.ToString());
         LevelStateBegin.Invoke(state);
         currentState = state;
     }
-
-
-
+    #endregion
+    
     #region Creatures
     [SerializeField] protected Transform mobs;
     private List<AIEntity> monsters = new List<AIEntity>();
@@ -73,17 +65,16 @@ public class Level : MonoBehaviour
     int placedCreatures = 0;
     public void OnCreaturePlacement(CreaturePlacementData data)
     {
-        AIEntity creature = Instantiate(Game.loadout[data.creature].prefab, data.position, Quaternion.identity, mobs).GetComponent<AIEntity>();
-        creature.stats = Game.loadout[data.creature].stats;
-        inGameLoadout[data.creature] = creature;
-
+        AIEntity entity = data.creature.GetComponent<AIEntity>();
+        entity.stats = Game.loadout[data.slot].stats;
+        inGameLoadout[data.slot] = entity;
+        print("placed " + data.slot);
         placedCreatures++;
         if (placedCreatures >= Game.AvailableCreatures)
             GoToState(State.Fighting);
     }
     public void RegisterCreature(AIEntity creature)
     {
-        print("reg");
         LevelStateBegin.AddListener(creature.OnLevelStateBegin);
         creature.deathEvent.AddListener(UnregisterCreature);
 

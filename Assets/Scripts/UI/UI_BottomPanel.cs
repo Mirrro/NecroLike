@@ -4,14 +4,14 @@ using UnityEngine.UI;
 
 namespace NecroCore.UI.INGAME
 {
-    public class UI_BottomPanel : UI_InGameComponent, ILevelStateListener
+    public class UI_BottomPanel : UI_InGameComponent, ILevelStateListener, ISelectionStateListener
     {
         [SerializeField] private Button button;
 
         private Animator ani;
         private bool IsShow = true;
-        private static readonly int Hide = Animator.StringToHash("Hide");
-        private static readonly int Show = Animator.StringToHash("Show");
+        private static readonly int hide = Animator.StringToHash("Hide");
+        private static readonly int show = Animator.StringToHash("Show");
 
         private void Awake()
         {
@@ -29,23 +29,38 @@ namespace NecroCore.UI.INGAME
             Debug.Log("GamePaused");
         }
 
-        private void ShowOrHide()
+        private void ShowOrHide(bool newShow)
         {
-            if (ani == null || ani.GetCurrentAnimatorStateInfo(0).normalizedTime <= 0.9f && !(ani.GetAnimatorTransitionInfo(0).normalizedTime > 0))
+            if (ani == null || newShow == IsShow)// || ani.GetCurrentAnimatorStateInfo(0).normalizedTime <= 0.9f && !(ani.GetAnimatorTransitionInfo(0).normalizedTime > 0))
             {
                 return;
-            }
-            ani.SetTrigger(IsShow ? Hide : Show);
-            IsShow = !IsShow;
+            }         
+            ani.SetTrigger(newShow ? show : hide);
+            IsShow = newShow;
+        }
+
+        private void ShowOrHide()
+        {
+            ShowOrHide(!IsShow);
         }
 
         public void OnLevelStateEnd(Level.State state)
         {
-
+            
         }
 
         public void OnLevelStateBegin(Level.State state)
         {
+            if (state == Level.State.Fighting)
+                ShowOrHide(false);
+        }
+
+        public void OnSelectionState(InputHandler.SelectionState state)
+        {
+            if(state == InputHandler.SelectionState.Dragging)
+                ShowOrHide(false);
+            else
+                ShowOrHide(true);
 
         }
     }

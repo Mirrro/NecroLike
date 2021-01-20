@@ -72,16 +72,34 @@ public static class Game
     }
     #endregion
 
-    #region Level Initialisation
+    #region Initialisation
     public static Level level;
+    public static InputHandler handler;
     public static void InitLevel(Level level)
     {
         Game.level = level;
+
+        level.LevelStateBegin.AddListener(OnLevelStateChange);
         var levelStateListeners = Object.FindObjectsOfType<MonoBehaviour>().OfType<ILevelStateListener>();
         foreach (ILevelStateListener s in levelStateListeners)
-            level.InitLevelStateListener(s);
+        {
+            level.LevelStateBegin.AddListener(s.OnLevelStateBegin);
+            level.LevelStateEnd.AddListener(s.OnLevelStateEnd);
+        }
         level.GoToState(Level.State.Positioning);
-        level.LevelStateBegin.AddListener(OnLevelStateChange);
+    }
+    public static void InitInputHander(InputHandler handler)
+    {
+        Game.handler = handler;
+
+        var selectionStateListeners = Object.FindObjectsOfType<MonoBehaviour>().OfType<ISelectionStateListener>();
+        foreach (ISelectionStateListener s in selectionStateListeners)
+               handler.SelectCreatureEvent.AddListener(s.OnSelectionState);
+
+        var placementListeners = Object.FindObjectsOfType<MonoBehaviour>().OfType<IPlacementListener>();
+        foreach (IPlacementListener s in placementListeners)
+            handler.PositionCreatureEvent.AddListener(s.OnCreaturePlacement);
+        
     }
     public static void OnLevelStateChange(Level.State state)
     {
@@ -91,7 +109,7 @@ public static class Game
             for (int i = 0; i < level.inGameLoadout.Length; i++)
             {
                 loadout[i].stats = level.inGameLoadout[i].stats;
-                if (loadout[i].stats.health > 0)
+                if (loadout[i].stats.lostHealth < loadout[i].stats.health)
                     notDead++;
             }
             if(notDead>0)

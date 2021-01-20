@@ -8,7 +8,6 @@ namespace AICreatures
     {
         [SerializeField] private float cooldown;
         [SerializeField] private float attackTime;
-        [SerializeField] private CreatureAbility ability;
         public override void InitStates()
         {
             actions = new AIAction[] 

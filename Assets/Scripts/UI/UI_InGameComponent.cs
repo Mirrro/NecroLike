@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 namespace NecroCore.UI.INGAME
@@ -7,7 +8,7 @@ namespace NecroCore.UI.INGAME
     {
         private void Start()
         {
-            Spawn();
+            StartCoroutine(Spawn());
         }
 
         public virtual void Hide()
@@ -19,7 +20,7 @@ namespace NecroCore.UI.INGAME
             gameObject.SetActive(true);
         }
 
-        public virtual void Spawn()
+        public virtual IEnumerator Spawn()
         {
             float timer = 0;
             gameObject.transform.localScale = Vector3.zero;
@@ -27,6 +28,7 @@ namespace NecroCore.UI.INGAME
             {
                 gameObject.transform.localScale = Vector3.Lerp(Vector3.zero, Vector3.one, timer);
                 timer += Time.deltaTime;
+                yield return null;
             }
         }
     }

@@ -2293,6 +2293,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 172e10ed2c111214ebdf93d221be5059, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SelectCreatureEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  PositionCreatureEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  worldMousePositon: {x: 0, y: 0, z: 0}
 --- !u!4 &1245830655 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1531317723221714645, guid: ac2adf5cf5788514bb8205e5185f704d,
@@ -4144,6 +4151,36 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1387245566037909173, guid: 5b5b38d652e7391408ed48e9834b3a35,
+        type: 3}
+      propertyPath: slot
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1387245566037909173, guid: 5b5b38d652e7391408ed48e9834b3a35,
+        type: 3}
+      propertyPath: creature
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1387245567172639859, guid: 5b5b38d652e7391408ed48e9834b3a35,
+        type: 3}
+      propertyPath: slot
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1387245567172639859, guid: 5b5b38d652e7391408ed48e9834b3a35,
+        type: 3}
+      propertyPath: creature
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4672862692815716627, guid: 5b5b38d652e7391408ed48e9834b3a35,
+        type: 3}
+      propertyPath: slot
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4672862692815716627, guid: 5b5b38d652e7391408ed48e9834b3a35,
+        type: 3}
+      propertyPath: creature
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4808096902908919765, guid: 5b5b38d652e7391408ed48e9834b3a35,
         type: 3}
       propertyPath: m_IsActive
@@ -4168,6 +4205,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5108087064742927811, guid: 5b5b38d652e7391408ed48e9834b3a35,
+        type: 3}
+      propertyPath: slot
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5108087064742927811, guid: 5b5b38d652e7391408ed48e9834b3a35,
+        type: 3}
+      propertyPath: creature
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5884946781995644209, guid: 5b5b38d652e7391408ed48e9834b3a35,
         type: 3}
@@ -4194,6 +4241,16 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6192976551636768548, guid: 5b5b38d652e7391408ed48e9834b3a35,
+        type: 3}
+      propertyPath: slot
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6192976551636768548, guid: 5b5b38d652e7391408ed48e9834b3a35,
+        type: 3}
+      propertyPath: creature
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 6309897294508222945, guid: 5b5b38d652e7391408ed48e9834b3a35,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -4218,6 +4275,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6459618410063564066, guid: 5b5b38d652e7391408ed48e9834b3a35,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7697101325621219504, guid: 5b5b38d652e7391408ed48e9834b3a35,
         type: 3}
@@ -4329,5 +4391,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: BottomPanel
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6459618410063564066, guid: 5b5b38d652e7391408ed48e9834b3a35, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 5b5b38d652e7391408ed48e9834b3a35, type: 3}

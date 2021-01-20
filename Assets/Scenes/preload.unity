@@ -172,9 +172,9 @@ MonoBehaviour:
     prefab: {fileID: 3312118156029521908, guid: dacbc4e3538d2804ba6f7c8f2d43d7fa,
       type: 3}
     stats:
-      health: 10
+      health: 1
       lostHealth: 0
-      damage: 2
+      damage: 10
       range: 2
-      speed: 100
+      speed: 10
     unlocked: 1

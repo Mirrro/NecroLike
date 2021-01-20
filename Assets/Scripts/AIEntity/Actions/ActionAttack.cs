@@ -13,15 +13,14 @@ namespace AICreatures
         }
         public override bool Run()
         {
-            if(timeLeft<= 0)
-            {
-                if (main.entity.GetNearestEnemy() != null)
-                    if (main.entity.GetNearestEnemy().GetHit(main.entity.stats.damage))
-                        main.entity.killEvent.Invoke(main.entity);
-                
+            if (timeLeft <= 0)
+            { 
+                AIEntity enemy = main.entity.GetNearestEnemy();
+                if (enemy != null && main.entity.IsInRange(enemy.GetPosition()))
+                    if (enemy.GetHit(main.entity.stats.damage))
+                        main.entity.killEvent.Invoke(enemy);                
                 return true;
             }
-
             timeLeft -= Time.deltaTime;
             return false;
         }

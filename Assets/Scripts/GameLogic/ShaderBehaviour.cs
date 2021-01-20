@@ -9,7 +9,7 @@ public class ShaderBehaviour : MonoBehaviour,  ILevelStateListener
     [SerializeField]
     private ShaderHandler pingShader;
 
-   private Coroutine pingAnimation;
+    private Coroutine pingAnimation;
 
     public IEnumerator TransitionToBlueprint()
     {
