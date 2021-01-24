@@ -144,6 +144,13 @@ MonoBehaviour:
   currentScore: 100
   countsPerSecond: 10
   text: {fileID: 2140570470}
+  Icon: {fileID: 116384174}
+--- !u!224 &116384174 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 1608756168774323007, guid: 32aabba617ea2f14c857a7d7ae4bc9f4,
+    type: 3}
+  m_PrefabInstance: {fileID: 639619909}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &123432293 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1531317723221714645, guid: ac2adf5cf5788514bb8205e5185f704d,

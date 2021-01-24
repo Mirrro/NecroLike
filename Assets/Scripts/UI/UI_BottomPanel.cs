@@ -31,7 +31,7 @@ namespace NecroCore.UI.INGAME
 
         private void ShowOrHide(bool newShow)
         {
-            if (ani == null || newShow == IsShow)// || ani.GetCurrentAnimatorStateInfo(0).normalizedTime <= 0.9f && !(ani.GetAnimatorTransitionInfo(0).normalizedTime > 0))
+            if (ani == null || newShow == IsShow)
             {
                 return;
             }         
@@ -46,7 +46,10 @@ namespace NecroCore.UI.INGAME
 
         public void OnLevelStateEnd(Level.State state)
         {
-            
+            if (state == Level.State.Positioning)
+            {
+                ShowOrHide(false);
+            }
         }
 
         public void OnLevelStateBegin(Level.State state)
