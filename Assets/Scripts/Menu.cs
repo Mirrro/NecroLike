@@ -53,7 +53,7 @@ public class Menu : MonoBehaviour
     {
         int x = (i % 5) * 120 - 200;
         int y = (i / 5) * 120 + 200;
-        GameObject creatureIcon = Instantiate(creatureIconPrefab, Vector3.zero, Quaternion.identity, allCreaturePanel);
+        GameObject creatureIcon = Instantiate(creatureIconPrefab, allCreaturePanel.position, Quaternion.identity, allCreaturePanel);
         creatureIcon.transform.GetComponent<Image>().sprite = Game.templateCreatures[i].icon;
         creatureIcon.GetComponent<Button>().onClick.AddListener(delegate { SelectCreature(i); });
     }

@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: UI_UpgradeButton
+  m_Name: SelectButton
   m_Shader: {fileID: -6465566751694194690, guid: d85bf7bf04ba42b4393177a8d2d14d8e,
     type: 3}
   m_ShaderKeywords: 
@@ -56,7 +56,7 @@ Material:
     - Vector1_97997e0ce4404f05b0ff762a211ddaef: 0
     - Vector1_ab310889012640fabc6b88e7730fa996: 0
     m_Colors:
-    - Color_04190dc5e8c14ec4a64e90a5a398ec04: {r: 0.10044494, g: 0.9339623, b: 0.45843297,
+    - Color_04190dc5e8c14ec4a64e90a5a398ec04: {r: 0.060590927, g: 0.8679245, b: 0.6891483,
         a: 1}
     - Color_2e992e021ced499bafba192428bf2733: {r: 0.7491433, g: 0.7830189, b: 0.63823426,
         a: 1}
