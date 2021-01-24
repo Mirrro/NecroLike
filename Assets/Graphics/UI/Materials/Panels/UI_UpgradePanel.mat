@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Shader Graphs_UI_ColorChangerRBG
+  m_Name: UI_UpgradePanel
   m_Shader: {fileID: -6465566751694194690, guid: d85bf7bf04ba42b4393177a8d2d14d8e,
     type: 3}
   m_ShaderKeywords: 
@@ -20,6 +20,10 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - Texture2D_16541fcf82dc4d2c828af349a157aa7f:
+        m_Texture: {fileID: 2800000, guid: 9e5aade1fd6950241924a71098bf8ae3, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - Texture2D_f22207ee07784d719174cebeb37612b4:
         m_Texture: {fileID: 2800000, guid: f2719de0fe7a3bf4aa767d0460ea3236, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -44,7 +48,13 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    m_Floats: []
+    m_Floats:
+    - Vector1_00a9b4771a8445cbad30ca6de4a92c08: 0.577
+    - Vector1_09f3099ba29b4b38b69c50d36d296fe6: 0.635
+    - Vector1_0a434f8e07e0483a8a5a2e0dc06f2f73: 0.456
+    - Vector1_173b1b976fb946bc937833f86e41d28f: 0
+    - Vector1_97997e0ce4404f05b0ff762a211ddaef: 0
+    - Vector1_ab310889012640fabc6b88e7730fa996: 0
     m_Colors:
     - Color_04190dc5e8c14ec4a64e90a5a398ec04: {r: 0.627451, g: 0.3254902, b: 0.1137255,
         a: 1}
