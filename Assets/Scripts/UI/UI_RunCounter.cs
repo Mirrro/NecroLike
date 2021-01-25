@@ -7,7 +7,7 @@ namespace NecroCore.UI.INGAME
 {
     public class UI_RunCounter : UI_InGameComponent
     {
-        void Start()
+        void Awake()
         {
             GetComponent<Text>().text = Game.run.ToString();
         }

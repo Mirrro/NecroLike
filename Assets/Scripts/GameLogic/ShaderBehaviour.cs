@@ -11,6 +11,10 @@ public class ShaderBehaviour : MonoBehaviour,  ILevelStateListener
 
     private Coroutine pingAnimation;
 
+    private void Start()
+    {
+        pingShader.Set();
+    }
     public IEnumerator TransitionToBlueprint()
     {
         blueprintShader.Set();
