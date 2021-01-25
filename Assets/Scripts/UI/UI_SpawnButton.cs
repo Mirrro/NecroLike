@@ -12,8 +12,10 @@ namespace NecroCore.UI.INGAME
 
         private void Awake()
         {
-            if(Game.loadout[slot].stats.lostHealth < Game.loadout[slot].stats.health)
+            if (Game.loadout[slot].stats.lostHealth < Game.loadout[slot].stats.health)
                 transform.GetChild(0).GetComponent<Image>().sprite = Game.loadout[slot].icon;
+            else
+                transform.GetChild(0).GetComponent<Image>().enabled = false;
         }
 
         public void OnBeginDrag(PointerEventData eventData)

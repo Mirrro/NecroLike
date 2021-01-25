@@ -873,7 +873,7 @@ GameObject:
   - component: {fileID: 403878783}
   m_Layer: 0
   m_Name: Ground
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -2251,7 +2251,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1155725682}
-  - component: {fileID: 1155725683}
   - component: {fileID: 1155725684}
   m_Layer: 0
   m_Name: HANDLER
@@ -2274,20 +2273,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1155725683
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1155725681}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0643e9ba448f4144183d67aaa22baf22, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  blueprintShader: {fileID: 11400000, guid: 5a9e59ebf3801e54ca1f546093b6dee7, type: 2}
-  pingShader: {fileID: 11400000, guid: 5a77f4c7fcd9dfb42b54fc7830afd22a, type: 2}
 --- !u!114 &1155725684
 MonoBehaviour:
   m_ObjectHideFlags: 0
