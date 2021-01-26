@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class Loader : MonoBehaviour
 {
     public PlayerCreature[] creatures;
+    public GameObject[] tiles;
 
     private void Awake()
     {

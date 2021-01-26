@@ -47,9 +47,7 @@ namespace NecroCore.UI.INGAME
         public void OnLevelStateEnd(Level.State state)
         {
             if (state == Level.State.Positioning)
-            {
                 ShowOrHide(false);
-            }
         }
 
         public void OnLevelStateBegin(Level.State state)
@@ -64,7 +62,6 @@ namespace NecroCore.UI.INGAME
                 ShowOrHide(false);
             else
                 ShowOrHide(true);
-
         }
     }
 }

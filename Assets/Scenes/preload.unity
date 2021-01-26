@@ -179,6 +179,9 @@ MonoBehaviour:
       range: 2
       speed: 10
     unlocked: 1
+  tiles:
+  - {fileID: 5615260397216552219, guid: f144f69684469b64387dac5e9814aeaa, type: 3}
+  - {fileID: 5615260397216552219, guid: 97592015b8ab2484a870045a0e206020, type: 3}
 --- !u!114 &1659634626
 MonoBehaviour:
   m_ObjectHideFlags: 0

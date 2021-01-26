@@ -27,6 +27,7 @@ public static class Game
     public static void Init(Loader loader)
     {
         templateCreatures = loader.creatures;
+        LevelGenerator.Init(loader.tiles);
         LoadMenu();
     }
     public enum Team { Undead, Humans };

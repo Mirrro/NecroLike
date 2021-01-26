@@ -9,7 +9,7 @@ public class Level : MonoBehaviour, IPlacementListener
 {
     #region Level State
     public enum State { Entry, Positioning, Fighting, End };
-    public  State currentState = State.Entry;
+    public State currentState = State.Entry;
     public UnityEvent<State> LevelStateBegin = new UnityEvent<State>();
     public UnityEvent<State> LevelStateEnd = new UnityEvent<State>();    
 
@@ -29,6 +29,7 @@ public class Level : MonoBehaviour, IPlacementListener
             return;
         }
         Game.InitLevel(this);
+        LevelGenerator.GenerateLevel(transform);
     }
 
     public void GoToState(State state)
