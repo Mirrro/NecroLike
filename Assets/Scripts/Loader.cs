@@ -7,6 +7,7 @@ public class Loader : MonoBehaviour
 {
     public PlayerCreature[] creatures;
     public GameObject[] tiles;
+    public GameObject[] enemyPrefabs;
 
     private void Awake()
     {
