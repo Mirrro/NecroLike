@@ -5,6 +5,8 @@ using UnityEngine.AI;
 
 public static class LevelGenerator
 {
+    public static Vector3 Origin = new Vector3(-20, 2 , 0);
+        
     private static GameObject[] tilePrefabs;
     private static GameObject[] enemyPrefabs;
     public static void Init(GameObject[] tilePrefabs, GameObject[] enemyPrefabs)
@@ -55,12 +57,12 @@ public static class LevelGenerator
             yOffset = -0.5f;
         }
         */
-        Vector3 pos = new Vector3(x * tileSize, yOffset, (y + offset - height / 2) * tileSize);
+        Vector3 pos = new Vector3(x * tileSize, yOffset, (y + offset - height / 2) * tileSize) + Origin;
         Object.Instantiate(tilePrefab, pos, Quaternion.identity, level);
 
         int type = Random.Range(0, 15);
         if(type<enemyPrefabs.Length)
-            Object.Instantiate(enemyPrefabs[type], pos + Vector3.up*2.5f, Quaternion.identity, level);
+            Object.Instantiate(enemyPrefabs[type], pos + Vector3.up*2.5f , Quaternion.identity, level);
 
     }
 }

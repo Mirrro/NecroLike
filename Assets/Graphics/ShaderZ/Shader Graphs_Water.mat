@@ -7,27 +7,19 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Shader Graphs_UpgardeGlow
-  m_Shader: {fileID: -6465566751694194690, guid: a75941c1e45fd7a429a09c0b43da5266,
+  m_Name: Shader Graphs_Water
+  m_Shader: {fileID: -6465566751694194690, guid: 096662f98a3b2724c9cfb3f833348e7b,
     type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2450
+  m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - Texture2D_d0c2bc347ce147f69a8bb02bfb6b92a8:
-        m_Texture: {fileID: 2800000, guid: 018aed84515933a449d2ec3a08d21a59, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _Texture2DAsset_c3247cdce29a4130ba8abf178490c7ab_Out_0:
-        m_Texture: {fileID: 2800000, guid: 018aed84515933a449d2ec3a08d21a59, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -41,6 +33,5 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats: []
-    m_Colors:
-    - Color_a45063cd8afc4ce1a66e42d29318b741: {r: 1, g: 0.63042796, b: 0, a: 0}
+    m_Colors: []
   m_BuildTextureStacks: []
