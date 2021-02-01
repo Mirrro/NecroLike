@@ -56,7 +56,7 @@ public class ShaderBehaviour : MonoBehaviour,  ILevelStateListener
     {
         if (state == Level.State.Entry)
             StartCoroutine(TransitionToBlueprint());
-        else if (state == Level.State.Positioning)
+        else if (state == Level.State.Playing)
             StartCoroutine(TransitionToFight());
     }
 

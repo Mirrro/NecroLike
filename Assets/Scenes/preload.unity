@@ -166,11 +166,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a76494900dd739342b4e74c9affff359, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ships:
-  - name: TEST
-    size: 5
+  ship:
+    size: 2
     icon: {fileID: 21300000, guid: f62e9223fba7f414cbdbd5554072a6c8, type: 3}
-    prefab: {fileID: 2703441658184657507, guid: 09e9a027aa4e34a409aeecdf68652ee1,
+    prefab: {fileID: 2703441658184657507, guid: 6146d73e99a98054089c86fdd0be2d9b,
       type: 3}
   units:
   - name: TEST

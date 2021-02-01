@@ -8,7 +8,7 @@ namespace DefaultNamespace
     {
         private void Awake()
         {
-            SpawnShips(Game.LoadShips());
+            //SpawnShips(Game.LoadShips());
         }
 
         private void SpawnShips(List<Ship> ships)
@@ -17,7 +17,7 @@ namespace DefaultNamespace
             ships.ForEach(s =>
             {
                 var ship = GameObject.Instantiate(s.prefab, Vector3.right * (counter * 5), Quaternion.identity);
-                ship.GetComponent<ShipBehaviour>().PositionUnits();
+                ship.GetComponent<ShipBehaviour>().PositionUnits(s);
                 counter++;
             });
         }

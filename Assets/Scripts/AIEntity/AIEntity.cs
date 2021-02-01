@@ -42,7 +42,7 @@ namespace AIUnits
         {
             Game.level.RegisterUnit(this);
 
-            if (Game.level.currentState == Level.State.Fighting)
+            if (Game.level.currentState == Level.State.Playing)
                 GameStart();
             else
             {
@@ -141,7 +141,7 @@ namespace AIUnits
 
         public void OnLevelStateBegin(Level.State state)
         {
-            if (state == Level.State.Fighting)
+            if (state == Level.State.Playing)
                 GameStart();
         }
     }

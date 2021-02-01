@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace NecroCore.UI.INGAME
 {
-    public class UI_BottomPanel : UI_InGameComponent, ILevelStateListener, ISelectionStateListener
+    public class UI_BottomPanel : UI_InGameComponent, ISelectionStateListener
     {
         [SerializeField] private Button button;
 
@@ -42,18 +42,6 @@ namespace NecroCore.UI.INGAME
         private void ShowOrHide()
         {
             ShowOrHide(!IsShow);
-        }
-
-        public void OnLevelStateEnd(Level.State state)
-        {
-            if (state == Level.State.Positioning)
-                ShowOrHide(false);
-        }
-
-        public void OnLevelStateBegin(Level.State state)
-        {
-            if (state == Level.State.Fighting)
-                ShowOrHide(false);
         }
 
         public void OnSelectionState(InputHandler.SelectionState state)

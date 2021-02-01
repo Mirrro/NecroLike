@@ -1,3 +1,4 @@
+using NUnit.Framework;
 using UnityEngine.UI;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -12,8 +13,8 @@ namespace NecroCore.UI.INGAME
 
         private void Awake()
         {
-            if (Game.ships[slot].HasValue)
-                transform.GetChild(0).GetComponent<Image>().sprite = Game.ships[slot].Value.icon;
+            if (Game.ships.Count < slot)
+                transform.GetChild(0).GetComponent<Image>().sprite = Game.ships[slot].icon;
             else
                 transform.GetChild(0).GetComponent<Image>().enabled = false;
         }
@@ -24,7 +25,8 @@ namespace NecroCore.UI.INGAME
                 return;
             Game.handler.Drag();
             transform.GetChild(0).GetComponent<Image>().enabled = false;
-            previewShip = Instantiate(Game.ships[slot].Value.prefab, Game.handler.worldMousePositon, Quaternion.identity);
+            previewShip = Instantiate(Game.ships[slot].prefab, Game.handler.worldMousePositon, Quaternion.identity);
+
         }
 
         public void OnDrag(PointerEventData eventData)
@@ -42,17 +44,16 @@ namespace NecroCore.UI.INGAME
             Game.handler.Release(new ShipPlacementData(slot, previewShip));
         }
 
-        public void OnLevelStateEnd(Level.State state)
-        {
-            if (state == Level.State.Positioning)
-                active = false;
-        }
-
         public void OnLevelStateBegin(Level.State state)
         {
-            if (state == Level.State.Positioning)
-                if (Game.ships[slot].HasValue)
+            if (state == Level.State.Playing)
+                if (Game.ships.Count < slot)
                     active = true;
+            
+        }
+
+        public void OnLevelStateEnd(Level.State state)
+        {
         }
     }
 }

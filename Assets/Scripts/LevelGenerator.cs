@@ -45,18 +45,6 @@ public static class LevelGenerator
             tilePrefab = tilePrefabs[1];
             yOffset = -0.5f;
         }
-        /* FIX THIS CHECK FOR BORDER TILES FOR BEACH !!!
-        else if (x>0 && heightMap[x-1] / 2 < y-1)
-        {
-            tilePrefab = tilePrefabs[1];
-            yOffset = -0.5f;
-        }
-        else if(x<heightMap.Length && heightMap[x+1]/2<y-1)
-        {
-            tilePrefab = tilePrefabs[1];
-            yOffset = -0.5f;
-        }
-        */
         Vector3 pos = new Vector3(x * tileSize, yOffset, (y + offset - height / 2) * tileSize) + Origin;
         Object.Instantiate(tilePrefab, pos, Quaternion.identity, level);
 

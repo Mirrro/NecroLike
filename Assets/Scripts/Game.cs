@@ -35,8 +35,22 @@ public static class Game
     public enum Team { Vikings, Christians};
     public static PlayerUnit[] templateUnits;
     public static Ship templateShip;
-
+    
     public static List<PlayerUnit> Units = new List<PlayerUnit>(3);
+
+    public static List<Ship> ships;
+
+    public static int NumberOfShips
+    {
+        get
+        {
+            int count = 0;
+            foreach (Ship? ship in ships)
+                if (ship.HasValue)
+                    count++;
+            return count;
+        }
+    }
 
     #region Loading
     public static void Load()
@@ -67,7 +81,7 @@ public static class Game
             level.LevelStateBegin.AddListener(s.OnLevelStateBegin);
             level.LevelStateEnd.AddListener(s.OnLevelStateEnd);
         }
-        level.GoToState(Level.State.Positioning);
+        level.GoToState(Level.State.Playing);
     }
     public static void InitInputHander(InputHandler handler)
     {
@@ -106,9 +120,8 @@ public static class Game
         Units[pos2] = unit1;
     }
 
-    public static List<Ship> LoadShips()
+    public static void LoadShips()
     {
-        var ships = new List<Ship>();
         for (int i = 0; i < Units.Count; i++)
         {
             if (i % 2 !=  0)
@@ -121,8 +134,6 @@ public static class Game
                 ships.Add(new Ship());
             }
         }
-
-        return ships;
     }
 }
 
