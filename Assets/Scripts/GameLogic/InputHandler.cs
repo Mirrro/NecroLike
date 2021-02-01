@@ -7,8 +7,8 @@ using UnityEngine.EventSystems;
 public class InputHandler : MonoBehaviour
 {
     public enum SelectionState { None, Dragging}
-    public UnityEvent<SelectionState> SelectCreatureEvent = new UnityEvent<SelectionState>();    
-    public UnityEvent<CreaturePlacementData> PositionCreatureEvent = new UnityEvent<CreaturePlacementData>();
+    public UnityEvent<SelectionState> SelectShipEvent = new UnityEvent<SelectionState>();    
+    public UnityEvent<ShipPlacementData> PositionShipEvent = new UnityEvent<ShipPlacementData>();
     public Vector3 worldMousePositon;
 
     private void Awake()
@@ -18,29 +18,29 @@ public class InputHandler : MonoBehaviour
     private void Update()
     {
         Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out RaycastHit hit);
-        if(hit.collider != null && hit.collider.tag == "Ground")
-            worldMousePositon = new Vector3((int)hit.point.x, (int)hit.point.y, (int)hit.point.z);       
+        if (hit.collider != null && hit.collider.tag == "Ground")
+            worldMousePositon = hit.collider.transform.position + Vector3.up*2;  
     }
 
-    public void Release(CreaturePlacementData data)
+    public void Release(ShipPlacementData data)
     {
-        PositionCreatureEvent.Invoke(data);
-        SelectCreatureEvent.Invoke(SelectionState.None);
+        PositionShipEvent.Invoke(data);
+        SelectShipEvent.Invoke(SelectionState.None);
     }
 
     public void Drag()
     {
-        SelectCreatureEvent.Invoke(SelectionState.Dragging);
+        SelectShipEvent.Invoke(SelectionState.Dragging);
     }
 }
 
-public struct CreaturePlacementData
+public struct ShipPlacementData
 {
     public int slot;
-    public GameObject creature;
-    public CreaturePlacementData(int slot, GameObject creature)
+    public GameObject ship;
+    public ShipPlacementData(int slot, GameObject ship)
     {
         this.slot = slot;
-        this.creature = creature;
+        this.ship = ship;
     }
 }

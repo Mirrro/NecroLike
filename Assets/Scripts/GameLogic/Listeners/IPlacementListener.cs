@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IPlacementListener
 {
-    void OnCreaturePlacement(CreaturePlacementData data);
+    void OnShipPlacement(ShipPlacementData data);
 }

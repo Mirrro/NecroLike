@@ -1,5 +1,5 @@
 using UnityEngine;
-using AICreatures;
+using AIUnits;
 
 [RequireComponent(typeof(AIEntity))]
 public abstract class CreatureAbility : MonoBehaviour

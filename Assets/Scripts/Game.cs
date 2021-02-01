@@ -2,12 +2,14 @@
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
-using AICreatures;
+using AIUnits;
 using System.Collections.Generic;
 
 public static class Game
 {
     #region Score
+    public static int highestRun = 1;
+    public static int run = 1;
     private static int score;
     public static UnityEvent scoreEvent;
     public static int Score
@@ -26,33 +28,23 @@ public static class Game
 
     public static void Init(Loader loader)
     {
-        templateCreatures = loader.creatures;
+        templateUnits = loader.units;
+        templateShip = loader.ship;
         LevelGenerator.Init(loader.tiles, loader.enemyPrefabs);
         LoadMenu();
     }
-    public enum Team { Undead, Humans };
-    public static PlayerCreature[] templateCreatures;
-    /*public static PlayerCreature GetCreature(int type)
-    {
-        return new PlayerCreature
-        {
-            type = templateCreatures[type].type,
-            icon = templateCreatures[type].icon,
-            prefab = templateCreatures[type].prefab,
-            stats = templateCreatures[type].stats,
-            unlocked = templateCreatures[type].unlocked
-        };
-    }*/
-    public static int highestRun = 1;
-    public static int run = 1;
-    public static PlayerCreature[] loadout = new PlayerCreature[6];
-    public static int AvailableCreatures
+    public enum Team { Vikings, Christians};
+    public static PlayerUnit[] templateUnits;
+    public static Ship templateShip;
+
+    public static Ship?[] ships = new Ship?[5];
+    public static int NumberOfShips
     {
         get
         {
             int count = 0;
-            for (int i = loadout.Length; i-- != 0;)
-                if (loadout[i].stats.health>0)
+            foreach (Ship? ship in ships)
+                if (ship.HasValue)
                     count++;
             return count;
         }
@@ -73,7 +65,7 @@ public static class Game
     }
     #endregion
 
-    #region Initialisation
+    #region Level Initialisation
     public static Level level;
     public static InputHandler handler;
     public static void InitLevel(Level level)
@@ -95,48 +87,75 @@ public static class Game
 
         var selectionStateListeners = Object.FindObjectsOfType<MonoBehaviour>().OfType<ISelectionStateListener>();
         foreach (ISelectionStateListener s in selectionStateListeners)
-               handler.SelectCreatureEvent.AddListener(s.OnSelectionState);
+               handler.SelectShipEvent.AddListener(s.OnSelectionState);
 
         var placementListeners = Object.FindObjectsOfType<MonoBehaviour>().OfType<IPlacementListener>();
         foreach (IPlacementListener s in placementListeners)
-            handler.PositionCreatureEvent.AddListener(s.OnCreaturePlacement);
+            handler.PositionShipEvent.AddListener(s.OnShipPlacement);
         
     }
     public static void OnLevelStateChange(Level.State state)
     {
-        if (state == Level.State.End)
-        {
-            int notDead = 0;
-            for (int i = 0; i < level.inGameLoadout.Length; i++)
-            {
-                loadout[i].stats = level.inGameLoadout[i].stats;
-                if (loadout[i].stats.lostHealth < loadout[i].stats.health)
-                    notDead++;
-            }
-            if(notDead>0)
-            {
-                run++;
-                LoadLevel();
-            }
-            else
-            {
-                if(run> highestRun)
-                    highestRun = run;
-                run = 1;
-                LoadMenu();
-            }
-        }
+       
     }
     #endregion
 
+    public static void CreateShip()
+    {
+        for (int i = 0; i < ships.Length; i++)
+        {
+            if (!ships[i].HasValue)
+            {
+                ships[i] = new Ship(templateShip);
+                return;
+            }
+        }
+    }
+
+    public static void CreateUnit(int shipID, int type)
+    {
+        Ship ship = ships[shipID].Value;
+        for (int i = 0; i < ship.size; i++)
+        {
+            if(!ship.load[i].HasValue)
+            {
+                ship.load[i] = new PlayerUnit(templateUnits[type]);
+                return;
+            }
+        }
+    }
 }
 
 [System.Serializable]
-public struct PlayerCreature
+public struct PlayerUnit
 {
     public string name;
-    public Sprite icon;
     public GameObject prefab;
     public Stats stats;
-    public bool unlocked;
+
+    public PlayerUnit(PlayerUnit copy)
+    {
+        name = copy.name;
+        stats = copy.stats;
+        prefab = copy.prefab;
+    }
+}
+
+[System.Serializable]
+public struct Ship
+{
+    public string name;
+    public int size;
+    public Sprite icon;
+    public GameObject prefab;
+    public PlayerUnit?[] load;
+
+    public Ship(Ship copy)
+    {
+        name = copy.name;
+        size = copy.size;
+        icon = copy.icon;
+        prefab = copy.prefab;
+        load = new PlayerUnit?[size];
+    }
 }
