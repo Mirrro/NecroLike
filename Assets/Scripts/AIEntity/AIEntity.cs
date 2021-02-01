@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
 
-namespace AICreatures
+namespace AIUnits
 {
     [RequireComponent(typeof(NavMeshAgent))]
     [RequireComponent(typeof(Collider))]
@@ -40,7 +40,7 @@ namespace AICreatures
 
         private void Start()
         {
-            Game.level.RegisterCreature(this);
+            Game.level.RegisterUnit(this);
 
             if (Game.level.currentState == Level.State.Fighting)
                 GameStart();

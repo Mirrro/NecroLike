@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace AICreatures
+namespace AIUnits
 {
     public class AIWander : DefaultBehaviour
     {

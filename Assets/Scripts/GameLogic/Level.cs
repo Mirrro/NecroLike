@@ -1,4 +1,4 @@
-using AICreatures;
+using AIUnits;
 using UnityEngine;
 using UnityEngine.Events;
 using System.Collections;
@@ -28,6 +28,7 @@ public class Level : MonoBehaviour, IPlacementListener
             Game.Load();
             return;
         }
+        Debug.Log(Game.ships[0].HasValue);
         Game.InitLevel(this);
         LevelGenerator.GenerateLevel(transform);
     }
@@ -50,52 +51,48 @@ public class Level : MonoBehaviour, IPlacementListener
     }
     #endregion
     
-    #region Creatures
+    #region Units
     [SerializeField] protected Transform mobs;
-    private List<AIEntity> monsters = new List<AIEntity>();
-    private List<AIEntity> humans = new List<AIEntity>();
+    private List<AIEntity> vikings = new List<AIEntity>();
+    private List<AIEntity> christians = new List<AIEntity>();
 
     public AIEntity[] GetEnemies(Game.Team enemyTeam)
     {
-        if (enemyTeam == Game.Team.Humans)
-            return humans.ToArray();
-        return monsters.ToArray();
+        if (enemyTeam == Game.Team.Christians)
+            return christians.ToArray();
+        return vikings.ToArray();
     }
 
-    public AIEntity[] inGameLoadout = new AIEntity[Game.loadout.Length];
-    int placedCreatures = 0;
-    public void OnCreaturePlacement(CreaturePlacementData data)
+    int placedShips;
+    public void OnShipPlacement(ShipPlacementData data)
     {
-        AIEntity entity = data.creature.GetComponent<AIEntity>();
-        entity.stats = Game.loadout[data.slot].stats;
-        inGameLoadout[data.slot] = entity;
-        print("placed " + data.slot);
-        placedCreatures++;
-        if (placedCreatures >= Game.AvailableCreatures)
+        placedShips++;
+        if (Game.NumberOfShips <= placedShips)
             GoToState(State.Fighting);
     }
-    public void RegisterCreature(AIEntity creature)
+
+    public void RegisterUnit(AIEntity creature)
     {
         LevelStateBegin.AddListener(creature.OnLevelStateBegin);
-        creature.deathEvent.AddListener(UnregisterCreature);
+        creature.deathEvent.AddListener(UnregisterUnit);
 
-        if (creature.team == Game.Team.Humans)
-            humans.Add(creature);
+        if (creature.team == Game.Team.Christians)
+            christians.Add(creature);
         else
-            monsters.Add(creature);
+            vikings.Add(creature);
     }
-    public void UnregisterCreature(AIEntity creature)
+    public void UnregisterUnit(AIEntity creature)
     {
-        if (creature.team == Game.Team.Humans)
+        if (creature.team == Game.Team.Christians)
         {
-            humans.Remove(creature);
-            if (humans.Count <= 0)
+            christians.Remove(creature);
+            if (christians.Count <= 0)
                 GoToState(State.End);
         }
         else
         {
-            monsters.Remove(creature);
-            if (monsters.Count <= 0)
+            vikings.Remove(creature);
+            if (vikings.Count <= 0)
                 GoToState(State.End);
         }
 

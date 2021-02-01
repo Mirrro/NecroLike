@@ -5,7 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class Loader : MonoBehaviour
 {
-    public PlayerCreature[] creatures;
+    public Ship ship;
+    public PlayerUnit[] units;
     public GameObject[] tiles;
     public GameObject[] enemyPrefabs;
 

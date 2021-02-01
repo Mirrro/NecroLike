@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace AICreatures
+namespace AIUnits
 {
     [RequireComponent(typeof(AIEntity))]
     public abstract class AIBehaviour : MonoBehaviour

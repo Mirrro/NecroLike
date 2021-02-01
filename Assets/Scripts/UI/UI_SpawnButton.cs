@@ -8,12 +8,12 @@ namespace NecroCore.UI.INGAME
     {
         bool active = false;
         public int slot;
-        private GameObject previewCreature;
+        private GameObject previewShip;
 
         private void Awake()
         {
-            if (Game.loadout[slot].stats.lostHealth < Game.loadout[slot].stats.health)
-                transform.GetChild(0).GetComponent<Image>().sprite = Game.loadout[slot].icon;
+            if (Game.ships[slot].HasValue)
+                transform.GetChild(0).GetComponent<Image>().sprite = Game.ships[slot].Value.icon;
             else
                 transform.GetChild(0).GetComponent<Image>().enabled = false;
         }
@@ -24,14 +24,14 @@ namespace NecroCore.UI.INGAME
                 return;
             Game.handler.Drag();
             transform.GetChild(0).GetComponent<Image>().enabled = false;
-            previewCreature = Instantiate(Game.loadout[slot].prefab, Game.handler.worldMousePositon, Quaternion.identity);
+            previewShip = Instantiate(Game.ships[slot].Value.prefab, Game.handler.worldMousePositon, Quaternion.identity);
         }
 
         public void OnDrag(PointerEventData eventData)
         {
             if (!active)
                 return;
-            previewCreature.transform.position = Game.handler.worldMousePositon;
+            previewShip.transform.position = Game.handler.worldMousePositon;
         }
 
         public void OnEndDrag(PointerEventData eventData)
@@ -39,7 +39,7 @@ namespace NecroCore.UI.INGAME
             if (!active)
                 return;
             active = false;
-            Game.handler.Release(new CreaturePlacementData(slot, previewCreature));
+            Game.handler.Release(new ShipPlacementData(slot, previewShip));
         }
 
         public void OnLevelStateEnd(Level.State state)
@@ -50,8 +50,8 @@ namespace NecroCore.UI.INGAME
 
         public void OnLevelStateBegin(Level.State state)
         {
-            if (Game.loadout[slot].stats.health > 0)
-                if (state == Level.State.Positioning)
+            if (state == Level.State.Positioning)
+                if (Game.ships[slot].HasValue)
                     active = true;
         }
     }
