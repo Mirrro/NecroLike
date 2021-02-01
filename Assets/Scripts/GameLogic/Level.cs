@@ -8,7 +8,7 @@ using System.Collections.Generic;
 public class Level : MonoBehaviour, IPlacementListener
 {
     #region Level State
-    public enum State { Entry, Positioning, Fighting, End };
+    public enum State { Entry, Playing, End };
     public State currentState = State.Entry;
     public UnityEvent<State> LevelStateBegin = new UnityEvent<State>();
     public UnityEvent<State> LevelStateEnd = new UnityEvent<State>();    
@@ -62,13 +62,10 @@ public class Level : MonoBehaviour, IPlacementListener
             return christians.ToArray();
         return vikings.ToArray();
     }
-
-    int placedShips;
+    
     public void OnShipPlacement(ShipPlacementData data)
     {
-        placedShips++;
-        if (Game.NumberOfShips <= placedShips)
-            GoToState(State.Fighting);
+        data.ship.GetComponent<ShipBehaviour>().Init(Game.ships[data.slot].Value);
     }
 
     public void RegisterUnit(AIEntity creature)

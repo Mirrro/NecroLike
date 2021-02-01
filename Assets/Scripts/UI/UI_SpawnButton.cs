@@ -25,6 +25,7 @@ namespace NecroCore.UI.INGAME
             Game.handler.Drag();
             transform.GetChild(0).GetComponent<Image>().enabled = false;
             previewShip = Instantiate(Game.ships[slot].Value.prefab, Game.handler.worldMousePositon, Quaternion.identity);
+
         }
 
         public void OnDrag(PointerEventData eventData)
@@ -42,17 +43,16 @@ namespace NecroCore.UI.INGAME
             Game.handler.Release(new ShipPlacementData(slot, previewShip));
         }
 
-        public void OnLevelStateEnd(Level.State state)
-        {
-            if (state == Level.State.Positioning)
-                active = false;
-        }
-
         public void OnLevelStateBegin(Level.State state)
         {
-            if (state == Level.State.Positioning)
+            if (state == Level.State.Playing)
                 if (Game.ships[slot].HasValue)
                     active = true;
+            
+        }
+
+        public void OnLevelStateEnd(Level.State state)
+        {
         }
     }
 }

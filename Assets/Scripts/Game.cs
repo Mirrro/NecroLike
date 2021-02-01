@@ -37,7 +37,7 @@ public static class Game
     public static PlayerUnit[] templateUnits;
     public static Ship templateShip;
 
-    public static Ship?[] ships = new Ship?[5];
+    public static Ship?[] ships = new Ship?[6];
     public static int NumberOfShips
     {
         get
@@ -79,7 +79,7 @@ public static class Game
             level.LevelStateBegin.AddListener(s.OnLevelStateBegin);
             level.LevelStateEnd.AddListener(s.OnLevelStateEnd);
         }
-        level.GoToState(Level.State.Positioning);
+        level.GoToState(Level.State.Playing);
     }
     public static void InitInputHander(InputHandler handler)
     {
@@ -104,11 +104,9 @@ public static class Game
     {
         for(int s = 0; s < ships.Length; s++)
         {
-            Ship ship;
-            if (!ships[s].HasValue)
-                ship = new Ship(templateShip);
-            else
-                ship = ships[s].Value;
+            if(!ships[s].HasValue)
+                ships[s] = new Ship(templateShip);
+            Ship ship = ships[s].Value;
 
             for (int i = 0; i < ship.size; i++)
             {

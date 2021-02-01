@@ -19,7 +19,7 @@ public class InputHandler : MonoBehaviour
     {
         Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out RaycastHit hit);
         if (hit.collider != null && hit.collider.tag == "Ground")
-            worldMousePositon = hit.collider.transform.position + Vector3.up*2;  
+            worldMousePositon = hit.point;  
     }
 
     public void Release(ShipPlacementData data)
