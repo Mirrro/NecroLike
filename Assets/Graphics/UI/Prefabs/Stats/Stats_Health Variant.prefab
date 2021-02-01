@@ -12,11 +12,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Stats_Health Variant
       objectReference: {fileID: 0}
-    - target: {fileID: 5659400552907266297, guid: ca41e00e89d55ac4bb7dc2b120569d6a,
-        type: 3}
-      propertyPath: m_Text
-      value: Value Health
-      objectReference: {fileID: 0}
     - target: {fileID: 7186755245391543141, guid: ca41e00e89d55ac4bb7dc2b120569d6a,
         type: 3}
       propertyPath: m_Pivot.x
