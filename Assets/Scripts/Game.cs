@@ -2,7 +2,6 @@
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
-using AIUnits;
 using System.Collections.Generic;
 
 public static class Game
@@ -37,18 +36,7 @@ public static class Game
     public static PlayerUnit[] templateUnits;
     public static Ship templateShip;
 
-    public static Ship?[] ships = new Ship?[5];
-    public static int NumberOfShips
-    {
-        get
-        {
-            int count = 0;
-            foreach (Ship? ship in ships)
-                if (ship.HasValue)
-                    count++;
-            return count;
-        }
-    }
+    public static List<PlayerUnit> Units = new List<PlayerUnit>(3);
 
     #region Loading
     public static void Load()
@@ -102,27 +90,39 @@ public static class Game
 
     public static void CreateUnit(int type)
     {
-        for(int s = 0; s < ships.Length; s++)
-        {
-            Ship ship;
-            if (!ships[s].HasValue)
-                ship = new Ship(templateShip);
-            else
-                ship = ships[s].Value;
-
-            for (int i = 0; i < ship.size; i++)
-            {
-                if (!ship.load[i].HasValue)
-                {
-                    ship.load[i] = new PlayerUnit(templateUnits[type]);
-                    return;
-                }
-            }
-        }        
+        Units.Add(new PlayerUnit(templateUnits[type]));
     }
-    public static void UpgradeUnit(int ship, int position, int newUnit)
+    public static void UpgradeUnit(PlayerUnit unit, int templateUnitID)
     {
-        ships[ship].Value.load[position] = new PlayerUnit(templateUnits[newUnit]);
+        Units[Units.IndexOf(unit)] = new PlayerUnit(templateUnits[templateUnitID]);
+    }
+
+    public static void SwapUnit(PlayerUnit unit1, PlayerUnit unit2)
+    {
+        var pos1 = Units.IndexOf(unit1);
+        var pos2 = Units.IndexOf(unit2);
+
+        Units[pos1] = unit2;
+        Units[pos2] = unit1;
+    }
+
+    public static List<Ship> LoadShips()
+    {
+        var ships = new List<Ship>();
+        for (int i = 0; i < Units.Count; i++)
+        {
+            if (i % 2 !=  0)
+            {
+                ships[ships.Count -1].load[0] = Units[i];
+            }
+            else
+            {
+                ships[ships.Count].load[1] = Units[i];
+                ships.Add(new Ship());
+            }
+        }
+
+        return ships;
     }
 }
 
@@ -144,16 +144,14 @@ public struct PlayerUnit
 [System.Serializable]
 public struct Ship
 {
-    public int size;
     public Sprite icon;
     public GameObject prefab;
     public PlayerUnit?[] load;
 
     public Ship(Ship copy)
     {
-        size = copy.size;
         icon = copy.icon;
         prefab = copy.prefab;
-        load = new PlayerUnit?[size];
+        load = new PlayerUnit?[2];
     }
 }

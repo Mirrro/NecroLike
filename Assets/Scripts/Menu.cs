@@ -14,12 +14,16 @@ public class Menu : MonoBehaviour
             return;
         }
         runDisplay.text = Game.highestRun.ToString();
+        
+        Game.CreateUnit(0);
+        Game.CreateUnit(0);
+        Game.CreateUnit(0);
+        Game.CreateUnit(0);
+        Game.CreateUnit(0);
     }
-       
-   
+    
     public void StartLevel()
     {
-        Game.CreateUnit(0);
         Game.LoadLevel();
     }
 }
