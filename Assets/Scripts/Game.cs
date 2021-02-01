@@ -100,29 +100,29 @@ public static class Game
     }
     #endregion
 
-    public static void CreateShip()
+    public static void CreateUnit(int type)
     {
-        for (int i = 0; i < ships.Length; i++)
+        for(int s = 0; s < ships.Length; s++)
         {
-            if (!ships[i].HasValue)
-            {
-                ships[i] = new Ship(templateShip);
-                return;
-            }
-        }
-    }
+            Ship ship;
+            if (!ships[s].HasValue)
+                ship = new Ship(templateShip);
+            else
+                ship = ships[s].Value;
 
-    public static void CreateUnit(int shipID, int type)
-    {
-        Ship ship = ships[shipID].Value;
-        for (int i = 0; i < ship.size; i++)
-        {
-            if(!ship.load[i].HasValue)
+            for (int i = 0; i < ship.size; i++)
             {
-                ship.load[i] = new PlayerUnit(templateUnits[type]);
-                return;
+                if (!ship.load[i].HasValue)
+                {
+                    ship.load[i] = new PlayerUnit(templateUnits[type]);
+                    return;
+                }
             }
-        }
+        }        
+    }
+    public static void UpgradeUnit(int ship, int position, int newUnit)
+    {
+        ships[ship].Value.load[position] = new PlayerUnit(templateUnits[newUnit]);
     }
 }
 
@@ -144,7 +144,6 @@ public struct PlayerUnit
 [System.Serializable]
 public struct Ship
 {
-    public string name;
     public int size;
     public Sprite icon;
     public GameObject prefab;
@@ -152,7 +151,6 @@ public struct Ship
 
     public Ship(Ship copy)
     {
-        name = copy.name;
         size = copy.size;
         icon = copy.icon;
         prefab = copy.prefab;

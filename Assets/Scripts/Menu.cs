@@ -19,7 +19,7 @@ public class Menu : MonoBehaviour
    
     public void StartLevel()
     {
-        Game.CreateShip(0);
+        Game.CreateUnit(0);
         Game.LoadLevel();
     }
 }
