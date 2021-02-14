@@ -38,7 +38,7 @@ public static class Game
     
     public static List<PlayerUnit> Units = new List<PlayerUnit>(3);
 
-    public static List<Ship> ships;
+    public static List<Ship> ships = new List<Ship>();
 
     public static int NumberOfShips
     {
@@ -118,20 +118,28 @@ public static class Game
 
         Units[pos1] = unit2;
         Units[pos2] = unit1;
+        
+        Debug.Log("Swapped Unit: " + unit1.name + " with " + unit2.name);
+        
+        LoadShips();
     }
 
     public static void LoadShips()
     {
-        for (int i = 0; i < Units.Count; i++)
+        ships = new List<Ship>();
+        ships.Add(new Ship(templateShip));
+        var shipCounter = 1;
+        for (int u = 0; u < Units.Count; u++)
         {
-            if (i % 2 !=  0)
+            for (int s = 0; s < ships[shipCounter-1].load.Length; s++)
             {
-                ships[ships.Count -1].load[0] = Units[i];
-            }
-            else
-            {
-                ships[ships.Count].load[1] = Units[i];
-                ships.Add(new Ship());
+
+                ships[shipCounter-1].load[s] = Units[u];
+                if (s == ships[shipCounter-1].load.Length - 1)
+                {
+                    ships.Add(new Ship(templateShip));
+                    shipCounter++;
+                }
             }
         }
     }
@@ -157,12 +165,12 @@ public struct Ship
 {
     public Sprite icon;
     public GameObject prefab;
-    public PlayerUnit?[] load;
+    public PlayerUnit[] load;
 
     public Ship(Ship copy)
     {
         icon = copy.icon;
         prefab = copy.prefab;
-        load = new PlayerUnit?[2];
+        load = new PlayerUnit[2];
     }
 }

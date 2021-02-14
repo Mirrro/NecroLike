@@ -20,12 +20,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="65b49190-1ef6-4efb-ad42-a6299a0453fc" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Assets/UnitSwapperSelectable.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/UnitSwapperSelectable.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.NecroLike/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.NecroLike/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.NecroLike/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.NecroLike/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Graphics/ShaderZ/Shader Graphs_DefaultEnvironmentShader 1.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Graphics/ShaderZ/Shader Graphs_DefaultEnvironmentShader 1.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Menu.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Menu.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/UI_InGameComponent.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/UI_InGameComponent.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Ship.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Ship.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Menu.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Menu.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Loader.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Loader.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ShipBehaviour.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ShipBehaviour.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UnitOrderManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UnitOrderManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -38,16 +42,33 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/E414E10B-FE5F-4572-9FF1-22F3359DE21B/47/e44db668/Behaviour.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SelectionPanel.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/PillarLoadOut.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/UnitSwapper.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/Assets/AICreature.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/UI/UI_SkullCounter.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/UI/UI_BottomPanel.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/UI/UI_SpawnCreaturePanel.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/UI/UI_InGameComponent.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/UI/UI_BottomPanel.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/UI/UI_SkullCounter.cs" />
+        <option value="$PROJECT_DIR$/Assets/PillarLoadOut.cs" />
+        <option value="$PROJECT_DIR$/Assets/SelectionPanel.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/LevelGenerator.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Menu.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/GameLogic/Level.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/UI/UI_SpawnButton.cs" />
+        <option value="$PROJECT_DIR$/Assets/ShipManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/UnitSwaper.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/UnitOrderManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/UI/UI_INGAME.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Loader.cs" />
+        <option value="$PROJECT_DIR$/Assets/UnitSwapperSelectable.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/ShipBehaviour.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game.cs" />
+        <option value="$PROJECT_DIR$/Assets/UnitSwapper.cs" />
       </list>
     </option>
   </component>
@@ -101,6 +122,12 @@
       <workItem from="1609327976853" duration="2736000" />
       <workItem from="1610644762209" duration="2462000" />
       <workItem from="1610659034023" duration="440000" />
+      <workItem from="1611333577124" duration="3641000" />
+      <workItem from="1611504492160" duration="1781000" />
+      <workItem from="1611935702245" duration="2762000" />
+      <workItem from="1612203410389" duration="5454000" />
+      <workItem from="1612297562887" duration="4228000" />
+      <workItem from="1613304103090" duration="9923000" />
     </task>
     <servers />
   </component>
@@ -123,5 +150,15 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="2793" y="211" key="run.anything.popup" timestamp="1613306852289">
+      <screen x="2560" y="-543" width="1152" height="2008" />
+    </state>
+    <state x="2793" y="211" key="run.anything.popup/2560.-543.1152.2008/0.0.2048.1112@2560.-543.1152.2008" timestamp="1613306852289" />
+    <state x="3247" y="243" width="672" height="678" key="search.everywhere.popup" timestamp="1612207068713">
+      <screen x="2560" y="0" width="2048" height="1112" />
+    </state>
+    <state x="3247" y="243" width="672" height="678" key="search.everywhere.popup/2560.0.2048.1112/0.0.2048.1112@2560.0.2048.1112" timestamp="1612207068713" />
   </component>
 </project>

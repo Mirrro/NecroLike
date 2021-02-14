@@ -131,20 +131,9 @@
             </e>
           </e>
         </e>
+        <e p="PillarLoadOut.cs" t="Include" />
         <e p="Scripts" t="Include">
-          <e p="GameLogic" t="Include">
-            <e p="CameraBehaviour.cs" t="Include" />
-            <e p="Game.cs" t="Include" />
-            <e p="ILevelStateListener.cs" t="Include" />
-            <e p="InputHandler.cs" t="Include" />
-            <e p="Level.cs" t="Include" />
-            <e p="ShaderBehaviour.cs" t="Include" />
-            <e p="ShaderHandler.cs" t="Include" />
-          </e>
-          <e p="GPGSIds.cs" t="Include" />
-          <e p="Loader.cs" t="Include" />
-          <e p="Menu.cs" t="Include" />
-          <e p="Statemachine" t="Include">
+          <e p="AIEntity" t="Include">
             <e p="Actions" t="Include">
               <e p="ActionAttack.cs" t="Include" />
               <e p="ActionFlee.cs" t="Include" />
@@ -161,17 +150,63 @@
               <e p="AIWander.cs" t="Include" />
               <e p="DefaultBehaviour.cs" t="Include" />
             </e>
+            <e p="CreatureAbility.cs" t="Include" />
+            <e p="NecroAbility.cs" t="Include" />
           </e>
+          <e p="Game.cs" t="Include" />
+          <e p="GameLogic" t="Include">
+            <e p="CameraBehaviour.cs" t="Include" />
+            <e p="HealthBar.cs" t="Include" />
+            <e p="InputHandler.cs" t="Include" />
+            <e p="Level.cs" t="Include" />
+            <e p="Listeners" t="Include">
+              <e p="ILevelStateListener.cs" t="Include" />
+              <e p="IPlacementListener.cs" t="Include" />
+              <e p="ISelectionStateListener.cs" t="Include" />
+            </e>
+            <e p="ShaderBehaviour.cs" t="Include" />
+            <e p="ShaderHandler.cs" t="Include" />
+          </e>
+          <e p="GPGSIds.cs" t="Include" />
+          <e p="LevelGenerator.cs" t="Include" />
+          <e p="Loader.cs" t="Include" />
+          <e p="Menu.cs" t="Include" />
+          <e p="NavMeshComponents" t="Include">
+            <e p="Editor" t="Include">
+              <e p="NavMeshAssetManager.cs" t="Include" />
+              <e p="NavMeshComponentsEditor.asmdef" t="Include" />
+              <e p="NavMeshComponentsGUIUtility.cs" t="Include" />
+              <e p="NavMeshLinkEditor.cs" t="Include" />
+              <e p="NavMeshModifierEditor.cs" t="Include" />
+              <e p="NavMeshModifierVolumeEditor.cs" t="Include" />
+              <e p="NavMeshSurfaceEditor.cs" t="Include" />
+            </e>
+            <e p="Scripts" t="Include">
+              <e p="NavMeshComponents.asmdef" t="Include" />
+              <e p="NavMeshLink.cs" t="Include" />
+              <e p="NavMeshModifier.cs" t="Include" />
+              <e p="NavMeshModifierVolume.cs" t="Include" />
+              <e p="NavMeshSurface.cs" t="Include" />
+            </e>
+          </e>
+          <e p="ShipBehaviour.cs" t="Include" />
           <e p="UI" t="Include">
             <e p="UI_BottomPanel.cs" t="Include" />
             <e p="UI_INGAME.cs" t="Include" />
             <e p="UI_InGameComponent.cs" t="Include" />
+            <e p="UI_RunCounter.cs" t="Include" />
             <e p="UI_ScoreEventArgs.cs" t="Include" />
             <e p="UI_SkullCounter.cs" t="Include" />
-            <e p="UI_SpawnCreaturePanel.cs" t="Include" />
+            <e p="UI_SpawnButton.cs" t="Include" />
           </e>
+          <e p="UnitOrderManager.cs" t="Include" />
         </e>
+        <e p="SelectionPanel.cs" t="Include" />
+        <e p="UnitSwapper.cs" t="Include" />
+        <e p="UnitSwapperSelectable.cs" t="Include" />
       </e>
+      <e p="NavMeshComponents.csproj" t="IncludeRecursive" />
+      <e p="NavMeshComponentsEditor.csproj" t="IncludeRecursive" />
       <e p="NecroLike.sln" t="IncludeFlat" />
       <e p="obj" t="ExcludeRecursive" />
       <e p="Packages" t="ExcludeRecursive" />
